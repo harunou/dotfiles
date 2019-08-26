@@ -1,0 +1,26 @@
+#!/bin/sh
+
+command="$1"
+shift
+
+case "$command" in
+
+  install-grml-zsh|update-grml-zsh)
+    curl -L -o "$HOME/.zshrc" https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+    ;;
+
+  setup)
+    exec "$HOME/.local/bin/harunou-setup" "$@"
+    ;;
+
+  config)
+    exec "$HOME/.local/bin/harunou-config" "$@"
+    ;;
+
+  '') echo "Usage: `basename "$0"` <command> [options]" 
+    ;;
+
+  *) 
+    echo "`basename "$0"` $basename: unknown command." >&2; exit 1 
+    ;;
+esac

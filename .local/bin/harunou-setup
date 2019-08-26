@@ -1,0 +1,33 @@
+#!/bin/sh
+
+setup_shell() {
+  zsh=$(grep 'zsh$' /etc/shells 2>/dev/null|head -1)
+  if [ -x "$zsh" ] && grep "^$LOGNAME:" /etc/passwd >/dev/null; then
+    if ! grep "^$LOGNAME:.*zsh" /etc/passwd >/dev/null; then
+      echo "Changing login shell."
+      chsh -s "$zsh"
+    fi
+  fi
+}
+
+
+command="$1"
+shift
+
+case "$command" in
+
+  setup-shell)
+    setup_shell
+    ;;
+
+  setup-grml-zsh|update-grml-zsh)
+    curl -L -o "$HOME/.zshrc" https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+    ;;
+
+  '') echo "Usage: `basename "$0"` <command> [options]" 
+    ;;
+
+  *) 
+    echo "`basename "$0"` $basename: unknown command." >&2; exit 1 
+    ;;
+esac

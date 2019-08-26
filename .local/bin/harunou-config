@@ -1,0 +1,35 @@
+#!/bin/sh
+
+files="\
+  ./.login ./.profile \
+  ./.zlogin ./.zprofile ./.zshenv ./.zshrc \
+  ./.local/bin/harunou ./.local/bin/harunou-config \
+  ./.local/bin/harunou-setup"
+
+command="$1"
+shift
+
+case "$command" in
+  tar) # flags
+    cd
+    exec tar "$@" $files
+    ;;
+
+  clone) # destination directory
+    set -e
+    git clone https://github.com/harunou/harunou.git "$@"
+    cd "${1-harunou}"
+    git config --replace-all remote.origin.url git@github.com:harunou/harunou.git
+    git config alias.find '!find . -name .git -prune -o -name install -prune -o -type f'
+    git config alias.import '!git find -exec rm {} \; && harunou config tar -cf - | tar -xf -'
+    git config alias.export '!git find -print0 | xargs -0 tar -cf - | harunou config tar -xf -'
+    ;;
+
+  '')
+    echo "Usage: `basename "$0"` <command> [options]" 
+    ;;
+
+  *)
+    echo "`basename "$0"` $command: unknown command." >&2; exit 1 
+    ;;
+esac
