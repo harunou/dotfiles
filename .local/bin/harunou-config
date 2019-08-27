@@ -14,15 +14,20 @@ case "$command" in
     cd
     exec tar "$@" $files
     ;;
+  
+  find)
+    starting_point="$1"
+    shift
+    exec find "$starting_point" -name .git -prune -o -name install -prune -o -type f "$@"
+    ;;
 
   clone) # destination directory
     set -e
     git clone https://github.com/harunou/harunou.git "$@"
     cd "${1-harunou}"
     git config --replace-all remote.origin.url git@github.com:harunou/harunou.git
-    git config alias.find '!find . -name .git -prune -o -name install -prune -o -type f'
-    git config alias.import '!git find -exec rm {} \; && harunou config tar -cf - | tar -xf -'
-    git config alias.export '!git find -print0 | xargs -0 tar -cf - | harunou config tar -xf -'
+    git config alias.import '!harunou config find . -exec rm {} \; && harunou config tar -cf - | tar -xf -'
+    git config alias.export '!harunou config find . -print0 | xargs -0 tar -cf - | harunou config tar -xf -'
     ;;
 
   '')
