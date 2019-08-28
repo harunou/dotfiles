@@ -10,6 +10,10 @@ setup_shell() {
   fi
 }
 
+setup_grml_zsh(){
+  curl -o "$HOME/.zshrc" https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+}
+
 
 command="$1"
 shift
@@ -21,8 +25,8 @@ case "$command" in
     setup_grml_zsh
     ;;
 
-  setup-grml-zsh|update-grml-zsh)
-    curl -L -o "$HOME/.zshrc" https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+  update-grml-zsh)
+    setup_grml_zsh
     ;;
 
   '') echo "Usage: `basename "$0"` <command> [options]" 

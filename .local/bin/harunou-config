@@ -3,6 +3,7 @@
 files="\
   ./.login ./.profile \
   ./.zlogin ./.zprofile ./.zshenv ./.zshrc \
+  ./.curlrc \
   ./.local/bin/harunou ./.local/bin/harunou-config \
   ./.local/bin/harunou-setup"
 
