@@ -2,9 +2,6 @@
 
 set -e
 git clone https://github.com/harunou/harunou.git "$@"
-cd "${1-harunou}"
-git config --replace-all remote.origin.url git@github.com:harunou/harunou.git
-git config alias.import '!harunou config find . -exec rm {} \; && harunou config tar -cf - | tar -xf -'
-git config alias.export '!harunou config find . -print0 | xargs -0 tar -cf - | harunou config tar -xf -'
 
-./.local/bin/harunou-config find . -print0 | xargs -0 tar -cf - | ./.local/bin/harunou-config tar -xf -
+.local/bin/harunou-config setup-repo "${1-harunou}"
+.local/bin/harunou-config find . -print0 | xargs -0 tar -cf - | .local/bin/harunou-config tar -xf -
