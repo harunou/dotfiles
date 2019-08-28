@@ -16,8 +16,9 @@ shift
 
 case "$command" in
 
-  setup-shell)
+  all)
     setup_shell
+    setup_grml_zsh
     ;;
 
   setup-grml-zsh|update-grml-zsh)

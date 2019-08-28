@@ -5,10 +5,6 @@ shift
 
 case "$command" in
 
-  install-grml-zsh|update-grml-zsh)
-    curl -L -o "$HOME/.zshrc" https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
-    ;;
-
   setup)
     exec "$HOME/.local/bin/harunou-setup" "$@"
     ;;
