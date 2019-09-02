@@ -6,11 +6,11 @@ shift
 case "$command" in
 
   setup)
-    exec "$HOME/.local/bin/harunou-setup" "$@"
+    exec "harunou-setup" "$@"
     ;;
 
   config)
-    exec "$HOME/.local/bin/harunou-config" "$@"
+    exec "harunou-config" "$@"
     ;;
 
   '') echo "Usage: `basename "$0"` <command> [options]" 
