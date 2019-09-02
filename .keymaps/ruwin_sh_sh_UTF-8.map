@@ -1,0 +1,1394 @@
+# Author: Dzmitry Harunou
+#==========================================================================
+# README
+#==========================================================================
+# Notes:
+# • Not using KP_-keysyms on fourth level as NumLock is not controllable
+#   (i.e. can't be forced to on whenever the keymap is loaded).
+#   On console there is little need for KP_-keysyms.
+# • Mod4-Lock is not implemented (technical difficulties, not enough levels)
+# • Dead keys only when there exists a corresponding dead keysym on console
+#   (i.e circumflex, gravis, cedille, trema, akut and tilde) otherwise the
+#   undead character is produced.
+# • Using default compose as for now. Maximum number allowed compose
+#   sequences seems to be 256, not enough for the standard Neo2 sequences.
+# • Wrong Caps_Lock behaviour with ssharp (not returning to lower case when
+#   using Caps_Lock and Shift)
+#   See: https://bugzilla.kernel.org/show_bug.cgi?id=7063
+
+#==========================================================================
+# Prelude
+#==========================================================================
+
+#keymaps 0-3,16-19,32-35,64-67,80-83,96-99
+keymaps 0-127
+compose as usual
+strings as usual
+
+#==========================================================================
+# Default Keys (usually not needed)
+#==========================================================================
+
+                  keycode   1 = Escape
+              alt keycode   1 = Meta_Escape
+       shiftl alt keycode   1 = Meta_Escape
+       shiftr alt keycode   1 = Meta_Escape
+altgr             keycode   1 = Escape
+altgr         alt keycode   1 = Meta_Escape
+altgr  shiftl alt keycode   1 = Meta_Escape
+altgr  shiftr alt keycode   1 = Meta_Escape
+
+                  keycode  14 = Delete
+              alt keycode  14 = Meta_Delete
+       shiftl alt keycode  14 = Meta_Delete
+       shiftr alt keycode  14 = Meta_Delete
+altgr             keycode  14 = Delete
+altgr         alt keycode  14 = Meta_Delete
+altgr  shiftl alt keycode  14 = Meta_Delete
+altgr  shiftr alt keycode  14 = Meta_Delete
+ 
+                  keycode  15 = Tab
+              alt keycode  15 = Meta_Tab
+           shiftl keycode  15 = Meta_Tab
+           shiftr keycode  15 = Meta_Tab
+altgr             keycode  15 = Tab
+altgr         alt keycode  15 = Meta_Tab
+altgr      shiftl keycode  15 = Meta_Tab
+altgr      shiftr keycode  15 = Meta_Tab
+ 
+                  keycode  28 = Return
+              alt keycode  28 = Meta_Control_m
+altgr             keycode  28 = Return
+altgr         alt keycode  28 = Meta_Control_m
+ 
+                  keycode  29 = Control
+                  keycode  97 = Control
+  
+                  keycode  56 = Alt
+
+#==========================================================================
+# linux-keys-bare, Control Keys
+#==========================================================================
+
+                  keycode  59 = F1
+              alt keycode  59 = Console_1
+      control alt keycode  59 = Console_1
+           shiftl keycode  59 = F13
+           shiftr keycode  59 = F13
+altgr             keycode  59 = F1
+altgr         alt keycode  59 = Console_1
+altgr control alt keycode  59 = Console_1
+altgr      shiftl keycode  59 = F13
+altgr      shiftr keycode  59 = F13
+
+                  keycode  60 = F2
+              alt keycode  60 = Console_2
+      control alt keycode  60 = Console_2
+           shiftl keycode  60 = F14
+           shiftr keycode  60 = F14
+altgr             keycode  60 = F2
+altgr         alt keycode  60 = Console_2
+altgr control alt keycode  60 = Console_2
+altgr      shiftl keycode  60 = F14
+altgr      shiftr keycode  60 = F14
+
+                  keycode  61 = F3
+              alt keycode  61 = Console_3
+      control alt keycode  61 = Console_3
+           shiftl keycode  61 = F15
+           shiftr keycode  61 = F15
+altgr             keycode  61 = F3
+altgr         alt keycode  61 = Console_3
+altgr control alt keycode  61 = Console_3
+altgr      shiftl keycode  61 = F15
+altgr      shiftr keycode  61 = F15
+
+                  keycode  62 = F4
+              alt keycode  62 = Console_4
+      control alt keycode  62 = Console_4
+           shiftl keycode  62 = F16
+           shiftr keycode  62 = F16
+altgr             keycode  62 = F4
+altgr         alt keycode  62 = Console_4
+altgr control alt keycode  62 = Console_4
+altgr      shiftl keycode  62 = F16
+altgr      shiftr keycode  62 = F16
+ 
+                  keycode  63 = F5
+              alt keycode  63 = Console_5
+      control alt keycode  63 = Console_5
+           shiftl keycode  63 = F17
+           shiftr keycode  63 = F17
+altgr             keycode  63 = F5
+altgr         alt keycode  63 = Console_5
+altgr control alt keycode  63 = Console_5
+altgr      shiftl keycode  63 = F17
+altgr      shiftr keycode  63 = F17
+
+                  keycode  64 = F6
+              alt keycode  64 = Console_6
+      control alt keycode  64 = Console_6
+           shiftl keycode  64 = F18
+           shiftr keycode  64 = F18
+altgr             keycode  64 = F6
+altgr         alt keycode  64 = Console_6
+altgr control alt keycode  64 = Console_6
+altgr      shiftl keycode  64 = F18
+altgr      shiftr keycode  64 = F18
+
+                  keycode  65 = F7
+              alt keycode  65 = Console_7
+      control alt keycode  65 = Console_7
+           shiftl keycode  65 = F19
+           shiftr keycode  65 = F19
+altgr             keycode  65 = F7
+altgr         alt keycode  65 = Console_7
+altgr control alt keycode  65 = Console_7
+altgr      shiftl keycode  65 = F19
+altgr      shiftr keycode  65 = F19
+
+                  keycode  66 = F8
+              alt keycode  66 = Console_8
+      control alt keycode  66 = Console_8
+           shiftl keycode  66 = F20
+           shiftr keycode  66 = F20
+altgr             keycode  66 = F8
+altgr         alt keycode  66 = Console_8
+altgr control alt keycode  66 = Console_8
+altgr      shiftl keycode  66 = F20
+altgr      shiftr keycode  66 = F20
+ 
+                  keycode  67 = F9
+              alt keycode  67 = Console_9
+      control alt keycode  67 = Console_9
+           shiftl keycode  67 = F21
+           shiftr keycode  67 = F21
+altgr             keycode  67 = F9
+altgr         alt keycode  67 = Console_9
+altgr control alt keycode  67 = Console_9
+altgr      shiftl keycode  67 = F21
+altgr      shiftr keycode  67 = F21
+
+                  keycode  68 = F10
+              alt keycode  68 = Console_10
+      control alt keycode  68 = Console_10
+           shiftl keycode  68 = F22
+           shiftr keycode  68 = F22
+altgr             keycode  68 = F10
+altgr         alt keycode  68 = Console_10
+altgr control alt keycode  68 = Console_10
+altgr      shiftl keycode  68 = F22
+altgr      shiftr keycode  68 = F22
+
+                  keycode  87 = F11
+              alt keycode  87 = Console_11
+      control alt keycode  87 = Console_11
+           shiftl keycode  87 = F23
+           shiftr keycode  87 = F23
+altgr             keycode  87 = F11
+altgr         alt keycode  87 = Console_11
+altgr control alt keycode  87 = Console_11
+altgr      shiftl keycode  87 = F23
+altgr      shiftr keycode  87 = F23
+
+                  keycode  88 = F12
+              alt keycode  88 = Console_12
+      control alt keycode  88 = Console_12
+           shiftl keycode  88 = F24
+           shiftr keycode  88 = F24
+altgr             keycode  88 = F12
+altgr         alt keycode  88 = Console_12
+altgr control alt keycode  88 = Console_12
+altgr      shiftl keycode  88 = F24
+altgr      shiftr keycode  88 = F24
+ 
+                  keycode 103 = Up
+              alt keycode 103 = KeyboardSignal
+altgr             keycode 103 = Up
+altgr         alt keycode 103 = KeyboardSignal
+
+                  keycode 105 = Left
+              alt keycode 105 = Decr_Console
+altgr             keycode 105 = Left
+altgr         alt keycode 105 = Decr_Console
+
+                  keycode 106 = Right
+              alt keycode 106 = Incr_Console
+altgr             keycode 106 = Right
+altgr         alt keycode 106 = Incr_Console
+
+                  keycode 108 = Down
+altgr             keycode 108 = Down
+ 
+                  keycode 110 = Insert
+altgr             keycode 110 = Insert
+
+                  keycode 111 = Remove
+      control alt keycode 111 = Boot
+altgr             keycode 111 = Remove
+altgr control alt keycode 111 = Boot
+
+                  keycode 102 = Home
+altgr             keycode 102 = Home
+
+                  keycode 107 = End
+altgr             keycode 107 = End
+
+                  keycode 104 = PageUp
+           shiftl keycode 104 = Scroll_Backward
+           shiftr keycode 104 = Scroll_Backward
+altgr             keycode 104 = PageUp
+altgr      shiftl keycode 104 = Scroll_Backward
+altgr      shiftr keycode 104 = Scroll_Backward
+
+                  keycode 109 = PageDown
+           shiftl keycode 109 = Scroll_Forward
+           shiftr keycode 109 = Scroll_Forward
+altgr             keycode 109 = PageDown
+altgr      shiftl keycode 109 = Scroll_Forward
+altgr      shiftr keycode 109 = Scroll_Forward
+ 
+                  keycode  99 = Compose
+              alt keycode  99 = Control_backslash
+          control keycode  99 = Control_backslash
+altgr             keycode  99 = Compose
+altgr         alt keycode  99 = Control_backslash
+altgr     control keycode  99 = Control_backslash
+
+	          keycode  70 = Scroll_Lock
+           shiftl keycode  70 = Show_Memory
+           shiftr keycode  70 = Show_Memory
+          control keycode  70 = Show_State
+              alt keycode  70 = Show_Registers
+altgr             keycode  70 = Scroll_Lock
+altgr      shiftl keycode  70 = Show_Memory
+altgr      shiftr keycode  70 = Show_Memory
+altgr     control keycode  70 = Show_State
+altgr         alt keycode  70 = Show_Registers
+
+                  keycode 119 = Pause
+altgr             keycode 119 = Pause
+
+## Alternatively:
+#
+#include "linux-keys-bare"
+#
+#         shiftl keycode  59 = F13
+#         shiftr keycode  59 = F13
+#         shiftl keycode  60 = F14
+#         shiftr keycode  60 = F14
+#         shiftl keycode  61 = F15
+#         shiftr keycode  61 = F15
+#         shiftl keycode  62 = F16
+#         shiftr keycode  62 = F16
+#
+#         shiftl keycode  63 = F17
+#         shiftr keycode  63 = F17
+#         shiftl keycode  64 = F18
+#         shiftr keycode  64 = F18
+#         shiftl keycode  65 = F19
+#         shiftr keycode  65 = F19
+#         shiftl keycode  66 = F20
+#         shiftr keycode  66 = F20
+#
+#         shiftl keycode  67 = F21
+#         shiftr keycode  67 = F21
+#         shiftl keycode  68 = F22
+#         shiftr keycode  68 = F22
+#         shiftl keycode  87 = F23
+#         shiftr keycode  87 = F23
+#         shiftl keycode  88 = F24
+#         shiftr keycode  88 = F24
+#
+#         shiftl keycode 104 = Scroll_Backward
+#         shiftr keycode 104 = Scroll_Backward
+#
+#         shiftl keycode 109 = Scroll_Forward
+#         shiftr keycode 109 = Scroll_Forward
+#
+#         shiftl keycode  70 = Show_Memory
+#         shiftr keycode  70 = Show_Memory
+
+#==========================================================================
+# Modifier
+#==========================================================================
+
+                 keycode  42 = ShiftL
+         shiftr  keycode  42 = AltGr_Lock
+                 keycode  54 = ShiftR
+         shiftl  keycode  54 = AltGr_Lock
+
+altgr            keycode  42 = ShiftL
+altgr    shiftr  keycode  42 = AltGr_Lock
+altgr            keycode  54 = ShiftR
+altgr    shiftl  keycode  54 = AltGr_Lock
+
+ 		 #Caps_Lock
+                 keycode  58 = Control           # Mod3
+                 keycode  86 = CtrlL             # Mod4 Left
+ 
+                 keycode  29 = Control
+                 keycode  97 = Control
+   
+                 keycode  56 = Alt
+                 keycode 100 = Alt               # Mod4 Right
+
+#==========================================================================
+# Compose
+#==========================================================================
+
+# TODO: add most important compose definitions
+
+        # altgr   keycode  15 = Compose          # Mod3 + Tab: Compose
+
+#==========================================================================
+# Character keys
+#==========================================================================
+
+	alt	keycode   2 =	Meta_one	
+altgr	alt     keycode   2 = 	Meta_one
+	shift alt keycode   2 = 	Meta_exclam
+altgr	shift alt keycode   2 = 	Meta_exclam
+
+                        keycode   2 = one              
+        shiftl          keycode   2 = exclam	
+        shiftr          keycode   2 = exclam
+	        alt     keycode   2 = Meta_one	
+        shiftl  alt     keycode   2 = Meta_exclam	
+        shiftr  alt     keycode   2 = Meta_exclam
+altgr                   keycode   2 = one 
+altgr   shiftl          keycode   2 = exclam 
+altgr   shiftr          keycode   2 = exclam
+altgr           alt     keycode   2 = Meta_one 
+altgr   shiftl  alt     keycode   2 = Meta_exclam 
+altgr   shiftr  alt     keycode   2 = Meta_exclam
+
+                        keycode   3 = two
+        shiftl          keycode   3 = at
+        shiftr          keycode   3 = at
+	        alt     keycode   3 = Meta_two
+        shiftl  alt     keycode   3 = Meta_at
+        shiftr  alt     keycode   3 = Meta_at
+        control         keycode   3 = nul
+altgr                   keycode   3 = two
+altgr   shiftl          keycode   3 = quotedbl
+altgr   shiftr          keycode   3 = quotedbl
+altgr           alt     keycode   3 = Meta_two
+altgr   shiftl  alt     keycode   3 = Meta_at
+altgr   shiftr  alt     keycode   3 = Meta_at
+altgr   control         keycode   3 = nul
+
+                        keycode   4 = three
+        shiftl          keycode   4 = numbersign
+        shiftr          keycode   4 = numbersign
+	        alt     keycode   4 = Meta_three
+        shiftl  alt     keycode   4 = Meta_numbersign
+        shiftr  alt     keycode   4 = Meta_numbersign
+        control         keycode   4 = Escape
+altgr                   keycode   4 = three
+altgr   shiftl          keycode   4 = numbersign
+altgr   shiftr          keycode   4 = numbersign
+altgr           alt     keycode   4 = Meta_three
+altgr   shiftl  alt     keycode   4 = Meta_numbersign
+altgr   shiftr  alt     keycode   4 = Meta_numbersign
+altgr   control         keycode   4 = Escape
+
+                        keycode   5 = four
+        shiftl          keycode   5 = dollar
+        shiftr          keycode   5 = dollar
+	        alt     keycode   5 = Meta_four
+        shiftl  alt     keycode   5 = Meta_dollar
+        shiftr  alt     keycode   5 = Meta_dollar
+        control         keycode   5 = Control_backslash
+altgr                   keycode   5 = four
+altgr   shiftl          keycode   5 = semicolon
+altgr   shiftr          keycode   5 = semicolon
+altgr           alt     keycode   5 = Meta_four
+altgr   shiftl  alt     keycode   5 = Meta_dollar
+altgr   shiftr  alt     keycode   5 = Meta_dollar
+altgr   control         keycode   5 = Control_backslash
+
+                        keycode   6 = five
+        shiftl          keycode   6 = percent
+        shiftr          keycode   6 = percent 
+	        alt     keycode   6 = Meta_five
+        shiftl  alt     keycode   6 = Meta_percent
+        shiftr  alt     keycode   6 = Meta_percent
+        control         keycode   6 = Control_bracketright
+altgr                   keycode   6 = five
+altgr   shiftl          keycode   6 = percent
+altgr   shiftr          keycode   6 = percent
+altgr           alt     keycode   6 = Meta_five
+altgr   shiftl  alt     keycode   6 = Meta_percent
+altgr   shiftr  alt     keycode   6 = Meta_percent
+altgr   control         keycode   6 = Control_bracketright
+
+                        keycode   7 = six
+        shiftl          keycode   7 = asciicircum
+        shiftr          keycode   7 = asciicircum
+	        alt     keycode   7 = Meta_six
+        shiftl  alt     keycode   7 = Meta_asciicircum
+        shiftr  alt     keycode   7 = Meta_asciicircum 
+        control         keycode   7 = Control_asciicircum
+altgr                   keycode   7 = six
+altgr   shiftl          keycode   7 = colon
+altgr   shiftr          keycode   7 = colon
+altgr           alt     keycode   7 = Meta_six
+altgr   shiftl  alt     keycode   7 = Meta_asciicircum
+altgr   shiftr  alt     keycode   7 = Meta_asciicircum
+altgr   control         keycode   7 = Control_asciicircum
+
+                        keycode   8 = seven
+        shiftl          keycode   8 = ampersand
+        shiftr          keycode   8 = ampersand
+	        alt     keycode   8 = Meta_seven
+        shiftl  alt     keycode   8 = Meta_ampersand
+        shiftr  alt     keycode   8 = Meta_ampersand 
+        control         keycode   8 = Control_underscore
+altgr                   keycode   8 = seven
+altgr   shiftl          keycode   8 = question
+altgr   shiftr          keycode   8 = question
+altgr           alt     keycode   8 = Meta_seven
+altgr   shiftl  alt     keycode   8 = Meta_ampersand
+altgr   shiftr  alt     keycode   8 = Meta_ampersand
+altgr   control         keycode   8 = Control_underscore
+
+                        keycode   9 = eight
+        shiftl          keycode   9 = asterisk
+        shiftr          keycode   9 = asterisk
+	        alt     keycode   9 = Meta_eight
+        shiftl  alt     keycode   9 = Meta_asterisk
+        shiftr  alt     keycode   9 = Meta_asterisk 
+        control         keycode   9 = Delete
+altgr                   keycode   9 = eight
+altgr   shiftl          keycode   9 = asterisk
+altgr   shiftr          keycode   9 = asterisk
+altgr           alt     keycode   9 = Meta_eight
+altgr   shiftl  alt     keycode   9 = Meta_asterisk
+altgr   shiftr  alt     keycode   9 = Meta_asterisk
+altgr   control         keycode   9 = Delete
+
+                        keycode  10 = nine
+        shiftl          keycode  10 = parenleft
+        shiftr          keycode  10 = parenleft
+	        alt     keycode  10 = Meta_nine
+        shiftl  alt     keycode  10 = Meta_parenleft
+        shiftr  alt     keycode  10 = Meta_parenleft 
+altgr                   keycode  10 = nine
+altgr   shiftl          keycode  10 = parenleft
+altgr   shiftr          keycode  10 = parenleft
+altgr           alt     keycode  10 = Meta_nine
+altgr   shiftl  alt     keycode  10 = Meta_parenleft
+altgr   shiftr  alt     keycode  10 = Meta_parenleft
+
+                        keycode  11 = zero
+        shiftl          keycode  11 = parenright
+        shiftr          keycode  11 = parenright
+	        alt     keycode  11 = Meta_zero
+        shiftl  alt     keycode  11 = Meta_parenright
+        shiftr  alt     keycode  11 = Meta_parenright 
+altgr                   keycode  11 = zero
+altgr   shiftl          keycode  11 = parenright
+altgr   shiftr          keycode  11 = parenright
+altgr           alt     keycode  11 = Meta_zero
+altgr   shiftl  alt     keycode  11 = Meta_parenright
+altgr   shiftr  alt     keycode  11 = Meta_parenright
+
+                        keycode  12 = minus
+        shiftl          keycode  12 = underscore
+        shiftr          keycode  12 = underscore
+	        alt     keycode  12 = Meta_minus
+        shiftl  alt     keycode  12 = Meta_underscore
+        shiftr  alt     keycode  12 = Meta_underscore 
+        control         keycode  12 = Control_underscore
+altgr                   keycode  12 = minus
+altgr   shiftl          keycode  12 = underscore
+altgr   shiftr          keycode  12 = underscore
+altgr           alt     keycode  12 = Meta_minus 
+altgr   shiftl  alt     keycode  12 = Meta_underscore
+altgr   shiftr  alt     keycode  12 = Meta_underscore
+altgr   control         keycode  12 = Control_underscore
+
+                        keycode  13 = equal 
+        shiftl          keycode  13 = plus
+        shiftr          keycode  13 = plus
+	        alt     keycode  13 = Meta_equal
+        shiftl  alt     keycode  13 = Meta_plus
+        shiftr  alt     keycode  13 = Meta_plus
+altgr                   keycode  13 = equal
+altgr   shiftl          keycode  13 = plus
+altgr   shiftr          keycode  13 = plus
+altgr           alt     keycode  13 = Meta_equal
+altgr   shiftl  alt     keycode  13 = Meta_plus
+altgr   shiftr  alt     keycode  13 = Meta_plus
+
+                        keycode  16 = q
+        shiftl          keycode  16 = Q
+        shiftr          keycode  16 = Q
+	        alt     keycode  16 = Meta_q
+        shiftl  alt     keycode  16 = Meta_q
+        shiftr  alt     keycode  16 = Meta_q
+        control         keycode  16 = Control_q
+        control alt     keycode  16 = Meta_Control_q
+altgr                   keycode  16 = U+0439
+altgr   shiftl          keycode  16 = U+0419
+altgr   shiftr          keycode  16 = U+0419
+altgr           alt     keycode  16 = Meta_q
+altgr   shiftl  alt     keycode  16 = Meta_q
+altgr   shiftr  alt     keycode  16 = Meta_q
+altgr   control         keycode  16 = Control_q
+altgr   control alt     keycode  16 = Meta_Control_q
+
+                        keycode  17 = w
+        shiftl          keycode  17 = W
+        shiftr          keycode  17 = W
+	        alt     keycode  17 = Meta_w
+        shiftl  alt     keycode  17 = Meta_w
+        shiftr  alt     keycode  17 = Meta_w
+        control         keycode  17 = Control_w
+        control alt     keycode  17 = Meta_Control_w
+altgr                   keycode  17 = U+0446
+altgr   shiftl          keycode  17 = U+0426
+altgr   shiftr          keycode  17 = U+0426
+altgr           alt     keycode  17 = Meta_w
+altgr   shiftl  alt     keycode  17 = Meta_w
+altgr   shiftr  alt     keycode  17 = Meta_w
+altgr   control         keycode  17 = Control_w
+altgr   control alt     keycode  17 = Meta_Control_w
+
+                        keycode  18 = e
+        shiftl          keycode  18 = E
+        shiftr          keycode  18 = E
+	        alt     keycode  18 = Meta_e
+        shiftl  alt     keycode  18 = Meta_e
+        shiftr  alt     keycode  18 = Meta_e
+        control         keycode  18 = Control_e
+        control alt     keycode  18 = Meta_Control_e
+altgr                   keycode  18 = U+0443
+altgr   shiftl          keycode  18 = U+0423
+altgr   shiftr          keycode  18 = U+0423
+altgr           alt     keycode  18 = Meta_e
+altgr   shiftl  alt     keycode  18 = Meta_e
+altgr   shiftr  alt     keycode  18 = Meta_e
+altgr   control         keycode  18 = Control_e
+altgr   control alt     keycode  18 = Meta_Control_e
+
+                        keycode  19 = r
+        shiftl          keycode  19 = R
+        shiftr          keycode  19 = R
+	        alt     keycode  19 = Meta_r
+        shiftl  alt     keycode  19 = Meta_r
+        shiftr  alt     keycode  19 = Meta_r
+        control         keycode  19 = Control_r
+        control alt     keycode  19 = Meta_Control_r
+altgr                   keycode  19 = U+043A
+altgr   shiftl          keycode  19 = U+041A
+altgr   shiftr          keycode  19 = U+041A
+altgr           alt     keycode  19 = Meta_r
+altgr   shiftl  alt     keycode  19 = Meta_r
+altgr   shiftr  alt     keycode  19 = Meta_r
+altgr   control         keycode  19 = Control_r
+altgr   control alt     keycode  19 = Meta_Control_r
+
+                        keycode  20 = t
+        shiftl          keycode  20 = T
+        shiftr          keycode  20 = T
+	        alt     keycode  20 = Meta_t
+        shiftl  alt     keycode  20 = Meta_t
+        shiftr  alt     keycode  20 = Meta_t
+        control         keycode  20 = Control_t
+        control alt     keycode  20 = Meta_Control_t
+altgr                   keycode  20 = U+0435
+altgr   shiftl          keycode  20 = U+0415
+altgr   shiftr          keycode  20 = U+0415
+altgr           alt     keycode  20 = Meta_t
+altgr   shiftl  alt     keycode  20 = Meta_t
+altgr   shiftr  alt     keycode  20 = Meta_t
+altgr   control         keycode  20 = Control_t
+altgr   control alt     keycode  20 = Meta_Control_t
+
+                        keycode  21 = y
+        shiftl          keycode  21 = Y
+        shiftr          keycode  21 = Y
+	        alt     keycode  21 = Meta_y
+        shiftl  alt     keycode  21 = Meta_y
+        shiftr  alt     keycode  21 = Meta_y
+        control         keycode  21 = Control_y
+        control alt     keycode  21 = Meta_Control_y
+altgr                   keycode  21 = U+0441
+altgr   shiftl          keycode  21 = U+0421
+altgr   shiftr          keycode  21 = U+0421
+altgr           alt     keycode  21 = Meta_y
+altgr   shiftl  alt     keycode  21 = Meta_y
+altgr   shiftr  alt     keycode  21 = Meta_y
+altgr   control         keycode  21 = Control_y
+altgr   control alt     keycode  21 = Meta_Control_y
+
+                        keycode  22 = u
+        shiftl          keycode  22 = U
+        shiftr          keycode  22 = U
+	        alt     keycode  22 = Meta_u
+        shiftl  alt     keycode  22 = Meta_u
+        shiftr  alt     keycode  22 = Meta_u
+        control         keycode  22 = Control_u
+        control alt     keycode  22 = Meta_Control_u
+altgr                   keycode  22 = U+0433
+altgr   shiftl          keycode  22 = U+0413
+altgr   shiftr          keycode  22 = U+0413
+altgr           alt     keycode  22 = Meta_u
+altgr   shiftl  alt     keycode  22 = Meta_u
+altgr   shiftr  alt     keycode  22 = Meta_u
+altgr   control         keycode  22 = Control_u
+altgr   control alt     keycode  22 = Meta_Control_u
+
+                        keycode  23 = i
+        shiftl          keycode  23 = I
+        shiftr          keycode  23 = I
+	        alt     keycode  23 = Meta_i
+        shiftl  alt     keycode  23 = Meta_i
+        shiftr  alt     keycode  23 = Meta_i
+        control         keycode  23 = Tab
+        control alt     keycode  23 = Tab
+altgr                   keycode  23 = U+0448
+altgr   shiftl          keycode  23 = U+0428
+altgr   shiftr          keycode  23 = U+0428
+altgr           alt     keycode  23 = Meta_i
+altgr   shiftl  alt     keycode  23 = Meta_i
+altgr   shiftr  alt     keycode  23 = Meta_i
+altgr   control         keycode  23 = Tab
+altgr   control alt     keycode  23 = Tab
+
+                        keycode  24 = o
+        shiftl          keycode  24 = O
+        shiftr          keycode  24 = O
+	        alt     keycode  24 = Meta_o
+        shiftl  alt     keycode  24 = Meta_o
+        shiftr  alt     keycode  24 = Meta_o
+        control         keycode  24 = Control_o
+        control alt     keycode  24 = Meta_Control_o
+altgr                   keycode  24 = U+0449
+altgr   shiftl          keycode  24 = U+0429
+altgr   shiftr          keycode  24 = U+0429
+altgr           alt     keycode  24 = Meta_o
+altgr   shiftl  alt     keycode  24 = Meta_o
+altgr   shiftr  alt     keycode  24 = Meta_o
+altgr   control         keycode  24 = Control_o
+altgr   control alt     keycode  24 = Meta_Control_o
+
+                        keycode  25 = p
+        shiftl          keycode  25 = P
+        shiftr          keycode  25 = P
+	        alt     keycode  25 = Meta_p
+        shiftl  alt     keycode  25 = Meta_p
+        shiftr  alt     keycode  25 = Meta_p
+        control         keycode  25 = Control_p
+        control alt     keycode  25 = Meta_Control_p
+altgr                   keycode  25 = U+0437
+altgr   shiftl          keycode  25 = U+0417
+altgr   shiftr          keycode  25 = U+0417
+altgr           alt     keycode  25 = Meta_p
+altgr   shiftl  alt     keycode  25 = Meta_p
+altgr   shiftr  alt     keycode  25 = Meta_p
+altgr   control         keycode  25 = Control_o
+altgr   control alt     keycode  25 = Meta_Control_o
+
+                        keycode  26 = bracketleft
+        shiftl          keycode  26 = braceleft
+        shiftr          keycode  26 = braceleft
+	        alt     keycode  26 = Meta_bracketleft
+        shiftl  alt     keycode  26 = Meta_bracketleft
+        shiftr  alt     keycode  26 = Meta_bracketleft
+        control         keycode  26 = Escape
+        control alt     keycode  26 = Meta_Escape
+altgr                   keycode  26 = U+0445
+altgr   shiftl          keycode  26 = U+0425
+altgr   shiftr          keycode  26 = U+0425
+altgr           alt     keycode  26 = Meta_bracketleft
+altgr   shiftl  alt     keycode  26 = Meta_bracketleft
+altgr   shiftr  alt     keycode  26 = Meta_bracketleft
+altgr   control         keycode  26 = Escape
+altgr   control alt     keycode  26 = Meta_Escape
+
+                        keycode  27 = bracketright
+        shiftl          keycode  27 = braceright
+        shiftr          keycode  27 = braceright
+	        alt     keycode  27 = Meta_bracketright
+        shiftl  alt     keycode  27 = Meta_bracketright
+        shiftr  alt     keycode  27 = Meta_bracketright
+        control         keycode  27 = Control_bracketright
+altgr                   keycode  27 = U+044A
+altgr   shiftl          keycode  27 = U+042A
+altgr   shiftr          keycode  27 = U+042A
+altgr           alt     keycode  27 = Meta_bracketright
+altgr   shiftl  alt     keycode  27 = Meta_bracketright
+altgr   shiftr  alt     keycode  27 = Meta_bracketright
+altgr   control         keycode  27 = Control_bracketright
+
+                        keycode  30 = a
+        shiftl          keycode  30 = A
+        shiftr          keycode  30 = A
+	        alt     keycode  30 = Meta_a
+        shiftl  alt     keycode  30 = Meta_a
+        shiftr  alt     keycode  30 = Meta_a
+        control         keycode  30 = Control_a
+	control	alt	keycode  30 = Meta_Control_a  
+altgr                   keycode  30 = U+0444
+altgr   shiftl          keycode  30 = U+0424
+altgr   shiftr          keycode  30 = U+0424
+altgr           alt     keycode  30 = Meta_a
+altgr   shiftl  alt     keycode  30 = Meta_a
+altgr   shiftr  alt     keycode  30 = Meta_a
+altgr   control         keycode  30 = Control_a
+altgr   control	alt     keycode  30 = Meta_Control_a  
+
+                        keycode  31 = s
+        shiftl          keycode  31 = S
+        shiftr          keycode  31 = S
+	        alt     keycode  31 = Meta_s
+        shiftl  alt     keycode  31 = Meta_s
+        shiftr  alt     keycode  31 = Meta_s
+        control         keycode  31 = Control_s
+	control	alt	keycode  31 = Meta_Control_s  
+altgr                   keycode  31 = U+044B
+altgr   shiftl          keycode  31 = U+042B
+altgr   shiftr          keycode  31 = U+042B
+altgr           alt     keycode  31 = Meta_s
+altgr   shiftl  alt     keycode  31 = Meta_s
+altgr   shiftr  alt     keycode  31 = Meta_s
+altgr   control         keycode  31 = Control_s
+altgr   control alt	keycode  31 = Meta_Control_s  
+
+                        keycode  32 = d
+        shiftl          keycode  32 = D
+        shiftr          keycode  32 = D
+	        alt     keycode  32 = Meta_d
+        shiftl  alt     keycode  32 = Meta_D
+        shiftr  alt     keycode  32 = Meta_D
+        control         keycode  32 = Control_d
+	control	alt     keycode  32 = Meta_Control_d  
+altgr                   keycode  32 = U+0432
+altgr   shiftl          keycode  32 = U+0412
+altgr   shiftr          keycode  32 = U+0412
+altgr           alt     keycode  32 = Meta_d
+altgr   shiftl  alt     keycode  32 = Meta_D
+altgr   shiftr  alt     keycode  32 = Meta_D
+altgr   control         keycode  32 = Control_d
+altgr   control alt     keycode  32 = Meta_Control_d  
+
+                        keycode  33 = f
+        shiftl          keycode  33 = F
+        shiftr          keycode  33 = F
+	        alt     keycode  33 = Meta_f
+        shiftl  alt     keycode  33 = Meta_F
+        shiftr  alt     keycode  33 = Meta_F
+        control         keycode  33 = Control_f
+	control	alt     keycode  33 = Meta_Control_f  
+altgr                   keycode  33 = U+0433
+altgr   shiftl          keycode  33 = U+0413
+altgr   shiftr          keycode  33 = U+0413
+altgr           alt     keycode  33 = Meta_f
+altgr   shiftl  alt     keycode  33 = Meta_F
+altgr   shiftr  alt     keycode  33 = Meta_F
+altgr   control         keycode  33 = Control_f
+altgr   control alt     keycode  33 = Meta_Control_f  
+
+                        keycode  34 = g
+        shiftl          keycode  34 = G
+        shiftr          keycode  34 = G
+	        alt     keycode  34 = Meta_g
+        shiftl  alt     keycode  34 = Meta_G
+        shiftr  alt     keycode  34 = Meta_G
+        control         keycode  34 = Control_g
+	control	alt     keycode  34 = Meta_Control_g  
+altgr                   keycode  34 = U+043F
+altgr   shiftl          keycode  34 = U+041F
+altgr   shiftr          keycode  34 = U+041F  
+altgr           alt     keycode  34 = Meta_g
+altgr   shiftl  alt     keycode  34 = Meta_G
+altgr   shiftr  alt     keycode  34 = Meta_G
+altgr   control         keycode  34 = Control_g
+altgr   control alt     keycode  34 = Meta_Control_g  
+
+                        keycode  35 = h
+        shiftl          keycode  35 = H
+        shiftr          keycode  35 = H
+	        alt     keycode  35 = Meta_h
+        shiftl  alt     keycode  35 = Meta_H
+        shiftr  alt     keycode  35 = Meta_H
+        control         keycode  35 = BackSpace
+	control	alt     keycode  35 = Meta_BackSpace
+altgr                   keycode  35 = U+0440
+altgr   shiftl          keycode  35 = U+0420
+altgr   shiftr          keycode  35 = U+0420  
+altgr           alt     keycode  35 = Meta_h
+altgr   shiftl  alt     keycode  35 = Meta_H
+altgr   shiftr  alt     keycode  35 = Meta_H
+altgr   control         keycode  35 = BackSpace
+altgr   control alt     keycode  35 = Meta_BackSpace
+
+                        keycode  36 = j
+        shiftl          keycode  36 = J
+        shiftr          keycode  36 = J
+	        alt     keycode  36 = Meta_j
+        shiftl  alt     keycode  36 = Meta_J
+        shiftr  alt     keycode  36 = Meta_J
+        control         keycode  36 = Linefeed
+	control	alt     keycode  36 = Meta_Linefeed
+altgr                   keycode  36 = U+043E
+altgr   shiftl          keycode  36 = U+041E
+altgr   shiftr          keycode  36 = U+041E  
+altgr           alt     keycode  36 = Meta_j
+altgr   shiftl  alt     keycode  36 = Meta_J
+altgr   shiftr  alt     keycode  36 = Meta_J
+altgr   control         keycode  36 = Linefeed
+altgr   control alt     keycode  36 = Meta_Linefeed
+
+                        keycode  37 = k
+        shiftl          keycode  37 = K
+        shiftr          keycode  37 = K
+	        alt     keycode  37 = Meta_k
+        shiftl  alt     keycode  37 = Meta_K
+        shiftr  alt     keycode  37 = Meta_K
+        control         keycode  37 = Control_k
+	control	alt     keycode  37 = Meta_Control_k
+altgr                   keycode  37 = U+043B
+altgr   shiftl          keycode  37 = U+041B
+altgr   shiftr          keycode  37 = U+041B  
+altgr           alt     keycode  37 = Meta_k
+altgr   shiftl  alt     keycode  37 = Meta_K
+altgr   shiftr  alt     keycode  37 = Meta_K
+altgr   control         keycode  37 = Control_k
+altgr   control alt     keycode  37 = Meta_Control_k
+
+                        keycode  38 = l
+        shiftl          keycode  38 = L
+        shiftr          keycode  38 = L
+	        alt     keycode  38 = Meta_l
+        shiftl  alt     keycode  38 = Meta_L
+        shiftr  alt     keycode  38 = Meta_L
+        control         keycode  38 = Control_l
+	control	alt     keycode  38 = Meta_Control_l
+altgr                   keycode  38 = U+0434
+altgr   shiftl          keycode  38 = U+0414
+altgr   shiftr          keycode  38 = U+0414
+altgr           alt     keycode  38 = Meta_l
+altgr   shiftl  alt     keycode  38 = Meta_L
+altgr   shiftr  alt     keycode  38 = Meta_L
+altgr   control         keycode  38 = Control_l
+altgr   control alt     keycode  38 = Meta_Control_l
+
+                        keycode  39 = semicolon
+        shiftl          keycode  39 = colon
+        shiftr          keycode  39 = colon
+	        alt     keycode  39 = Meta_semicolon
+        shiftl  alt     keycode  39 = Meta_colon
+        shiftr  alt     keycode  39 = Meta_colon
+	control	alt     keycode  39 = Meta_semicolon
+altgr                   keycode  39 = U+0436
+altgr   shiftl          keycode  39 = U+0416
+altgr   shiftr          keycode  39 = U+0416
+altgr           alt     keycode  39 = Meta_semicolon
+altgr   shiftl  alt     keycode  39 = Meta_colon
+altgr   shiftr  alt     keycode  39 = Meta_colon
+altgr   control alt     keycode  39 = Meta_semicolon
+
+                        keycode  40 = apostrophe
+        shiftl          keycode  40 = quotedbl
+        shiftr          keycode  40 = quotedbl
+	        alt     keycode  40 = Meta_apostrophe
+        shiftl  alt     keycode  40 = Meta_quotedbl
+        shiftr  alt     keycode  40 = Meta_quotedbl
+        control         keycode  40 = Control_g
+	control	alt     keycode  40 = Meta_Control_g
+altgr                   keycode  40 = U+044D
+altgr   shiftl          keycode  40 = U+042D
+altgr   shiftr          keycode  40 = U+042D
+altgr           alt     keycode  40 = Meta_apostrophe
+altgr   shiftl  alt     keycode  40 = Meta_quotedbl
+altgr   shiftr  alt     keycode  40 = Meta_quotedbl
+altgr   control         keycode  40 = Control_g
+altgr   control alt     keycode  40 = Meta_Control_g
+
+                        keycode  43 = backslash
+        shiftl          keycode  43 = bar
+        shiftr          keycode  43 = bar
+	        alt     keycode  43 = Meta_backslash
+        shiftl  alt     keycode  43 = Meta_bar
+        shiftr  alt     keycode  43 = Meta_bar
+        control         keycode  43 = Control_backslash
+altgr                   keycode  43 = slash
+altgr   shiftl          keycode  43 = bar
+altgr   shiftr          keycode  43 = bar
+altgr           alt     keycode  43 = Meta_backslash
+altgr   shiftl  alt     keycode  43 = Meta_bar
+altgr   shiftr  alt     keycode  43 = Meta_bar
+altgr   control         keycode  43 = Control_backslash
+
+                        keycode  44 = z
+        shiftl          keycode  44 = Z
+        shiftr          keycode  44 = Z
+	        alt     keycode  44 = Meta_z
+        shiftl  alt     keycode  44 = Meta_Z
+        shiftr  alt     keycode  44 = Meta_Z
+        control         keycode  44 = Control_z
+	control	alt     keycode  44 = Meta_Control_z
+altgr                   keycode  44 = U+044F
+altgr   shiftl          keycode  44 = U+042F
+altgr   shiftr          keycode  44 = U+042F
+altgr           alt     keycode  44 = Meta_z
+altgr   shiftl  alt     keycode  44 = Meta_Z
+altgr   shiftr  alt     keycode  44 = Meta_Z
+altgr   control         keycode  44 = Control_z
+altgr   control alt     keycode  44 = Meta_Control_z
+
+                        keycode  45 = x
+        shiftl          keycode  45 = X
+        shiftr          keycode  45 = X
+	        alt     keycode  45 = Meta_x
+        shiftl  alt     keycode  45 = Meta_X
+        shiftr  alt     keycode  45 = Meta_X
+        control         keycode  45 = Control_x
+	control	alt     keycode  45 = Meta_Control_x
+altgr                   keycode  45 = U+0447
+altgr   shiftl          keycode  45 = U+0427
+altgr   shiftr          keycode  45 = U+0427
+altgr           alt     keycode  45 = Meta_x
+altgr   shiftl  alt     keycode  45 = Meta_X
+altgr   shiftr  alt     keycode  45 = Meta_X
+altgr   control         keycode  45 = Control_x
+altgr   control alt     keycode  45 = Meta_Control_x
+
+                        keycode  46 = c
+        shiftl          keycode  46 = C
+        shiftr          keycode  46 = C
+	        alt     keycode  46 = Meta_c
+        shiftl  alt     keycode  46 = Meta_C
+        shiftr  alt     keycode  46 = Meta_C
+        control         keycode  46 = Control_c
+	control	alt     keycode  46 = Meta_Control_c
+altgr                   keycode  46 = U+0446
+altgr   shiftl          keycode  46 = U+0426
+altgr   shiftr          keycode  46 = U+0426
+altgr           alt     keycode  46 = Meta_c
+altgr   shiftl  alt     keycode  46 = Meta_C
+altgr   shiftr  alt     keycode  46 = Meta_C
+altgr   control         keycode  46 = Control_c
+altgr   control alt     keycode  46 = Meta_Control_c
+
+                        keycode  47 = v
+        shiftl          keycode  47 = V
+        shiftr          keycode  47 = V
+	        alt     keycode  47 = Meta_v
+        shiftl  alt     keycode  47 = Meta_V
+        shiftr  alt     keycode  47 = Meta_V
+        control         keycode  47 = Control_v
+	control	alt     keycode  47 = Meta_Control_v
+altgr                   keycode  47 = U+043C
+altgr   shiftl          keycode  47 = U+041C
+altgr   shiftr          keycode  47 = U+041C
+altgr           alt     keycode  47 = Meta_v
+altgr   shiftl  alt     keycode  47 = Meta_V
+altgr   shiftr  alt     keycode  47 = Meta_V
+altgr   control         keycode  47 = Control_v
+altgr   control alt     keycode  47 = Meta_Control_v
+
+                        keycode  48 = b
+        shiftl          keycode  48 = B
+        shiftr          keycode  48 = B
+	        alt     keycode  48 = Meta_b
+        shiftl  alt     keycode  48 = Meta_B
+        shiftr  alt     keycode  48 = Meta_B
+        control         keycode  48 = Control_b
+	control	alt     keycode  48 = Meta_Control_b
+altgr                   keycode  48 = U+0438
+altgr   shiftl          keycode  48 = U+0418
+altgr   shiftr          keycode  48 = U+0418
+altgr           alt     keycode  48 = Meta_b
+altgr   shiftl  alt     keycode  48 = Meta_B
+altgr   shiftr  alt     keycode  48 = Meta_B
+altgr   control         keycode  48 = Control_b
+altgr   control alt     keycode  48 = Meta_Control_b
+
+                        keycode  49 = n
+        shiftl          keycode  49 = N
+        shiftr          keycode  49 = N
+	        alt     keycode  49 = Meta_n
+        shiftl  alt     keycode  49 = Meta_N
+        shiftr  alt     keycode  49 = Meta_N
+        control         keycode  49 = Control_n
+	control	alt     keycode  49 = Meta_Control_n
+altgr                   keycode  49 = U+0442
+altgr   shiftl          keycode  49 = U+0422
+altgr   shiftr          keycode  49 = U+0422
+altgr           alt     keycode  49 = Meta_n
+altgr   shiftl  alt     keycode  49 = Meta_N
+altgr   shiftr  alt     keycode  49 = Meta_N
+altgr   control         keycode  49 = Control_n
+altgr   control alt     keycode  49 = Meta_Control_n
+
+                        keycode  50 = m
+        shiftl          keycode  50 = M
+        shiftr          keycode  50 = M
+	        alt     keycode  50 = Meta_m
+        shiftl  alt     keycode  50 = Meta_M
+        shiftr  alt     keycode  50 = Meta_M
+        control         keycode  50 = Control_m
+	control	alt     keycode  50 = Meta_Control_m
+altgr                   keycode  50 = U+044C
+altgr   shiftl          keycode  50 = U+042C
+altgr   shiftr          keycode  50 = U+042C
+altgr           alt     keycode  50 = Meta_m
+altgr   shiftl  alt     keycode  50 = Meta_M
+altgr   shiftr  alt     keycode  50 = Meta_M
+altgr   control         keycode  50 = Control_n
+altgr   control alt     keycode  50 = Meta_Control_n
+
+                        keycode  51 = comma
+        shiftl          keycode  51 = less
+        shiftr          keycode  51 = less
+	        alt     keycode  51 = Meta_comma
+        shiftl  alt     keycode  51 = Meta_less
+        shiftr  alt     keycode  51 = Meta_less
+altgr                   keycode  51 = U+0431
+altgr   shiftl          keycode  51 = U+0411
+altgr   shiftr          keycode  51 = U+0411
+altgr           alt     keycode  51 = Meta_comma
+altgr   shiftl  alt     keycode  51 = Meta_less
+altgr   shiftr  alt     keycode  51 = Meta_less
+
+                        keycode  52 = period
+        shiftl          keycode  52 = greater
+        shiftr          keycode  52 = greater
+	        alt     keycode  52 = Meta_period
+        shiftl  alt     keycode  52 = Meta_greater
+        shiftr  alt     keycode  52 = Meta_greater
+altgr                   keycode  52 = U+044E
+altgr   shiftl          keycode  52 = U+042E
+altgr   shiftr          keycode  52 = U+042E
+altgr           alt     keycode  52 = Meta_period
+altgr   shiftl  alt     keycode  52 = Meta_greater
+altgr   shiftr  alt     keycode  52 = Meta_greater
+
+                        keycode  53 = slash
+        shiftl          keycode  53 = question 
+        shiftr          keycode  53 = question
+	        alt     keycode  53 = Meta_slash
+        shiftl  alt     keycode  53 = Meta_question
+        shiftr  alt     keycode  53 = Meta_question
+        control         keycode  53 = Delete
+altgr                   keycode  53 = period 
+altgr   shiftl          keycode  53 = comma 
+altgr   shiftr          keycode  53 = comma
+altgr           alt     keycode  53 = Meta_slash
+altgr   shiftl  alt     keycode  53 = Meta_question
+altgr   shiftr  alt     keycode  53 = Meta_question
+altgr   control         keycode  53 = Delete
+
+
+#==========================================================================
+# Special Character Keys
+#==========================================================================
+
+                        keycode  57 = space
+        shiftl          keycode  57 = space
+        shiftr          keycode  57 = space
+	        alt     keycode  57 = Meta_space
+        shiftl  alt     keycode  57 = Meta_space
+        shiftr  alt     keycode  57 = Meta_space
+        control         keycode  57 = nul
+altgr                   keycode  57 = space
+altgr   shiftl          keycode  57 = space
+altgr   shiftr          keycode  57 = space
+altgr           alt     keycode  57 = Meta_space
+altgr   shiftl  alt     keycode  57 = Meta_space
+altgr   shiftr  alt     keycode  57 = Meta_space
+altgr   control         keycode  57 = nul
+
+                        keycode  41 = grave
+        shiftl          keycode  41 = asciitilde
+        shiftr          keycode  41 = asciitilde
+	        alt     keycode  41 = Meta_grave
+        shiftl  alt     keycode  41 = Meta_space
+        shiftr  alt     keycode  41 = Meta_space
+        control         keycode  41 = nul
+altgr                   keycode  41 = U+0451
+altgr   shiftl          keycode  41 = U+0401
+altgr   shiftr          keycode  41 = U+0401
+altgr           alt     keycode  41 = Meta_grave
+altgr   shiftl  alt     keycode  41 = Meta_space
+altgr   shiftr  alt     keycode  41 = Meta_space
+altgr   control         keycode  41 = nul
+
+#==========================================================================
+# Keypad
+#==========================================================================
+
+                        keycode  69 = Num_Lock
+        shiftl          keycode  69 = Bare_Num_Lock 
+        shiftr          keycode  69 = Bare_Num_Lock
+	        alt     keycode  69 = Num_Lock
+        shiftl  alt     keycode  69 = Num_Lock
+        shiftr  alt     keycode  69 = Num_Lock
+        control         keycode  69 = Num_Lock
+altgr                   keycode  69 = Num_Lock
+altgr   shiftl          keycode  69 = Bare_Num_Lock
+altgr   shiftr          keycode  69 = Bare_Num_Lock
+altgr           alt     keycode  69 = Num_Lock
+altgr   shiftl  alt     keycode  69 = Num_Lock
+altgr   shiftr  alt     keycode  69 = Num_Lock
+altgr   control         keycode  69 = Num_Lock
+
+                        keycode  98 = KP_Divide
+        shiftl          keycode  98 = VoidSymbol
+        shiftr          keycode  98 = VoidSymbol
+	        alt     keycode  98 = VoidSymbol
+        shiftl  alt     keycode  98 = VoidSymbol
+        shiftr  alt     keycode  98 = VoidSymbol
+        control         keycode  98 = VoidSymbol
+altgr                   keycode  98 = KP_Divide
+altgr   shiftl          keycode  98 = VoidSymbol
+altgr   shiftr          keycode  98 = VoidSymbol
+altgr           alt     keycode  98 = VoidSymbol
+altgr   shiftl  alt     keycode  98 = VoidSymbol
+altgr   shiftr  alt     keycode  98 = VoidSymbol
+altgr   control         keycode  98 = VoidSymbol
+
+                        keycode  55 = KP_Multiply
+        shiftl          keycode  55 = VoidSymbol
+        shiftr          keycode  55 = VoidSymbol
+	        alt     keycode  55 = VoidSymbol
+        shiftl  alt     keycode  55 = VoidSymbol
+        shiftr  alt     keycode  55 = VoidSymbol
+        control         keycode  55 = VoidSymbol
+altgr                   keycode  55 = KP_Multiply 
+altgr   shiftl          keycode  55 = VoidSymbol
+altgr   shiftr          keycode  55 = VoidSymbol
+altgr           alt     keycode  55 = VoidSymbol
+altgr   shiftl  alt     keycode  55 = VoidSymbol
+altgr   shiftr  alt     keycode  55 = VoidSymbol
+altgr   control         keycode  55 = VoidSymbol
+
+                        keycode  74 = KP_Subtract
+        shiftl          keycode  74 = VoidSymbol
+        shiftr          keycode  74 = VoidSymbol
+	        alt     keycode  74 = VoidSymbol
+        shiftl  alt     keycode  74 = VoidSymbol
+        shiftr  alt     keycode  74 = VoidSymbol
+        control         keycode  74 = VoidSymbol
+altgr                   keycode  74 = KP_Subtract
+altgr   shiftl          keycode  74 = VoidSymbol
+altgr   shiftr          keycode  74 = VoidSymbol
+altgr           alt     keycode  74 = VoidSymbol
+altgr   shiftl  alt     keycode  74 = VoidSymbol
+altgr   shiftr  alt     keycode  74 = VoidSymbol
+altgr   control         keycode  74 = VoidSymbol
+
+                        keycode  71 = KP_7 
+        shiftl          keycode  71 = KP_7
+        shiftr          keycode  71 = KP_7
+	        alt     keycode  71 = Ascii_7
+        shiftl  alt     keycode  71 = Ascii_7
+        shiftr  alt     keycode  71 = Ascii_7
+        control         keycode  71 = KP_7
+altgr                   keycode  71 = KP_7
+altgr   shiftl          keycode  71 = KP_7
+altgr   shiftr          keycode  71 = KP_7
+altgr           alt     keycode  71 = Ascii_7
+altgr   shiftl  alt     keycode  71 = Ascii_7
+altgr   shiftr  alt     keycode  71 = Ascii_7
+altgr   control         keycode  71 = KP_7
+
+                        keycode  72 = KP_8 
+        shiftl          keycode  72 = KP_8
+        shiftr          keycode  72 = KP_8
+	        alt     keycode  72 = Ascii_8
+        shiftl  alt     keycode  72 = Ascii_8
+        shiftr  alt     keycode  72 = Ascii_8
+        control         keycode  72 = KP_8
+altgr                   keycode  72 = KP_8
+altgr   shiftl          keycode  72 = KP_8
+altgr   shiftr          keycode  72 = KP_8
+altgr           alt     keycode  72 = Ascii_8
+altgr   shiftl  alt     keycode  72 = Ascii_8
+altgr   shiftr  alt     keycode  72 = Ascii_8
+altgr   control         keycode  72 = KP_8
+
+                        keycode  73 = KP_9 
+        shiftl          keycode  73 = KP_9
+        shiftr          keycode  73 = KP_9
+	        alt     keycode  73 = Ascii_9
+        shiftl  alt     keycode  73 = Ascii_9
+        shiftr  alt     keycode  73 = Ascii_9
+        control         keycode  73 = KP_9
+altgr                   keycode  73 = KP_9
+altgr   shiftl          keycode  73 = KP_9
+altgr   shiftr          keycode  73 = KP_9
+altgr           alt     keycode  73 = Ascii_9
+altgr   shiftl  alt     keycode  73 = Ascii_9
+altgr   shiftr  alt     keycode  73 = Ascii_9
+altgr   control         keycode  73 = KP_9
+
+                        keycode  74 = KP_Subtract
+        shiftl          keycode  74 = VoidSymbol
+        shiftr          keycode  74 = VoidSymbol
+	        alt     keycode  74 = VoidSymbol
+        shiftl  alt     keycode  74 = VoidSymbol
+        shiftr  alt     keycode  74 = VoidSymbol
+        control         keycode  74 = VoidSymbol
+altgr                   keycode  74 = KP_Subtract
+altgr   shiftl          keycode  74 = VoidSymbol
+altgr   shiftr          keycode  74 = VoidSymbol
+altgr           alt     keycode  74 = VoidSymbol
+altgr   shiftl  alt     keycode  74 = VoidSymbol
+altgr   shiftr  alt     keycode  74 = VoidSymbol
+altgr   control         keycode  74 = VoidSymbol
+
+                        keycode  75 = KP_4 
+        shiftl          keycode  75 = KP_4
+        shiftr          keycode  75 = KP_4
+	        alt     keycode  75 = Ascii_4
+        shiftl  alt     keycode  75 = Ascii_4
+        shiftr  alt     keycode  75 = Ascii_4
+        control         keycode  75 = KP_4
+altgr                   keycode  75 = KP_4
+altgr   shiftl          keycode  75 = KP_4
+altgr   shiftr          keycode  75 = KP_4
+altgr           alt     keycode  75 = Ascii_4
+altgr   shiftl  alt     keycode  75 = Ascii_4
+altgr   shiftr  alt     keycode  75 = Ascii_4
+altgr   control         keycode  75 = KP_4
+
+                        keycode  76 = KP_5 
+        shiftl          keycode  76 = KP_5
+        shiftr          keycode  76 = KP_5
+	        alt     keycode  76 = Ascii_5
+        shiftl  alt     keycode  76 = Ascii_5
+        shiftr  alt     keycode  76 = Ascii_5
+        control         keycode  76 = KP_5
+altgr                   keycode  76 = KP_5
+altgr   shiftl          keycode  76 = KP_5
+altgr   shiftr          keycode  76 = KP_5
+altgr           alt     keycode  76 = Ascii_5
+altgr   shiftl  alt     keycode  76 = Ascii_5
+altgr   shiftr  alt     keycode  76 = Ascii_5
+altgr   control         keycode  76 = KP_5
+
+                        keycode  77 = KP_6 
+        shiftl          keycode  77 = KP_6
+        shiftr          keycode  77 = KP_6
+	        alt     keycode  77 = Ascii_6
+        shiftl  alt     keycode  77 = Ascii_6
+        shiftr  alt     keycode  77 = Ascii_6
+        control         keycode  77 = KP_6
+altgr                   keycode  77 = KP_6
+altgr   shiftl          keycode  77 = KP_6
+altgr   shiftr          keycode  77 = KP_6
+altgr           alt     keycode  77 = Ascii_6
+altgr   shiftl  alt     keycode  77 = Ascii_6
+altgr   shiftr  alt     keycode  77 = Ascii_6
+altgr   control         keycode  77 = KP_6
+
+                        keycode  78 = KP_Add
+        shiftl          keycode  78 = VoidSymbol
+        shiftr          keycode  78 = VoidSymbol
+	        alt     keycode  78 = VoidSymbol
+        shiftl  alt     keycode  78 = VoidSymbol
+        shiftr  alt     keycode  78 = VoidSymbol
+        control         keycode  78 = VoidSymbol
+altgr                   keycode  78 = KP_Add
+altgr   shiftl          keycode  78 = VoidSymbol
+altgr   shiftr          keycode  78 = VoidSymbol
+altgr           alt     keycode  78 = VoidSymbol
+altgr   shiftl  alt     keycode  78 = VoidSymbol
+altgr   shiftr  alt     keycode  78 = VoidSymbol
+altgr   control         keycode  78 = VoidSymbol
+
+                        keycode  79 = KP_1 
+        shiftl          keycode  79 = KP_1
+        shiftr          keycode  79 = KP_1
+	        alt     keycode  79 = Ascii_1
+        shiftl  alt     keycode  79 = Ascii_1
+        shiftr  alt     keycode  79 = Ascii_1
+        control         keycode  79 = KP_1
+altgr                   keycode  79 = KP_1
+altgr   shiftl          keycode  79 = KP_1
+altgr   shiftr          keycode  79 = KP_1
+altgr           alt     keycode  79 = Ascii_1
+altgr   shiftl  alt     keycode  79 = Ascii_1
+altgr   shiftr  alt     keycode  79 = Ascii_1
+altgr   control         keycode  79 = KP_1
+
+                        keycode  80 = KP_2 
+        shiftl          keycode  80 = KP_2
+        shiftr          keycode  80 = KP_2
+	        alt     keycode  80 = Ascii_2
+        shiftl  alt     keycode  80 = Ascii_2
+        shiftr  alt     keycode  80 = Ascii_2
+        control         keycode  80 = KP_2
+altgr                   keycode  80 = KP_2
+altgr   shiftl          keycode  80 = KP_2
+altgr   shiftr          keycode  80 = KP_2
+altgr           alt     keycode  80 = Ascii_2
+altgr   shiftl  alt     keycode  80 = Ascii_2
+altgr   shiftr  alt     keycode  80 = Ascii_2
+altgr   control         keycode  80 = KP_2
+
+                        keycode  81 = KP_3 
+        shiftl          keycode  81 = KP_3
+        shiftr          keycode  81 = KP_3
+	        alt     keycode  81 = Ascii_3
+        shiftl  alt     keycode  81 = Ascii_3
+        shiftr  alt     keycode  81 = Ascii_3
+        control         keycode  81 = KP_3
+altgr                   keycode  81 = KP_3
+altgr   shiftl          keycode  81 = KP_3
+altgr   shiftr          keycode  81 = KP_3
+altgr           alt     keycode  81 = Ascii_3
+altgr   shiftl  alt     keycode  81 = Ascii_3
+altgr   shiftr  alt     keycode  81 = Ascii_3
+altgr   control         keycode  81 = KP_3
+
+                        keycode  82 = KP_0 
+        shiftl          keycode  82 = KP_0
+        shiftr          keycode  82 = KP_0
+	        alt     keycode  82 = Ascii_0
+        shiftl  alt     keycode  82 = Ascii_0
+        shiftr  alt     keycode  82 = Ascii_0
+        control         keycode  82 = KP_0
+altgr                   keycode  82 = KP_0
+altgr   shiftl          keycode  82 = KP_0
+altgr   shiftr          keycode  82 = KP_0
+altgr           alt     keycode  82 = Ascii_0
+altgr   shiftl  alt     keycode  82 = Ascii_0
+altgr   shiftr  alt     keycode  82 = Ascii_0
+altgr   control         keycode  82 = KP_0
+
+                        keycode  83 = KP_Period
+        shiftl          keycode  83 = VoidSymbol
+        shiftr          keycode  83 = VoidSymbol
+	        alt     keycode  83 = VoidSymbol
+        shiftl  alt     keycode  83 = VoidSymbol
+        shiftr  alt     keycode  83 = VoidSymbol
+        control alt     keycode  83 = Boot
+altgr                   keycode  83 = KP_Period
+altgr   shiftl          keycode  83 = VoidSymbol
+altgr   shiftr          keycode  83 = VoidSymbol
+altgr           alt     keycode  83 = VoidSymbol
+altgr   shiftl  alt     keycode  83 = VoidSymbol
+altgr   shiftr  alt     keycode  83 = VoidSymbol
+altgr   control alt     keycode  83 = Boot
+
+                        keycode  96 = KP_Enter
+        shiftl          keycode  96 = VoidSymbol
+        shiftr          keycode  96 = VoidSymbol
+	        alt     keycode  96 = VoidSymbol
+        shiftl  alt     keycode  96 = VoidSymbol
+        shiftr  alt     keycode  96 = VoidSymbol
+        control         keycode  96 = VoidSymbol
+altgr                   keycode  96 = KP_Enter
+altgr   shiftl          keycode  96 = VoidSymbol
+altgr   shiftr          keycode  96 = VoidSymbol
+altgr           alt     keycode  96 = VoidSymbol
+altgr   shiftl  alt     keycode  96 = VoidSymbol
+altgr   shiftr  alt     keycode  96 = VoidSymbol
+altgr   control         keycode  83 = VoidSymbol

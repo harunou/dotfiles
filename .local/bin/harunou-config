@@ -4,6 +4,7 @@ files="\
   ./.login ./.profile \
   ./.zlogin ./.zprofile ./.zshenv ./.zshrc \
   ./.curlrc \
+  ./.keymaps/ruwin_sh_sh_UTF-8.map \
   ./.local/bin/harunou ./.local/bin/harunou-config \
   ./.local/bin/harunou-setup"
 
