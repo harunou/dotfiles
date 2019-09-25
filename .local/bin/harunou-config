@@ -1,12 +1,18 @@
 #!/bin/sh
 
+
 files="\
   ./.login ./.profile \
   ./.zlogin ./.zprofile ./.zshenv ./.zshrc \
   ./.curlrc \
   ./.keymaps/ruwin_sh_sh_UTF-8.map \
   ./.local/bin/harunou ./.local/bin/harunou-config \
-  ./.local/bin/harunou-setup"
+  ./.local/bin/harunou-setup \
+  ./.local/share/fonts/inconsolata-lgc.tar.gz \
+  ./.local/share/fonts/terminus-console.tar.gz \
+  ./.local/share/fonts/terminus-x11.tar.gz \
+  ./.config/fontconfig/conf.d/75-yes-terminus.conf \
+"
 
 command="$1"
 shift
@@ -17,13 +23,13 @@ case "$command" in
     exec tar "$@" $files
     ;;
 
-  find) #starting_point, find params
+  find) # starting_point, find params
     starting_point="$1"
     shift
     exec find "$starting_point" -name .git -prune -o -name install -prune -o -type f "$@"
     ;;
 
-  setup-repo) #repo directory
+  setup-repo) # repo directory
     cd "$@"
     git config --replace-all remote.origin.url git@github.com:harunou/harunou.git
     git config alias.import '!harunou config find . -exec rm {} \; && harunou config tar -cf - | tar -xf -'
