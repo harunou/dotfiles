@@ -61,6 +61,10 @@ case "$command" in
     setup_grml_zsh
     ;;
 
+  keymap)
+    as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
+    ;;
+
   '') echo "Usage: `basename "$0"` <command> [options]" 
     ;;
 

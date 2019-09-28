@@ -1,21 +1,25 @@
 #!/bin/sh
+# vim:set et sw=2:
 
 
 files="\
   ./.login ./.profile \
   ./.zlogin ./.zprofile ./.zshenv ./.zshrc \
   ./.curlrc \
-  ./.keymaps/ruwin_sh_sh_UTF-8.map \
-  ./.local/bin/harunou ./.local/bin/harunou-config \
+  ./.local/bin/harunou \
+  ./.local/bin/harunou-config \
   ./.local/bin/harunou-setup \
+  ./.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
   ./.local/share/fonts/inconsolata-lgc.tar.gz \
   ./.local/share/fonts/terminus-console.tar.gz \
   ./.local/share/fonts/terminus-x11.tar.gz \
   ./.config/fontconfig/conf.d/75-yes-terminus.conf \
 "
 
-command="$1"
-shift
+if [ $# -gt 0 ]; then 
+  command="$1"
+  shift
+fi
 
 case "$command" in
   tar) # flags
