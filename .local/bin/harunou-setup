@@ -1,7 +1,30 @@
 #!/bin/sh
+# vim:set et sw=2:
+
 
 as_root(){
   exec sudo "$@"
+}
+
+setup_basics() {
+  if [ ! -f "$HOME/. harunou" -o -r "$HOME/. harunou" ]; then
+    [ -f "$HOME/. harunou" ] || basics=1
+    touch "$HOME/. harunou"
+    chmod 0000 "$HOME/. harunou"
+  fi
+  [ -z "$basics" ] || echo "Initializing basic configuration."
+}
+
+setup_fonts() {
+  fontsdir="$HOME/.local/share/fonts"
+  fonts="inconsolata-lgc.tar.gz \
+    roboto-mono.tar.gz \
+    terminus-console.tar.gz \
+    terminus-x11.tar.gz"
+  cd $fontsdir
+  for font in $fonts; do
+    tar -xzf "$fontsdir/$font"
+  done
 }
 
 setup_shell() {
@@ -18,10 +41,16 @@ setup_grml_zsh(){
   curl -o "$HOME/.zshrc" https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 }
 
+[ $# -gt 0 ] || set -- default
+
 command="$1"
 shift
 
 case "$command" in
+  default)
+    setup_basics
+    setup_fonts
+    ;;
 
   all)
     setup_shell
@@ -30,11 +59,6 @@ case "$command" in
 
   update-grml-zsh)
     setup_grml_zsh
-    ;;
-
-  setup-iso)
-    as_root mount / -o remount,size="$@"
-    as_root loadkeys "$HOME/.keymaps/ruwin_sh_sh_UTF-8.map"
     ;;
 
   '') echo "Usage: `basename "$0"` <command> [options]" 

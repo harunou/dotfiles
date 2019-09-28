@@ -1,7 +1,11 @@
 #!/bin/sh
+# vim:set et sw=2:
 
-command="$1"
-shift
+
+if [ $# -gt 0 ]; then
+  command="$1"
+  shift
+fi
 
 case "$command" in
 
