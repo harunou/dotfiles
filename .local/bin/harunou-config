@@ -6,7 +6,7 @@ files="\
   ./.login ./.profile \
   ./.zlogin ./.zprofile ./.zshenv ./.zshrc \
   ./.xsession \
-  ./.curlrc \
+  ./.curlrc ./.toprc \
   ./.gitconfig \
   ./.local/bin/harunou \
   ./.local/bin/harunou-config \
