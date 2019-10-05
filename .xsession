@@ -16,7 +16,7 @@ setxkbmap \
 
 xsetroot -solid '#008080'
 
-: > "$HOME/.env.$DISPLAY"
+: >"$HOME/.env.$DISPLAY"
 chmod 0600 "$HOME/.env.$DISPLAY"
 for var in DISPLAY XAUTHORITY DESKTOP_SESSION \
   XDG_SEAT XDG_SEAT_PATH XDG_SESSION_TYPE XDG_SESSION_CLASS \

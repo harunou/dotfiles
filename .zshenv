@@ -1,4 +1,5 @@
 # ~/.zshenv
+# vim:set et sw=2:
 
 if [ -z "$ENV" -a -n "$PATH" ]; then
   case $- in
