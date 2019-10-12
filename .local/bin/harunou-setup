@@ -61,8 +61,9 @@ case "$command" in
     setup_grml_zsh
     ;;
 
-  keymap)
+  console)
     as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
+    setfont $HOME/.local/share/fonts/terminus-console/ter-c18n.psf.gz
     ;;
 
   '') echo "Usage: `basename "$0"` <command> [options]" 
