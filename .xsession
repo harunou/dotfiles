@@ -16,6 +16,8 @@ setxkbmap \
 
 xsetroot -solid '#008080'
 
+[ ! -f "$HOME/.xsession.local" ] || . "$HOME/.xsession.local"
+
 : >"$HOME/.env.$DISPLAY"
 chmod 0600 "$HOME/.env.$DISPLAY"
 for var in DISPLAY XAUTHORITY DESKTOP_SESSION \
@@ -28,9 +30,9 @@ for var in DISPLAY XAUTHORITY DESKTOP_SESSION \
   if [ -n "$val" ]; then
     echo "$var='$val'" >> "$HOME/.env.$DISPLAY"
     exports="$exports $var"
-    # if [ "$DISPLAY" = ":0" ]; then
-      # tmux setenv -g $var "$val" 2>/dev/null
-    # fi
+    if [ "$DISPLAY" = ":0" ]; then
+      tmux setenv -g $var "$val" 2>/dev/null
+    fi
   fi
 done
 [ -z "$exports" ] || echo "export$exports" >> "$HOME/.env.$DISPLAY"

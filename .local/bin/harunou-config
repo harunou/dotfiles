@@ -8,6 +8,7 @@ files="\
   ./.xsession \
   ./.curlrc ./.toprc \
   ./.gitconfig \
+  ./.tmux.conf \
   ./.local/bin/harunou \
   ./.local/bin/harunou-config \
   ./.local/bin/harunou-setup \
