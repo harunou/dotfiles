@@ -124,6 +124,7 @@ XScreenSaver.dpmsEnabled: true
 XScreenSaver.splash: false
 XScreenSaver.ignoreUninstalledPrograms: true
 XScreenSaver.loadURL: xdg-open '%s'
-XScreensaver.captureStderr: false
-XScreensaver.overlayStderr: false
+XScreenSaver.captureStderr: false
+XScreenSaver.overlayStderr: false
+XScreenSaver.mode: random
 

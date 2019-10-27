@@ -8,6 +8,14 @@ if [ $# -gt 0 ]; then
 fi
 
 case "$command" in
+  screensaver)
+    mode="random"
+    if [[ "x--$1" == "x--off" ]]; then 
+      mode="off"
+    fi
+    echo "XScreenSaver.mode: $mode" | xrdb -merge -
+    xscreensaver-command -restart >/dev/null 2>&1
+    ;;
   setup)
     exec "harunou-setup" "$@"
     ;;
