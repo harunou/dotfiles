@@ -5,7 +5,6 @@
   email = d.harunou@gmail.com
 
 [alias]
-  stash-unapply = '!git stash show -p | git apply -R'
 #https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs=
 #quick look 
   loggsa = log --color --date-order --graph --oneline --decorate --simplify-by-decoration --all
@@ -26,9 +25,6 @@
   logta  = log --graph --color --format=\"%C(auto)%h %d %<|(100,trunc) %s\" --all        
   logtsa = log --graph --color --format=\"%C(auto)%h %d %<|(100,trunc) %s\" --all --simplify-by-decoration 
 
-        #lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-        #lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-        #lg = !"git lg1"
 [core]
   editor = vim
   pager = less -S
@@ -53,9 +49,10 @@
 
 [push]
   default = simple
+  followTags = true
 
 [pull]
-  rebase = true
+  rebase = merges
 
 [rebase]
   autosquash = true
