@@ -1,0 +1,129 @@
+! ~/.Xresources
+
+*international: true
+*customization: -color
+
+! Tango Scheme
+*.foreground:   #babdb6
+*.background:   #000000
+*.cursorColor:  #babdb6
+! black
+*.color0:       #2e3436
+*.color8:       #555753
+! red
+*.color1:       #cc0000
+*.color9:       #ef2929
+! green
+*.color2:       #4e9a06
+*.color10:      #8ae234
+! yellow
+*.color3:       #c4a000
+*.color11:      #fce94f
+! blue
+*.color4:       #3465a4
+*.color12:      #729fcf
+! magenta
+*.color5:       #75507b
+*.color13:      #ad7fa8
+! cyan
+*.color6:       #06989a
+*.color14:      #34e2e2
+! white
+*.color7:       #d3d7cf
+*.color15:      #eeeeec
+
+
+!##XFT
+Xft.dpi: 96
+Xft.autohint: false
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: true
+Xft.antialias: true
+Xft.rgba: rgb
+
+
+!## RXVT
+Rxvt*visualBell: true
+URxvt.urgentOnBell: true
+URxvt.visualBell: true
+
+URxvt.termName: rxvt-unicode
+
+URxvt.saveLines: 8192
+
+Rxvt*scrollBar: false
+URxvt.thickness: 4
+URxvt.scrollBar_floating: true
+URxvt.scrollstyle: plain
+URxvt.iso14755_52: false
+URxvt.iso14755: false
+
+URxvt.underlineColor: #777777
+URxvt.boldFont:
+URxvt.italicFont:
+URxvt.boldItalicFont:
+
+#if WIDTH > 1800
+URxvt.font: xft:MONOSIZE-13:Regular
+#else
+URxvt.font: -xos4-terminus-medium-r-normal-*-16-*-*-*-c-*
+#endif
+
+URxvt.keysym.M-C-1:     command:\033]710;-misc-fixed-medium-r-normal--8-*-*-*-c-*-iso10646-1\007
+URxvt.keysym.M-C-2:     command:\033]710;-xos4-terminus-medium-r-normal-*-12-*-*-*-c-*-iso10646-1\007
+URxvt.keysym.M-C-3:     command:\033]710;-xos4-terminus-medium-r-normal-*-16-*-*-*-c-*-iso10646-1\007
+URxvt.keysym.M-C-4:     command:\033]710;-xos4-terminus-medium-r-normal-*-18-*-*-*-c-*-iso10646-1\007
+URxvt.keysym.M-C-5:     command:\033]710;-xos4-terminus-medium-r-normal-*-22-*-*-*-c-*-iso10646-1\007
+URxvt.keysym.M-C-6:     command:\033]710;xft:Roboto Mono-7:Regular\007
+URxvt.keysym.M-C-7:     command:\033]710;xft:Roboto Mono-11:Regular\007
+URxvt.keysym.M-C-8:     command:\033]710;xft:Roboto Mono-13:Regular\007
+URxvt.keysym.M-C-9:     command:\033]710;xft:Roboto Mono-15:Regular\007
+URxvt.keysym.M-C-0:     command:\033]710;xft:Roboto Mono-17:Regular\007
+#URxvt.keysym.M-C-minus: command:\033]710;xft:Roboto Mono-13:Regular\007
+#URxvt.keysym.M-C-equal: command:\033]710;xft:Roboto Mono-13:Regular\007
+
+URxvt.keysym.C-grave:  perl:matcher:list
+URxvt.keysym.C-Escape: perl:keyboard-select:activate
+
+URxvt.keysym.C-comma:  command:\033]720;12\007
+URxvt.keysym.C-period: command:\033]721;12\007
+
+URxvt.keysym.KP_Up: string:\033[A
+URxvt.keysym.KP_Down: string:\033[B
+URxvt.keysym.KP_Right: string:\033[C
+URxvt.keysym.KP_Left: string:\033[D
+URxvt.keysym.KP_Begin: string:\033[E
+URxvt.keysym.KP_Insert: string:\033[2~
+URxvt.keysym.KP_Delete: string:\033[3~
+URxvt.keysym.KP_Next: string:\033[5~
+URxvt.keysym.KP_Prior: string:\033[6~
+URxvt.keysym.KP_Home: string:\033[7~
+URxvt.keysym.KP_End: string:\033[8~
+URxvt.keysym.KP_Enter: string:\015
+URxvt.keysym.KP_Add: string:+
+URxvt.keysym.KP_Subtract: string:-
+URxvt.keysym.KP_Multiply: string:*
+URxvt.keysym.KP_Divide: string:/
+
+
+URxvt.perl-ext: default,matcher,keyboard-select
+
+URxvt.matcher.button: 1
+URxvt.url-launcher: /usr/bin/xdg-open
+
+URxvt.keyboard-select.clipboard:true
+
+
+!## XMESSAGE
+Xmessage.defaultButton: okay
+
+
+!## XSCREENSAVER
+XScreenSaver.dpmsEnabled: true
+XScreenSaver.splash: false
+XScreenSaver.ignoreUninstalledPrograms: true
+XScreenSaver.loadURL: xdg-open '%s'
+XScreensaver.captureStderr: false
+XScreensaver.overlayStderr: false
+

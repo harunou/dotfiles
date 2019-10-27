@@ -5,7 +5,7 @@
 files="\
   ./.login ./.profile \
   ./.zlogin ./.zprofile ./.zshenv ./.zshrc \
-  ./.xsession \
+  ./.xsession ./.Xresources \
   ./.curlrc ./.toprc \
   ./.gitconfig \
   ./.tmux.conf \
@@ -14,6 +14,7 @@ files="\
   ./.local/bin/harunou-setup \
   ./.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
   ./.local/share/fonts/inconsolata-lgc.tar.gz \
+  ./.local/share/fonts/roboto-mono.tar.gz \
   ./.local/share/fonts/terminus-console.tar.gz \
   ./.local/share/fonts/terminus-x11.tar.gz \
   ./.config/fontconfig/conf.d/75-yes-terminus.conf \
