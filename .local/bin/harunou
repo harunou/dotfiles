@@ -15,6 +15,7 @@ case "$command" in
     fi
     echo "XScreenSaver.mode: $mode" | xrdb -merge -
     xscreensaver-command -restart >/dev/null 2>&1
+    echo "ScreenSaver mode set to $mode"
     ;;
   setup)
     exec "harunou-setup" "$@"
