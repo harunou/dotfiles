@@ -80,8 +80,8 @@ URxvt.keysym.M-C-7:     command:\033]710;xft:Roboto Mono-11:Regular\007
 URxvt.keysym.M-C-8:     command:\033]710;xft:Roboto Mono-13:Regular\007
 URxvt.keysym.M-C-9:     command:\033]710;xft:Roboto Mono-15:Regular\007
 URxvt.keysym.M-C-0:     command:\033]710;xft:Roboto Mono-17:Regular\007
-#URxvt.keysym.M-C-minus: command:\033]710;xft:Roboto Mono-13:Regular\007
-#URxvt.keysym.M-C-equal: command:\033]710;xft:Roboto Mono-13:Regular\007
+!URxvt.keysym.M-C-minus: command:\033]710;xft:Roboto Mono-13:Regular\007
+!URxvt.keysym.M-C-equal: command:\033]710;xft:Roboto Mono-13:Regular\007
 
 URxvt.keysym.C-grave:  perl:matcher:list
 URxvt.keysym.C-Escape: perl:keyboard-select:activate
