@@ -5,6 +5,7 @@
 files="\
   ./.login ./.profile \
   ./.zlogin ./.zprofile ./.zshenv ./.zshrc \
+  ./.bash_profile \
   ./.xsession ./.Xresources \
   ./.curlrc ./.toprc \
   ./.gitconfig \
