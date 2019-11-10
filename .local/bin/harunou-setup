@@ -50,11 +50,7 @@ case "$command" in
   default)
     setup_basics
     setup_fonts
-    ;;
-
-  all)
     setup_shell
-    setup_grml_zsh
     ;;
 
   update-grml-zsh)
