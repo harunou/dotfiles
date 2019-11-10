@@ -19,6 +19,7 @@ files="\
   ./.local/share/fonts/terminus-console.tar.gz \
   ./.local/share/fonts/terminus-x11.tar.gz \
   ./.config/fontconfig/conf.d/75-yes-terminus.conf \
+  ./.xmonad/xmonad.hs
 "
 
 if [ $# -gt 0 ]; then 
