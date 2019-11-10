@@ -1,7 +1,10 @@
 #!/bin/sh
 
 set -e
+
 git clone https://github.com/harunou/harunou.git "$@"
 
-.local/bin/harunou-config setup-repo "${1-harunou}"
+cd "${1-harunou}"
+
+.local/bin/harunou-config setup-repo "$(pwd)"
 .local/bin/harunou-config find . -print0 | xargs -0 tar -cf - | .local/bin/harunou-config tar -xf -
