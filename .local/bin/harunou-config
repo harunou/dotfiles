@@ -37,11 +37,10 @@ case "$command" in
   find) # starting_point, find params
     starting_point="$1"
     shift
-    exec find "$starting_point" \
-      -name .git -prune -o \
-      -name install -prune -o \
-      -name README.md -prune -o \
-      -type f "$@"
+    exec find "$starting_point" -name .git -prune \
+      -o -name install -prune \
+      -o -name README.md -prune \
+      -o -type f "$@"
     ;;
 
   setup-repo) # repo directory
