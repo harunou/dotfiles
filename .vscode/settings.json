@@ -58,7 +58,7 @@
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
   "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
   "update.mode": "none",
-  "window.menuBarVisibility": "visible",
+  "window.menuBarVisibility": "hidden",
   "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
   "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
