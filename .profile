@@ -2,6 +2,12 @@
 # vim:set et sw=2:
 
 PATH=$HOME/.local/bin:/usr/local/bin:${PATH}
+NVM_DIR=$HOME/.nvm
+if [ -d "$NVM_DIR" ]; then
+  default=$(<$NVM_DIR/alias/default)
+  PATH=$NVM_DIR/versions/node/v${default#v}/bin:${PATH}
+  export NVM_DIR
+fi
 ENV=$HOME/.profile
 export PATH ENV
 
