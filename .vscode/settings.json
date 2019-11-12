@@ -4,6 +4,7 @@
   "editor.accessibilitySupport": "off",
   "editor.colorDecorators": false,
   "editor.cursorStyle": "block",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
   "editor.find.seedSearchStringFromSelection": false,
@@ -42,21 +43,9 @@
   "html.format.indentHandlebars": true,
   "html.format.indentInnerHtml": true,
   "html.format.wrapAttributes": "force-expand-multiline",
-  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
-  "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "tslint.autoFixOnSave": false,
-  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
-  "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
   "update.mode": "none",
   "window.menuBarVisibility": "hidden",
   "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
@@ -72,9 +61,6 @@
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
   "zenMode.hideStatusBar": false,
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[html]": {
     "editor.wordWrapColumn": 120,
     "editor.rulers": [
@@ -87,7 +73,6 @@
   "[json]": {
     "editor.wordWrapColumn": 120,
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
     "editor.wordWrapColumn": 120,
