@@ -11,6 +11,7 @@ files="\
   ./.curlrc ./.toprc \
   ./.gitconfig \
   ./.tmux.conf \
+  ./.ssh/authorized_keys \
   ./.local/bin/harunou \
   ./.local/bin/harunou-config \
   ./.local/bin/harunou-setup \
