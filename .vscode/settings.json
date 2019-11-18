@@ -88,4 +88,7 @@
   "vim.statusBarColors.replace": "#000000",
   "vim.foldfix": true,
   "window.zoomLevel": 0,
+  "cSpell.userWords": [
+    "typecheck"
+  ],
 }
