@@ -23,7 +23,8 @@ files="\
   ./.config/fontconfig/conf.d/75-yes-terminus.conf \
   ./.xmonad/xmonad.hs \
   ./.vscode/settings.json ./.vscode/keybindings.json \
-  ./.FBReader/options.xml 
+  ./.FBReader/options.xml \
+  ./.vim/vimrc
 "
 
 if [ $# -gt 0 ]; then 

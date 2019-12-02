@@ -1,0 +1,58 @@
+silent! execute pathogen#infect()
+
+" Init
+set pastetoggle=<F2>
+
+" Search, moving
+set ignorecase
+set smartcase
+
+" Window
+set relativenumber
+
+" Messages, info
+set confirm
+set showcmd
+set visualbell
+
+" Editing text and indent
+set textwidth=78
+set expandtab
+set path+=**
+set infercase
+set showmatch
+set virtualedit=block
+set shiftround
+
+autocmd FileType json set sw=2 et
+
+if exists('+undofile')
+  set undofile
+endif
+
+if v:version >= 700
+  set viminfo=!,'20,<50,s10,h,n~/.vim/viminfo
+endif
+if exists('+undofile')
+  set undodir=~/.cache/vim/undo
+  if !isdirectory(&undodir)
+    call mkdir(&undodir, 'p')
+  endif
+endif
+
+" Section: Reading and writing files
+set fileformats=unix,dos,mac
+set backupskip+=/private/tmp/*
+
+" Plugin settings
+let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
+let g:surround_{char2nr('-')} = "<% \r %>"
+let g:surround_{char2nr('=')} = "<%= \r %>"
+let g:surround_{char2nr('8')} = "/* \r */"
+let g:surround_{char2nr('s')} = " \r"
+let g:surround_{char2nr('^')} = "/^\r$/"
+let g:surround_indent = 1
+let g:ragtag_global_maps = 1
+
+" vim:set et sw=2:
+
