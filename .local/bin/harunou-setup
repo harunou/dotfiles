@@ -17,10 +17,12 @@ setup_basics() {
 
 setup_fonts() {
   fontsdir="$HOME/.local/share/fonts"
-  fonts="inconsolata-lgc.tar.gz \
+  fonts="\
+    inconsolata-lgc.tar.gz \
     roboto-mono.tar.gz \
     terminus-console.tar.gz \
-    terminus-x11.tar.gz"
+    terminus-x11.tar.gz \
+  "
   cd $fontsdir
   for font in $fonts; do
     tar -xzf "$fontsdir/$font"
@@ -72,7 +74,7 @@ case "$command" in
     setup_vim
     ;;
 
-  update-grml-zsh)
+  grml-zsh)
     setup_grml_zsh
     ;;
 
