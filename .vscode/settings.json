@@ -31,9 +31,6 @@
     72
   ],
   "editor.suggestOnTriggerCharacters": false,
-  "editor.wordWrap": "wordWrapColumn",
-  "editor.wordWrapColumn": 72,
-  "editor.wrappingIndent": "indent",
   "explorer.enableDragAndDrop": false,
   "explorer.openEditors.visible": 0,
   "files.insertFinalNewline": true,
@@ -45,7 +42,6 @@
   "html.format.wrapAttributes": "force-expand-multiline",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
-  "tslint.autoFixOnSave": false,
   "update.mode": "none",
   "window.menuBarVisibility": "hidden",
   "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
@@ -54,31 +50,13 @@
     "statusBar.background": "#005f5f",
     "statusBar.noFolderBackground": "#005f5f",
     "statusBar.debuggingBackground": "#005f5f"
-  },
+},
   "workbench.editor.showTabs": false,
   "workbench.settings.editor": "json",
   "workbench.settings.useSplitJSON": true,
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
   "zenMode.hideStatusBar": false,
-  "[html]": {
-    "editor.wordWrapColumn": 120,
-    "editor.rulers": [
-      120
-    ]
-  },
-  "[stylus]": {
-    "editor.wordWrapColumn": 120
-  },
-  "[json]": {
-    "editor.wordWrapColumn": 120,
-    "editor.tabSize": 2,
-  },
-  "[jsonc]": {
-    "editor.wordWrapColumn": 120,
-    "editor.tabSize": 2
-  },
-  "vim.textwidth": 72,
   "vim.statusBarColorControl": true,
   "vim.statusBarColors.normal": "#005f5f",
   "vim.statusBarColors.insert": "#c0392b",
