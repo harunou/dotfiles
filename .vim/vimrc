@@ -40,9 +40,16 @@ if exists('+undofile')
   endif
 endif
 
-" Section: Reading and writing files
+" Reading and writing files
 set fileformats=unix,dos,mac
 set backupskip+=/private/tmp/*
+
+" Color schemes and palettes
+if $TERM =~# '^rxvt' 
+  set t_Co=256
+elseif &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
+  set t_Co=16
+endif
 
 " Plugin settings
 let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
