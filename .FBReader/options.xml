@@ -28,7 +28,7 @@
     <option name="Number" value="12"/>
   </group>
   <group name="PreferencesDialog">
-    <option name="LastOpened" value="readingOptions"/>
+    <option name="LastOpened" value="networkOptions"/>
   </group>
   <group name="Web Browser">
     <option name="Name" value="Browser"/>
