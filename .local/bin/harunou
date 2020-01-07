@@ -1,6 +1,13 @@
 #!/bin/bash
 # vim:set et sw=2:
 
+aur_remove_package(){
+  repo_path=$(aur repo) ;
+  if repo_path=$(readlink -e "$repo_path"); then
+    repo-remove "$repo_path" "$@"
+    paccache -c "${repo_path%/*}" -rvk0 "$@"
+  fi
+}
 
 if [ $# -gt 0 ]; then
   command="$1"
@@ -18,6 +25,14 @@ case "$command" in
     echo "ScreenSaver mode set to $mode"
     ;;
 
+  aur-remove)
+    if [ "$#" -eq 0 ]; then
+      printf "Usage: `basename "$0"` aur-remove [package ...]"
+      exit 1
+    fi
+    aur_remove_package "$@"
+    ;; 
+
   setup)
     exec "harunou-setup" "$@"
     ;;
@@ -26,7 +41,12 @@ case "$command" in
     exec "harunou-config" "$@"
     ;;
 
-  '') echo "Usage: `basename "$0"` <command> [options]" 
+  open)
+    exec "harunou-open" "$@"
+    ;;
+
+  '') 
+    echo "Usage: `basename "$0"` <command> [options]" 
     ;;
 
   *) 
