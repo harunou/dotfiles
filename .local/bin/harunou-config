@@ -24,7 +24,8 @@ files="\
   ./.xmonad/xmonad.hs \
   ./.vscode/settings.json ./.vscode/keybindings.json \
   ./.FBReader/options.xml \
-  ./.vim/vimrc
+  ./.vim/vimrc \
+  ./.vifm/vifmrc ./.vifm/colors/default.vifm \
 "
 
 if [ $# -gt 0 ]; then 

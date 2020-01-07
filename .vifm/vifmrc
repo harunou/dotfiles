@@ -1,0 +1,57 @@
+" This makes vifm perform file operations on its own instead of relying on
+" standard utilities like `cp`.  While using `cp` and alike is a more universal
+" solution, it's also much slower when processing large amounts of files and
+" doesn't support progress measuring.
+
+set syscalls
+
+" Selected color scheme
+
+colorscheme Default
+
+" Format for displaying time in file list. For example:
+" TIME_STAMP_FORMAT=%m/%d-%H:%M
+" See man date or man strftime for details.
+
+set timefmt=%m/%d\ %H:%M
+
+" Show list of matches on tab completion in command-line mode
+
+set wildmenu
+
+" Display completions in a form of popup with descriptions of the matches
+
+set wildstyle=popup
+
+" ------------------------------------------------------------------------------
+" The file type is for the default programs to be used with
+" a file extension.
+" :filetype pattern1,pattern2 defaultprogram,program2
+" :fileviewer pattern1,pattern2 consoleviewer
+" The other programs for the file type can be accessed with the :file command
+" The command macros %f, %F, %d, %F may be used in the commands.
+" The %a macro is ignored.  To use a % you must put %%.
+
+" For automated FUSE mounts, you must register an extension with :file[x]type
+" in one of following formats:
+"
+" :filetype extensions FUSE_MOUNT|some_mount_command using %SOURCE_FILE and DESTINATION_DIR variables
+" %SOURCE_FILE and %DESTINATION_DIR are filled in by vifm at runtime.
+" A sample line might look like this:
+" :filetype *.zip,*.jar,*.war,*.ear FUSE_MOUNT|fuse-zip %SOURCE_FILE DESTINATION_DIR
+"
+" :filetype extensions FUSE_MOUNT2|some_mount_command using %PARAM and DESTINATION_DIR variables
+" %PARAM and %DESTINATION_DIR are filled in by vifm at runtime.
+" A sample line might look like this:
+" :filetype *.ssh FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR
+" %PARAM value is filled from the first line of file (whole line).
+" Example first line for SshMount filetype: root@127.0.0.1:/
+"
+" You can also add %CLEAR if you want to clear screen before running FUSE
+" program.
+
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+        \ harunou open image-preview %c
+
+" vim:set et sw=2 ft=vim:
+
