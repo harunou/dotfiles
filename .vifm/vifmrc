@@ -51,7 +51,7 @@ set wildstyle=popup
 " program.
 
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-        \ harunou open image-preview %c
+        \ harunou open image-preview %c %d
 
 " vim:set et sw=2 ft=vim:
 
