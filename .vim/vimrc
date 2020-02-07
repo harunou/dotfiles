@@ -25,6 +25,8 @@ set virtualedit=block
 set shiftround
 
 autocmd FileType json set sw=2 et
+autocmd FileType haskell set sw=2 et
+autocmd FileType javascript set sw=4 et
 
 if exists('+undofile')
   set undofile

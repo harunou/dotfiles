@@ -47,6 +47,8 @@ setup_vim(){
     git@github.com:tpope/vim-commentary.git \
     git@github.com:tpope/vim-ragtag.git \
     git@github.com:tpope/vim-surround.git \
+    git@github.com:prettier/vim-prettier.git \
+    git@github.com:neovimhaskell/haskell-vim.git \
   "
   rm -rf "$vimdir/autoload" "$vimdir/bundle"
   mkdir -p "$vimdir/autoload" "$vimdir/bundle"
