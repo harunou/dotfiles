@@ -3,30 +3,30 @@
 
 
 files="\
-  ./.login ./.profile \
-  ./.zlogin ./.zprofile ./.zshenv \
-  ./.zshrc ./.zshrc.grml \
-  ./.bash_profile \
-  ./.xsession ./.Xresources \
-  ./.curlrc ./.toprc \
-  ./.gitconfig \
-  ./.tmux.conf \
-  ./.ssh/authorized_keys \
-  ./.local/bin/harunou \
-  ./.local/bin/harunou-config \
-  ./.local/bin/harunou-setup \
-  ./.local/bin/harunou-open \
-  ./.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
-  ./.local/share/fonts/inconsolata-lgc.tar.gz \
-  ./.local/share/fonts/roboto-mono.tar.gz \
-  ./.local/share/fonts/terminus-console.tar.gz \
-  ./.local/share/fonts/terminus-x11.tar.gz \
-  ./.config/fontconfig/conf.d/75-yes-terminus.conf \
-  ./.xmonad/xmonad.hs \
-  ./.vscode/settings.json ./.vscode/keybindings.json \
-  ./.FBReader/options.xml \
-  ./.vim/vimrc \
-  ./.vifm/vifmrc ./.vifm/colors/default.vifm \
+  .login .profile \
+  .zlogin .zprofile .zshenv \
+  .zshrc .zshrc.grml \
+  .bash_profile \
+  .xsession .Xresources \
+  .curlrc .toprc \
+  .gitconfig \
+  .tmux.conf \
+  .ssh/authorized_keys \
+  .local/bin/harunou \
+  .local/bin/harunou-config \
+  .local/bin/harunou-setup \
+  .local/bin/harunou-open \
+  .local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
+  .local/share/fonts/inconsolata-lgc.tar.gz \
+  .local/share/fonts/roboto-mono.tar.gz \
+  .local/share/fonts/terminus-console.tar.gz \
+  .local/share/fonts/terminus-x11.tar.gz \
+  .config/fontconfig/conf.d/75-yes-terminus.conf \
+  .xmonad/xmonad.hs \
+  .vscode/settings.json .vscode/keybindings.json \
+  .FBReader/options.xml \
+  .vim/vimrc \
+  .vifm/vifmrc .vifm/colors/default.vifm \
 "
 
 if [ $# -gt 0 ]; then 
@@ -56,7 +56,7 @@ case "$command" in
     cd "$@"
     git config --replace-all remote.origin.url git@github.com:harunou/harunou.git
     git config alias.import '!harunou config find . -exec rm {} \; && harunou config tar -cf - | tar -xf -'
-    git config alias.export '!harunou config find . -print0 | xargs -0 tar -cf - | harunou config tar -xf -'
+    git config alias.export '!harunou config find . -print0 | sed "s/\x0\.\//\x0/g;s/^\.\///" | xargs -0 tar -cf - | harunou config tar -xf -'
     ;;
 
   clone) # destination directory

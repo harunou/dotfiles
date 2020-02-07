@@ -7,4 +7,4 @@ git clone https://github.com/harunou/harunou.git "$@"
 cd "${1-harunou}"
 
 .local/bin/harunou-config setup-repo "$(pwd)"
-.local/bin/harunou-config find . -print0 | xargs -0 tar -cf - | .local/bin/harunou-config tar -xf -
+.local/bin/harunou-config find . -print0 | sed "s/\x0\.\//\x0/g;s/^\.\///" | xargs -0 tar -cf - | .local/bin/harunou-config tar -xf -
