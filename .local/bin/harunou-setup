@@ -1,9 +1,9 @@
 #!/bin/bash
 # vim:set et sw=2:
 
-
-as_root(){
-  exec sudo "$@"
+as_root() {
+  if [ "$1" = exec ]; then ex="exec"; shift; fi
+  $ex sudo "$@"
 }
 
 setup_basics() {
@@ -63,6 +63,22 @@ setup_grml_zsh(){
   curl -o "$HOME/.zshrc.grml" https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 }
 
+setup_dm_xsession(){
+  as_root tee "/usr/share/xsessions/xsession.desktop" >/dev/null <<-EOF
+[Desktop Entry]
+Name=xsession
+Comment=Executes the .xsession script in your home directory
+Exec=xsession-helper
+TryExec=xsession-helper
+Type=Application
+EOF
+  as_root tee "/usr/bin/xsession-helper" >/dev/null <<-EOF
+#!/bin/bash
+exec $HOME/.xsession
+EOF
+  as_root chmod +x "/usr/bin/xsession-helper"
+}
+
 [ $# -gt 0 ] || set -- default
 
 command="$1"
@@ -91,6 +107,10 @@ case "$command" in
   console)
     setfont $HOME/.local/share/fonts/terminus-console/ter-c18n.psf.gz
     as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
+    ;;
+
+  xsession)
+    setup_dm_xsession
     ;;
 
   '') echo "Usage: `basename "$0"` <command> [options]" 
