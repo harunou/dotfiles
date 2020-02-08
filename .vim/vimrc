@@ -16,6 +16,7 @@ set showcmd
 set visualbell
 
 " Editing text and indent
+set modeline 
 set textwidth=78
 set expandtab
 set path+=**

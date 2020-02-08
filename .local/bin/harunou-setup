@@ -42,13 +42,13 @@ setup_shell() {
 setup_vim(){
   vimdir="$HOME/.vim"
   vimplugins="\
-    git@github.com:pangloss/vim-javascript.git \
-    git@github.com:tpope/vim-sensible.git \
-    git@github.com:tpope/vim-commentary.git \
-    git@github.com:tpope/vim-ragtag.git \
-    git@github.com:tpope/vim-surround.git \
-    git@github.com:prettier/vim-prettier.git \
-    git@github.com:neovimhaskell/haskell-vim.git \
+    https://github.com/pangloss/vim-javascript \
+    https://github.com/tpope/vim-sensible \
+    https://github.com/tpope/vim-commentary \
+    https://github.com/tpope/vim-ragtag \
+    https://github.com/tpope/vim-surround \
+    https://github.com/prettier/vim-prettier \
+    https://github.com/neovimhaskell/haskell-vim \
   "
   rm -rf "$vimdir/autoload" "$vimdir/bundle"
   mkdir -p "$vimdir/autoload" "$vimdir/bundle"
