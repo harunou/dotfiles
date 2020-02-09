@@ -14,8 +14,6 @@ setxkbmap \
   -layout us,ru \
   -option ctrl:nocaps,ctrl:swap_lwin_lctl,grp:shifts_toggle,terminate:ctrl_alt_bksp
 
-xsetroot -solid '#008080'
-
 [ ! -f "$HOME/.xsession.local" ] || . "$HOME/.xsession.local"
 
 : >"$HOME/.env.$DISPLAY"
@@ -37,13 +35,26 @@ for var in DISPLAY XAUTHORITY DESKTOP_SESSION \
 done
 [ -z "$exports" ] || echo "export$exports" >> "$HOME/.env.$DISPLAY"
 
+for wm in $wm xmonad gnome-session; do
+  if type $wm >/dev/null 2>&1; then
+    set -- $wm
+    break
+  fi
+done
 
-type xmonad >/dev/null 2>&1 && xmonad &
+xsetroot -solid '#008080'
+
+"$@" &
 wmpid=$!
+
+: ${XDG_CURRENT_DESKTOP:=${XDG_SESSION_DESKTOP:-${GDMSESSION:-Old}}}
+
+for daemon in ${GSD:-/usr/lib/gnome-settings-daemon}/gsd-*; do
+  [ -x "$daemon" ] && "$daemon" &
+done
 
 sleep 0.5
 
 type dex >/dev/null 2>&1 && dex -a
 
 wait $wmpid
-
