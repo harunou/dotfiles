@@ -89,7 +89,6 @@ case "$command" in
     setup_basics
     setup_fonts
     setup_shell
-    setup_vim
     ;;
 
   grml-zsh)
@@ -109,7 +108,7 @@ case "$command" in
     as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
     ;;
 
-  xsession)
+  xsession-helper)
     setup_dm_xsession
     ;;
 
