@@ -66,8 +66,8 @@ setup_grml_zsh(){
 setup_dm_xsession(){
   as_root tee "/usr/share/xsessions/xsession.desktop" >/dev/null <<-EOF
 [Desktop Entry]
-Name=xsession
-Comment=Executes the .xsession script in your home directory
+Name=User .xsession
+Comment=Executes the .xsession script in user home directory
 Exec=xsession-helper
 TryExec=xsession-helper
 Type=Application
