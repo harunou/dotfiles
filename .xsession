@@ -47,14 +47,14 @@ xsetroot -solid '#008080'
 "$@" &
 wmpid=$!
 
-: ${XDG_CURRENT_DESKTOP:=${XDG_SESSION_DESKTOP:-${GDMSESSION:-Old}}}
-
-for daemon in ${GSD:-/usr/lib/gnome-settings-daemon}/gsd-*; do
-  [ -x "$daemon" ] && "$daemon" &
-done
-
 sleep 0.5
 
-type dex >/dev/null 2>&1 && dex -a
+case $wm in
+  xmonad)
+    type dex >/dev/null 2>&1 && dex -a
+    ;;
+  *)
+    ;;
+esac
 
 wait $wmpid
