@@ -51,7 +51,13 @@ set wildstyle=popup
 " program.
 
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-        \ harunou open image-preview %c %d
+      \ xdg-open %c
+
+filextype *.pdf
+      \ xdg-open %c
+
+filextype *.epub
+      \ xdg-open %c
 
 " vim:set et sw=2 ft=vim:
 
