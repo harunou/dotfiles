@@ -63,22 +63,6 @@ setup_grml_zsh(){
   curl -o "$HOME/.zshrc.grml" https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 }
 
-setup_dm_xsession(){
-  as_root tee "/usr/share/xsessions/xsession.desktop" >/dev/null <<-EOF
-[Desktop Entry]
-Name=User .xsession
-Comment=Executes the .xsession script in user home directory
-Exec=xsession-helper
-TryExec=xsession-helper
-Type=Application
-EOF
-  as_root tee "/usr/bin/xsession-helper" >/dev/null <<-EOF
-#!/bin/bash
-exec $HOME/.xsession
-EOF
-  as_root chmod +x "/usr/bin/xsession-helper"
-}
-
 [ $# -gt 0 ] || set -- default
 
 command="$1"
@@ -106,10 +90,6 @@ case "$command" in
   console)
     setfont $HOME/.local/share/fonts/terminus-console/ter-c18n.psf.gz
     as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
-    ;;
-
-  xsession-helper)
-    setup_dm_xsession
     ;;
 
   '') echo "Usage: `basename "$0"` <command> [options]" 
