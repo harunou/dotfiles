@@ -18,7 +18,7 @@ setxkbmap \
 
 : >"$HOME/.env.$DISPLAY"
 chmod 0600 "$HOME/.env.$DISPLAY"
-for var in DISPLAY XAUTHORITY DESKTOP_SESSION \
+for var in DISPLAY XAUTHORITY DESKTOP_SESSION GDM_SESSION \
   XDG_SEAT XDG_SEAT_PATH XDG_SESSION_TYPE XDG_SESSION_CLASS \
   XDG_SESSION_ID XDG_VTNR XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP \
   XDG_CONFIG_DIRS XDG_DATA_DIRS XDG_RUNTIME_DIR XDG_GREETER_DATA_DIR \
@@ -34,6 +34,14 @@ for var in DISPLAY XAUTHORITY DESKTOP_SESSION \
   fi
 done
 [ -z "$exports" ] || echo "export$exports" >> "$HOME/.env.$DISPLAY"
+
+case $1 in
+  *xmonad-session)
+    ;;
+  *start*|*session)
+    exec "$@"
+    ;;
+esac
 
 for wm in $wm xmonad gnome-session; do
   if type $wm >/dev/null 2>&1; then

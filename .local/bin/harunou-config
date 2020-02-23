@@ -7,7 +7,7 @@ files="\
   .zlogin .zprofile .zshenv \
   .zshrc .zshrc.grml \
   .bash_profile \
-  .xsession .Xresources \
+  .xsession .Xresources .xsessionrc \
   .curlrc .toprc \
   .gitconfig \
   .tmux.conf \
