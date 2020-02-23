@@ -56,7 +56,8 @@ case "$command" in
     cd "$@"
     git config --replace-all remote.origin.url git@github.com:harunou/harunou.git
     git config alias.import '!harunou config find . -exec rm {} \; && harunou config tar -cf - | tar -xf -'
-    git config alias.export '!harunou config find . -print0 | sed "s/\x0\.\//\x0/g;s/^\.\///" | xargs -0 tar -cf - | harunou config tar -xf -'
+    git config alias.export '!.local/bin/harunou-config find . -print0 | \
+      sed -e "s/\x0\.\//\x0/g;s/^\.\///" | xargs -0 tar -cf - | .local/bin/harunou-config tar -xf -'
     ;;
 
   clone) # destination directory
