@@ -35,10 +35,10 @@ for var in DISPLAY XAUTHORITY DESKTOP_SESSION GDM_SESSION \
 done
 [ -z "$exports" ] || echo "export$exports" >> "$HOME/.env.$DISPLAY"
 
-case $1 in
-  *xmonad-session)
+case "$@" in
+  *xmonad-session*)
     ;;
-  *start*|*session)
+  *gnome-session*)
     exec "$@"
     ;;
 esac
