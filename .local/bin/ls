@@ -1,0 +1,16 @@
+#!/bin/bash
+# vim:set et sw=2:
+
+# Adds --color=always to all ls calls, forces to show colored output whenever
+# it is possible
+
+if /usr/bin/ls --color=always / >/dev/null 2>&1; then
+  LS_COMMAND="/usr/bin/ls"
+elif /bin/ls --color=always / >/dev/null 2>&1; then
+  LS_COMMAND="/bin/ls"
+else 
+  echo "command not found"
+  exit 1
+fi
+
+$LS_COMMAND "$@" --color=always
