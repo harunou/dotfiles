@@ -16,6 +16,7 @@
   "editor.links": false,
   "editor.minimap.enabled": false,
   "editor.occurrencesHighlight": false,
+  "editor.selectionHighlight": false,
   "editor.overviewRulerBorder": false,
   "editor.parameterHints.enabled": false,
   "editor.quickSuggestions": {
@@ -26,9 +27,7 @@
   "editor.renderIndentGuides": false,
   "editor.renderLineHighlight": "none",
   "editor.renderWhitespace": "selection",
-  "editor.rulers": [
-    72
-  ],
+  "editor.rulers": [72],
   "editor.suggestOnTriggerCharacters": false,
   "explorer.enableDragAndDrop": false,
   "explorer.openEditors.visible": 0,
@@ -46,9 +45,9 @@
   "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
   "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
-    "statusBar.background": "#005f5f",
-    "statusBar.noFolderBackground": "#005f5f",
-    "statusBar.debuggingBackground": "#005f5f"
+    "statusBar.background": "#007acc",
+    "statusBar.noFolderBackground": "#007acc",
+    "statusBar.debuggingBackground": "#007acc"
 },
   "workbench.editor.showTabs": false,
   "workbench.editor.limit.value": 4,
@@ -65,5 +64,5 @@
   "vim.statusBarColors.visualline": "#593281",
   "vim.statusBarColors.visualblock": "#86592d",
   "vim.statusBarColors.replace": "#000000",
-  "vim.foldfix": true,
+  "vim.foldfix": true
 }
