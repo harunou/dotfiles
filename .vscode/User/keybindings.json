@@ -82,44 +82,43 @@
     "command": "-editor.unfoldAll",
     "when": "editorTextFocus && foldingEnabled"
   },
-  {
+{
     "key": "ctrl+tab",
-    "command": "-workbench.action.openNextRecentlyUsedEditorInGroup"
-  },
-  {
-    "key": "ctrl+shift+tab",
-    "command": "-workbench.action.openPreviousRecentlyUsedEditorInGroup"
-  },
-  {
+    "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
+},
+{
     "key": "ctrl+tab",
     "command": "-workbench.action.quickOpenNavigateNextInEditorPicker",
     "when": "inEditorsPicker && inQuickOpen"
-  },
-  {
-    "key": "ctrl+shift+tab",
-    "command": "-workbench.action.quickOpenNavigatePreviousInEditorPicker",
-    "when": "inEditorsPicker && inQuickOpen"
-  },
+},
   {
     "key": "ctrl+j",
-    "command": "workbench.action.openNextRecentlyUsedEditorInGroup",
+    "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
     "when": "vim.active && vim.mode == 'Normal'"
-  },
-  {
-    "key": "ctrl+k",
-    "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup",
-    "when": "vim.active && vim.mode == 'Normal'"
-  },
-  {
+},
+{
     "key": "ctrl+j",
     "command": "workbench.action.quickOpenNavigateNextInEditorPicker",
     "when": "inEditorsPicker && inQuickOpen"
-  },
-  {
+},
+{
+    "key": "ctrl+k",
+    "command": "workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
+},
+{
+    "key": "ctrl+shift+tab",
+    "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
+},
+{
     "key": "ctrl+k",
     "command": "workbench.action.quickOpenNavigatePreviousInEditorPicker",
     "when": "inEditorsPicker && inQuickOpen"
-  },
+},
+{
+    "key": "ctrl+shift+tab",
+    "command": "-workbench.action.quickOpenNavigatePreviousInEditorPicker",
+    "when": "inEditorsPicker && inQuickOpen"
+},
 
   // Open quit open dialog and select item
   {
@@ -295,5 +294,6 @@
   {
     "key": "ctrl+d",
     "command": "-editor.action.addSelectionToNextFindMatch"
-  },
+}
+
 ]
