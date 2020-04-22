@@ -48,6 +48,9 @@
   interactive = auto
   grep = auto
 
+[status]
+  showStash = true
+
 [push]
   default = simple
   followTags = true
