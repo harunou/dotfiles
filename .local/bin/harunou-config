@@ -5,7 +5,9 @@
 files="\
   .login .profile \
   .zlogin .zprofile .zshenv \
-  .zshrc .zshrc.grml .zshrc.grml.help \
+  .zshrc \
+  .zshrc.grml .zshrc.grml.help \
+  .zshrc.git \
   .bash_profile \
   .xsession .Xresources .xsessionrc \
   .curlrc .toprc \
