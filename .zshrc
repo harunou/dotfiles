@@ -10,7 +10,7 @@ alias h="harunou"
 
 alias logg="journalctl -r -b 0"
 alias loga="journalctl -r"
-alias lal="ls -la | $PAGER"
+alias lap="list_all_pager"
 alias dir="ls -lsAh --group-directories-first"
 alias lsf="ls *(.)"
 alias lsdnew="lsnewdir"
@@ -33,5 +33,9 @@ hash -d Downloads=$HOME/Downloads
 if [[ -n "$NVM_DIR" ]]; then
   alias startnvm="source $NVM_DIR/nvm.sh"
 fi
+
+function list_all_pager() {
+  ls -la $1 | $PAGER
+}
 
 [ ! -f "$HOME/.zshrc.local" ] || . "$HOME/.zshrc.local"
