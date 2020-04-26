@@ -25,11 +25,13 @@ files="\
   .local/share/fonts/terminus-console.tar.gz \
   .local/share/fonts/terminus-x11.tar.gz \
   .config/fontconfig/conf.d/75-yes-terminus.conf \
+  .config/autostart/xbindkeys.desktop \
   .xmonad/xmonad.hs \
   .vscode/User/settings.json .vscode/User/keybindings.json \
   .FBReader/options.xml \
   .vim/vimrc \
   .vifm/vifmrc .vifm/colors/default.vifm \
+  .xbindkeysrc.scm \
 "
 
 if [ $# -gt 0 ]; then 
