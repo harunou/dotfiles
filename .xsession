@@ -43,7 +43,7 @@ case "$@" in
     ;;
 esac
 
-for wm in $wm xmonad gnome-session; do
+for wm in $wm xmonad; do
   if type $wm >/dev/null 2>&1; then
     set -- $wm
     break
@@ -55,14 +55,14 @@ xsetroot -solid '#008080'
 "$@" &
 wmpid=$!
 
+: ${XDG_CURRENT_DESKTOP:=${XDG_SESSION_DESKTOP:-${GDMSESSION:-Old}}}
+
 sleep 0.5
 
-case $wm in
-  xmonad)
-    type dex >/dev/null 2>&1 && dex -a
-    ;;
-  *)
-    ;;
-esac
+if type dex >/dev/null 2>&1; then
+  dex -a -e "$XDG_CURRENT_DESKTOP"
+elif type xbindkeys >/dev/null 2>&1; then
+  xbindkeys -n &
+fi
 
 wait $wmpid
