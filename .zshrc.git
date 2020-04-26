@@ -141,3 +141,7 @@ function grename() {
     git push --set-upstream origin "$2"
   fi
 }
+
+alias gim='git import'
+alias gex='git export'
+
