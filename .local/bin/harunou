@@ -33,6 +33,10 @@ case "$command" in
     aur_remove_package "$@"
     ;; 
 
+  update)
+    sudo pacman -Syu
+    ;;
+
   setup)
     exec "harunou-setup" "$@"
     ;;
