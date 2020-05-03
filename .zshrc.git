@@ -146,16 +146,16 @@ function grename() {
 }
 
 function confirm_and_delete_gone_branch() {
-  gone_branches=$(git branch -vv | grep ': gone]' | awk '{print $1}')
-  for branch in $gone_branches; do 
-    echo "Delete branch $branch (y/n)?"
+  gone_branches=$(git branch -vv | awk '/: gone]/{print $1}')
+  while read -u 3 -r branch; do
+    echo -ne "Delete gone branch '$branch' [Y/n]? "
     read choice
     case "$choice" in 
       y|Y ) git branch -D $branch
 	;;
-      * ) echo "skip $branch" 
+      * ) echo "Skipping '$branch'" 
 	;;
     esac
-  done
+  done 3<<< "$gone_branches"
 }
 

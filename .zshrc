@@ -27,6 +27,8 @@ alias grmlhelphashes="zsh_grml_help_hashes | $PAGER"
 alias grmlhelpkeybindings="zsh_grml_help_keybindings | $PAGER"
 alias grmlhelpkeybindings="zsh_grml_help_expansion | $PAGER"
 alias githelpaliases="cat $HOME/.zshrc.git | $PAGER"
+alias gim="git import"
+alias gex="git export"
 
 hash -d Downloads=$HOME/Downloads
 
