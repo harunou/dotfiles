@@ -21,9 +21,9 @@
   logdr  = log --color --date-order --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s\"  
   logdra = log --color --date-order --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s\" --all
 #Look with commit owner (author)
-loggo='git log --color --date-order --graph --format=\"%C(auto)%h%Creset %C(auto)%an%Creset %C(auto)%d%Creset %s\"'
-logdo='git log --color --date-order --date=\"format:%d.%m.%y %H:%M\" --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ad%Creset %C(auto)%an%Creset %C(auto)%d%Creset %s\"'
-logdro='git log --color --date-order --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ar%Creset %C(auto)%an%Creset %C(auto)%d%Creset %s\"'
+  loggo  = log --color --date-order --graph --format=\"%C(auto)%h%Creset %C(auto)%an%Creset %C(auto)%d%Creset %s\"
+  logdo  = log --color --date-order --date=\"format:%d.%m.%y %H:%M\" --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ad%Creset %C(auto)%an%Creset %C(auto)%d%Creset %s\"
+  logdro  = log --color --date-order --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ar%Creset %C(auto)%an%Creset %C(auto)%d%Creset %s\"  
 
 [core]
   pager = less -S
