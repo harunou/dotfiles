@@ -19,17 +19,18 @@ alias gbrn='git branch -m' # rename
 alias gbrename='grename' #rename with remote
 alias gbd='git branch -d'
 alias gbD='git branch -D'
-alias gbda='git branch --no-color --merged | command grep -vE "^(\+|\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
+alias gbdm='git branch --no-color --merged | command grep -vE "^(\+|\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
+alias gbdg='confirm_and_delete_gone_branch'
 alias gfa='git fetch --all --prune'
 
 alias gco='git checkout'
-alias gco.='git checkout -- .'
+alias gcoa='git checkout -- .'
 alias gcb='git checkout -b'
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
 
 alias ga='git add'
-alias ga.='git add .'
+alias gaa='git add .'
 
 alias gc='git commit'
 alias gc!='git commit --amend'
@@ -47,12 +48,14 @@ alias gsts='git stash show --text' # show patch
 alias gl='git pull'
 alias gpull='git pull origin "$(git_current_branch)"'
 
-alias gp='git push'
+alias gp='git push origin'
+alias gpp='git push'
 alias gpd='git push --dry-run'
-alias gpf='git push --force-with-lease'
+alias gpf='git push origin --force-with-lease'
+alias gppf='git push --force-with-lease'
 alias gpf!='git push --force'
 alias gpoat='git push origin --all && git push origin --tags'
-alias gpush='git push origin "$(git_current_branch)"'
+alias gpush='git push -u origin "$(git_current_branch)"'
 
 alias gr='git rebase'
 alias gra='git rebase --abort'
@@ -72,9 +75,9 @@ alias gma='git merge --abort'
 alias gmc='git merge --continue'
 alias gmt='git mergetool --no-prompt'
 
-alias grh='git reset'
-alias grhh='git reset --hard'
-alias groh='git reset origin/$(git_current_branch) --hard'
+alias gt='git reset'
+alias gth='git reset --hard'
+alias gtho='git reset origin/$(git_current_branch) --hard'
 alias gpristine='git reset --hard && git clean -dffx'
 
 alias gbl='git blame -b -w'
@@ -142,6 +145,17 @@ function grename() {
   fi
 }
 
-alias gim='git import'
-alias gex='git export'
+function confirm_and_delete_gone_branch() {
+  gone_branches=$(git branch -vv | grep ': gone]' | awk '{print $1}')
+  for branch in $gone_branches; do 
+    echo "Delete branch $branch (y/n)?"
+    read choice
+    case "$choice" in 
+      y|Y ) git branch -D $branch
+	;;
+      * ) echo "skip $branch" 
+	;;
+    esac
+  done
+}
 
