@@ -90,6 +90,7 @@ alias gclean='git clean -id'
 
 alias gcount='git shortlog -sn'
 #https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs=
+alias glog='git log'
 #Basic graph log
 alias gloga='git loga'
 #Extend look
