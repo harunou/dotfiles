@@ -33,7 +33,7 @@ alias gex="git export"
 hash -d Downloads=$HOME/Downloads
 
 if [[ -n "$NVM_DIR" ]]; then
-  alias startnvm="source $NVM_DIR/nvm.sh"
+  alias nvmstart="source $NVM_DIR/nvm.sh"
 fi
 
 function list_all_pager() {
