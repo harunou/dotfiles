@@ -45,8 +45,8 @@ case "$command" in
     exec "harunou-config" "$@"
     ;;
 
-  open)
-    exec "harunou-open" "$@"
+  media)
+    exec "harunou-media" "$@"
     ;;
 
   '') 
