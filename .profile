@@ -27,3 +27,8 @@ if [ ! -f "$HOME/. harunou" ]; then
   harunou setup
 fi
 
+if [ -f "$HOME/.local/share/fonts/terminus-console/ter-c20n.psf.gz" ]; then
+  export FBFONT=$HOME/.local/share/fonts/terminus-console/ter-c16n.psf.gz
+fi
+
+
