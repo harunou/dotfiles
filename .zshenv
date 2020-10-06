@@ -14,3 +14,4 @@ zshcache=$HOME/.cache/zsh
 HISTFILE=$zshcache/.zsh_history
 COMPDUMPFILE=$zshcache/.zcompdump
 DIRSTACKFILE=$zshcache/.zdirs
+GRML_DISPLAY_BATTERY=1
