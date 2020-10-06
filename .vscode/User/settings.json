@@ -67,5 +67,6 @@
   "vim.foldfix": true,
   "explorer.confirmDelete": false,
   "editor.semanticHighlighting.enabled": false,
-  "window.restoreWindows": "one"
+  "window.restoreWindows": "one",
+  "diffEditor.ignoreTrimWhitespace": false
 }
