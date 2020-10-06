@@ -66,5 +66,6 @@
   "vim.statusBarColors.replace": "#000000",
   "vim.foldfix": true,
   "explorer.confirmDelete": false,
-  "editor.semanticHighlighting.enabled": false
+  "editor.semanticHighlighting.enabled": false,
+  "window.restoreWindows": "one"
 }
