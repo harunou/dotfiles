@@ -50,7 +50,13 @@ set wildstyle=popup
 " You can also add %CLEAR if you want to clear screen before running FUSE
 " program.
 
-filextype *
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+      \ xdg-open %c
+
+filextype *.pdf,*.epub
+      \ xdg-open %c
+
+filextype *.mp4
       \ xdg-open %c
 
 " vim:set et sw=2 ft=vim:
