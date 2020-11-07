@@ -1,5 +1,6 @@
 {
   "breadcrumbs.enabled": false,
+  "diffEditor.ignoreTrimWhitespace": false,
   "editor.accessibilitySupport": "off",
   "editor.colorDecorators": false,
   "editor.cursorStyle": "block",
@@ -17,6 +18,7 @@
   "editor.minimap.enabled": false,
   "editor.occurrencesHighlight": false,
   "editor.selectionHighlight": false,
+  "editor.semanticHighlighting.enabled": false,
   "editor.overviewRulerBorder": false,
   "editor.parameterHints.enabled": false,
   "editor.quickSuggestions": {
@@ -31,6 +33,7 @@
   "editor.suggestOnTriggerCharacters": false,
   "explorer.enableDragAndDrop": false,
   "explorer.openEditors.visible": 0,
+  "explorer.confirmDelete": false,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
@@ -43,6 +46,7 @@
   "update.mode": "none",
   "window.menuBarVisibility": "hidden",
   "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
+  "window.restoreWindows": "one",
   "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "statusBar.background": "#005f5f",
@@ -54,8 +58,8 @@
   "workbench.editor.limit.enabled": true,
   "workbench.settings.editor": "json",
   "workbench.settings.useSplitJSON": true,
-  "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
+  "workbench.sideBar.location": "right",
   "zenMode.hideStatusBar": false,
   "vim.statusBarColorControl": true,
   "vim.statusBarColors.normal": "#005f5f",
@@ -65,8 +69,5 @@
   "vim.statusBarColors.visualblock": "#86592d",
   "vim.statusBarColors.replace": "#000000",
   "vim.foldfix": true,
-  "explorer.confirmDelete": false,
-  "editor.semanticHighlighting.enabled": false,
-  "window.restoreWindows": "one",
-  "diffEditor.ignoreTrimWhitespace": false
+  "editor.codeActionsOnSave": {},
 }
