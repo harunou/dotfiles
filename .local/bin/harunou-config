@@ -32,6 +32,7 @@ files="\
   .vim/vimrc \
   .vifm/vifmrc .vifm/colors/default.vifm \
   .xbindkeysrc.scm \
+  .gnupg/gpg-agent.conf \
 "
 
 if [ $# -gt 0 ]; then 
