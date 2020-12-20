@@ -2,7 +2,7 @@
 # vim:set et sw=2:
 
 aur_remove_package(){
-  repo_path=$(aur repo) ;
+  repo_path=$(aur repo --path-list) ;
   if repo_path=$(readlink -e "$repo_path"); then
     repo-remove "$repo_path" "$@"
     paccache -c "${repo_path%/*}" -rvk0 "$@"
