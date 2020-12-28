@@ -9,6 +9,14 @@ aur_remove_package(){
   fi
 }
 
+name() {
+  if [ -r /proc/sys/kernel/hostname ]; then
+    cat /proc/sys/kernel/hostname
+  else
+    hostname | cut -d. -f1
+  fi
+}
+
 if [ $# -gt 0 ]; then
   command="$1"
   shift
@@ -33,6 +41,10 @@ case "$command" in
     aur_remove_package "$@"
     ;; 
 
+  hostname)
+    name
+    ;;
+
   update)
     sudo pacman -Syu
     ;;
@@ -47,6 +59,10 @@ case "$command" in
 
   media)
     exec "harunou-media" "$@"
+    ;;
+
+  ssl)
+    exec "harunou-ssl" "$@"
     ;;
 
   '') 

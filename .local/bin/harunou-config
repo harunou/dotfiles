@@ -18,6 +18,7 @@ files="\
   .local/bin/harunou-config \
   .local/bin/harunou-setup \
   .local/bin/harunou-media \
+  .local/bin/harunou-ssl \
   .local/bin/ls \
   .local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
   .local/share/fonts/inconsolata-lgc.tar.gz \
