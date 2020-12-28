@@ -11,21 +11,21 @@ case "$command" in
     operation="$1"
     shift
     case "$operation" in 
-      host-crt)
+      host-cert)
         echo -e 'Creating key...'
         host=$(harunou hostname)
         openssl genpkey -algorithm RSA -aes-128-cbc -out "$host".key 
-        echo -e '\nCreating crt...'
-        openssl req -x509 -key "$host".key -out "$host".crt -subj "/CN=$host/O=$host/emailAddress=$USER"
+        echo -e '\nCreating certificate...'
+        openssl req -x509 -key "$host".key -out "$host".crt -subj "/CN=$host/O=$host/emailAddress=$USER@$host"
         ;;
 
-      domain-crt)
+      domain-cert)
         domain=$1
-        cakey=$2
-        cacrt=$3
+        cacrt=$2
+        cakey=$3
         host=$(harunou hostname)
         openssl genpkey -algorithm RSA -out "$domain".key
-        openssl req -new -key "$domain".key -out "$domain".csr -subj "/CN=$domain/O=$host/emailAddress=$USER"
+        openssl req -new -key "$domain".key -out "$domain".csr -subj "/CN=$domain/O=$host/emailAddress=$USER@$host"
         openssl x509 -req -in "$domain".csr -days 365 -out "$domain".crt \
                 -CA $cacrt -CAkey $cakey -CAcreateserial \
                 -extfile <(cat <<END
@@ -51,21 +51,21 @@ END
         openssl req -text -noout -verify -in $1
         ;;
 
-      crt)
+      cert)
         openssl x509 -in $1 -text -noout
         ;;
     esac
     ;;
 
   trust)
-    crt=$1
-    harunou-ssl untrust $crt
-    sudo trust anchor $crt
+    cert=$1
+    harunou-ssl untrust $cert
+    sudo trust anchor $cert
     ;;
 
   untrust)
-    crt=$1
-    sudo trust anchor --remove $crt || true
+    cert=$1
+    sudo trust anchor --remove $cert || true
     ;;
 
   '') 
