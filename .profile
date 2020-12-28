@@ -35,4 +35,17 @@ if [ -f "$HOME/.local/share/fonts/terminus-console/ter-c20n.psf.gz" ]; then
   export FBFONT=$HOME/.local/share/fonts/terminus-console/ter-c16n.psf.gz
 fi
 
+XDG_DATA_HOME=$HOME/.local/share
+XDG_CONFIG_HOME=$HOME/.config
+XDG_DATA_DIRS=/usr/local/share/:/usr/share/
+XDG_CONFIG_DIRS=/etc/xdg
+XDG_CACHE_HOME=$HOME/.cache
 
+export XDG_DATA_HOME XDG_CONFIG_HOME XDG_DATA_DIRS XDG_CONFIG_DIRS \
+XDG_CACHE_HOME
+
+# To keep compatibility with app that use deprecated mimeapps.list location,
+# e.g. gio
+if [ ! -h $HOME/.local/share/applications/mimeapps.list ]; then
+  ln -s $HOME/.config/mimeapps.list $HOME/.local/share/applications/mimeapps.list
+fi
