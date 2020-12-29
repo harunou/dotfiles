@@ -1,17 +1,11 @@
 # ~/.zshrc
 # vim:set et sw=2:
 
+. $HOME/.shrc
 . $HOME/.grml.zsh
 . $HOME/.grml.help.zsh
 
-. $HOME/.git.zsh
-
-alias h="harunou"
-
-alias logg="journalctl -r -b 0"
-alias loga="journalctl -r"
 alias lap="list_all_pager"
-alias dir="ls -lsAh --group-directories-first"
 alias lsf="ls *(.)"
 alias lsdnew="lsnewdir"
 alias lsdold="lsolddir"
@@ -26,9 +20,6 @@ alias helpgrmlcommands="zsh_grml_help_commands | $PAGER"
 alias helpgrmlhashes="zsh_grml_help_hashes | $PAGER"
 alias helpgrmlkeybindings="zsh_grml_help_keybindings | $PAGER"
 alias helpgrmlkeybindings="zsh_grml_help_expansion | $PAGER"
-alias helpgitpaliases="cat $HOME/.zshrc.git | $PAGER"
-alias gim="git import"
-alias gex="git export"
 
 hash -d Downloads=$HOME/Downloads
 

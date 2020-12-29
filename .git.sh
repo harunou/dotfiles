@@ -1,4 +1,4 @@
-# ~/.zshrc.git
+# ~/.git.sh
 # vim:set et sw=2:
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet
 

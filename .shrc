@@ -1,0 +1,17 @@
+# ~/.shrc
+# vim:set et sw=2:
+
+alias h="harunou"
+
+alias gim="git import"
+alias gex="git export"
+
+alias logg="journalctl -r -b 0"
+alias loga="journalctl -r"
+alias dir="ls -lsAh --group-directories-first"
+
+alias helpgitpaliases="cat $HOME/.git.sh | $PAGER"
+
+. $HOME/.git.sh
+
+

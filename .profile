@@ -27,10 +27,6 @@ fi
 EDITOR=$VISUAL
 export LESS EDITOR VISUAL
 
-if [ ! -f "$HOME/. harunou" ]; then
-  harunou setup
-fi
-
 if [ -f "$HOME/.local/share/fonts/terminus-console/ter-c20n.psf.gz" ]; then
   export FBFONT=$HOME/.local/share/fonts/terminus-console/ter-c16n.psf.gz
 fi
@@ -48,4 +44,8 @@ XDG_CACHE_HOME
 # e.g. gio
 if [ ! -h $HOME/.local/share/applications/mimeapps.list ]; then
   ln -s $HOME/.config/mimeapps.list $HOME/.local/share/applications/mimeapps.list
+fi
+
+if [ ! -f "$HOME/. harunou" ]; then
+  harunou setup
 fi

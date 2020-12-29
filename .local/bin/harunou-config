@@ -4,11 +4,11 @@
 
 files="\
   .login .profile \
+  .shrc .git.sh \
   .zlogin .zprofile .zshenv \
   .zshrc \
   .grml.zsh .grml.help.zsh \
-  .git.zsh \
-  .bash_profile \
+  .bashrc .bash_profile \
   .xsession .Xresources .xsessionrc \
   .curlrc .toprc \
   .gitconfig \
