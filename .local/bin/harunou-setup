@@ -92,6 +92,13 @@ case "$command" in
     as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
     ;;
 
+  pacman-hooks)
+    if [[ ! -d /etc/pacman.d/hooks ]]; then 
+      as_root mkdir -p /etc/pacman.d/hooks
+    fi
+    as_root cp $HOME/.local/etc/pacman.d/hooks/* /etc/pacman.d/hooks/
+    ;;
+
   '') echo "Usage: `basename "$0"` <command> [options]" 
     ;;
 
