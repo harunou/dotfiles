@@ -34,6 +34,8 @@ files="\
   .vifm/vifmrc .vifm/colors/default.vifm \
   .xbindkeysrc.scm \
   .gnupg/gpg-agent.conf \
+  .local/etc/pacman.d/hooks/intel-microcode-reload.hook \
+  .local/etc/pacman.d/hooks/xmonad-recompile.hook \
 "
 
 if [ $# -gt 0 ]; then 
