@@ -1,0 +1,69 @@
+#!/bin/bash
+# vim:set et sw=2:
+
+WORKDIR="${0%/*}"
+
+source $WORKDIR/epo-vpn.conf
+
+INTERFACE="epo-vpn"
+LOGFILE="/tmp/epo-vpn.log"
+PIDFILE="/run/openconnect-$INTERFACE.pid"
+
+# NOTE(Harunou): to prevent dns leak usefull domains should be explicitly
+# specified, otherwise add nameserver and searchserver to /etc/resolv.conf
+start_vpn(){
+  echo $(date) >${LOGFILE}
+  echo $2 | sudo openconnect \
+    --background \
+    --protocol=pulse \
+    --user=$1 \
+    --passwd-on-stdin \
+    --interface=$INTERFACE \
+    --pid-file=$PIDFILE \
+    --script="/bin/vpn-slice $HOSTS --no-ns-hosts --verbose" $SERVER >>${LOGFILE} 2>&1
+  }
+
+stop_vpn() {
+  if [[ -f $PIDFILE ]]; then 
+    sudo kill -s SIGINT $(cat ${PIDFILE})
+  fi
+}
+
+status_vpn() {
+  is_connected=$(ip a | grep $INTERFACE)
+  if [[ -z $is_connected ]]; then
+    echo "$INTERFACE is down"
+    exit 1;
+  fi
+  echo "$INTERFACE is up"
+}
+
+if [ $# -gt 0 ]; then
+  command="$1"
+  shift
+fi
+
+case "$command" in
+  u|up)
+    start_vpn "$@"
+    ;;
+  d|down)
+    stop_vpn
+    ;;
+  s|status)
+    status_vpn
+    ;;
+  l|log)
+    if [[ -f $LOGFILE ]]; then 
+      cat $LOGFILE
+    fi
+    ;;
+  *) 
+    echo "`basename "$0"` $command: unknown command 
+Usage: epo-vpn s|status
+       epo-vpn u|up <user name> <digipass password>
+       epo-vpn d|down
+       epo-vpn l|log" >&2
+    exit 1
+    ;;
+esac
