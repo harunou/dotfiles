@@ -1,0 +1,82 @@
+#!/bin/bash
+# vim:set et sw=2:
+
+WORKDIR="${0%/*}"
+source $WORKDIR/epo.conf
+
+read_epo_user_password() {
+  echo -ne "password for $EPOUSER: "
+  read -s PASSWORD
+}
+
+read_epo_user_digipass() {
+  echo -ne "digipass for $EPOUSER: "
+  read DIGIPASS
+}
+
+set_vpn(){
+  sudo epo-vpn status >/dev/null
+  is_vpn_up=$?
+  if [[ $is_vpn_up -eq 0 ]]; then 
+    epo-vpn down
+    sleep 1
+  fi
+  echo "Setting up vpn..."
+  epo-vpn up $EPOUSER $DIGIPASS
+}
+
+set_kerberos(){
+  echo -ne "\nSetting up kerberos ticket...\n"
+  echo "$PASSWORD" | kinit $EPOUSER
+}
+
+set_proxy() {
+  echo -ne "\nSetting up proxy...\n"
+  curl --silent https://registry.npmjs.org/ --proxy http://proxylb.internal.epo.org:8080 --proxy-user "$EPOUSER:$PASSWORD"
+}
+
+if [ $# -gt 0 ]; then
+  command="$1"
+  shift
+fi
+
+case "$command" in
+  vpn)
+    read_epo_user_digipass
+    set_vpn
+    ;;
+
+  kerberos)
+    read_epo_user_password
+    set_kerberos
+    ;;
+
+  proxy)
+    read_epo_user_password
+    set_proxy
+    ;;
+
+  check)
+    echo -ne 'Cheking vpn...\n'
+    ping -c 1 my.internal.epo.org
+    echo -ne '\nChecking kerberos...\n'
+    klist
+    echo -ne '\nChecking proxy...\n'
+    curl --silent https://registry.npmjs.org/ --proxy http://proxylb.internal.epo.org:8080 
+    ;;
+
+  '') 
+    read_epo_user_password
+    echo -ne '\n'
+    read_epo_user_digipass
+    set_vpn
+    sleep 2
+    set_kerberos
+    set_proxy
+    ;;
+
+  *) 
+    echo "`basename "$0"` $command: unknown command." >&2; exit 1 
+    ;;
+esac
+
