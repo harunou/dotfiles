@@ -1,10 +1,10 @@
 # ~/.zshrc
 # vim:set et sw=2:
 
-. $HOME/.zshrc.grml
-. $HOME/.zshrc.grml.help
+. $HOME/.grml.zsh
+. $HOME/.grml.help.zsh
 
-. $HOME/.zshrc.git
+. $HOME/.git.zsh
 
 alias h="harunou"
 
