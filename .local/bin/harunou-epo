@@ -32,7 +32,7 @@ set_kerberos(){
 
 set_proxy() {
   echo -ne "\nSetting up proxy...\n"
-  curl --silent https://registry.npmjs.org/ --proxy http://proxylb.internal.epo.org:8080 --proxy-user "$EPOUSER:$PASSWORD"
+  curl --silent https://registry.npmjs.org/ --proxy $EPOPROXY --proxy-user "$EPOUSER:$PASSWORD"
 }
 
 if [ $# -gt 0 ]; then
@@ -56,13 +56,13 @@ case "$command" in
     set_proxy
     ;;
 
-  check)
+  status)
     echo -ne 'Cheking vpn...\n'
     ping -c 1 my.internal.epo.org
     echo -ne '\nChecking kerberos...\n'
     klist
     echo -ne '\nChecking proxy...\n'
-    curl --silent https://registry.npmjs.org/ --proxy http://proxylb.internal.epo.org:8080 
+    curl --silent https://registry.npmjs.org/ --proxy $EPOPROXY
     ;;
 
   '') 

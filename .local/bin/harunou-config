@@ -20,8 +20,8 @@ files="\
   .local/bin/harunou-media \
   .local/bin/harunou-ssl \
   .local/bin/harunou-openconnect \
+  .local/bin/harunou-epo \
   .local/bin/ls \
-  .local/bin/epo \
   .local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
   .local/share/fonts/inconsolata-lgc.tar.gz \
   .local/share/fonts/roboto-mono.tar.gz \
