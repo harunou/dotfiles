@@ -26,8 +26,10 @@ set_vpn(){
 }
 
 set_kerberos(){
+  kerberos_config_location=/tmp/epo-krb5.conf
   echo -ne "\nSetting up kerberos ticket...\n"
-  echo "$PASSWORD" | kinit $EPOUSER
+  echo "$EPOKRB5_CONFIG" > $kerberos_config_location
+  echo "$PASSWORD" | env KRB5_CONFIG=$kerberos_config_location kinit $EPOUSER
 }
 
 set_proxy() {
