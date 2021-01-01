@@ -1,26 +1,26 @@
 #!/bin/bash
 # vim:set et sw=2:
 
-WORKDIR="${0%/*}"
-
-source $WORKDIR/epo-vpn.conf
-
-INTERFACE="epo-vpn"
-LOGFILE="/tmp/epo-vpn.log"
-PIDFILE="/run/openconnect-$INTERFACE.pid"
+INTERFACE="harunou-oc"
+LOGFILE="/tmp/harunou-oc.log"
+PIDFILE="/run/$INTERFACE.pid"
 
 # NOTE(Harunou): to prevent dns leak usefull domains should be explicitly
 # specified, otherwise add nameserver and searchserver to /etc/resolv.conf
 start_vpn(){
+  ocuser=$1
+  ocpassword=$2
+  ocserver=$3
+  ochosts=$4
   echo $(date) >${LOGFILE}
-  echo $2 | sudo openconnect \
+  echo $ocpassword | sudo openconnect \
     --background \
     --protocol=pulse \
-    --user=$1 \
+    --user=$ocuser \
     --passwd-on-stdin \
     --interface=$INTERFACE \
     --pid-file=$PIDFILE \
-    --script="/bin/vpn-slice $HOSTS --no-ns-hosts --verbose" $SERVER >>${LOGFILE} 2>&1
+    --script="/bin/vpn-slice $ochosts --no-ns-hosts --verbose" $ocserver >>${LOGFILE} 2>&1
   }
 
 stop_vpn() {

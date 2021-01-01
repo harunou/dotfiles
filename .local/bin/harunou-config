@@ -19,8 +19,8 @@ files="\
   .local/bin/harunou-setup \
   .local/bin/harunou-media \
   .local/bin/harunou-ssl \
+  .local/bin/harunou-openconnect \
   .local/bin/ls \
-  .local/bin/epo-vpn \
   .local/bin/epo \
   .local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
   .local/share/fonts/inconsolata-lgc.tar.gz \

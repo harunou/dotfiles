@@ -15,14 +15,14 @@ read_epo_user_digipass() {
 }
 
 set_vpn(){
-  sudo epo-vpn status >/dev/null
+  sudo harunou openconnect status >/dev/null
   is_vpn_up=$?
   if [[ $is_vpn_up -eq 0 ]]; then 
-    epo-vpn down
+    harunou openconnect down
     sleep 1
   fi
   echo "Setting up vpn..."
-  epo-vpn up $EPOUSER $DIGIPASS
+  harunou openconnect up $EPOUSER $DIGIPASS $EPOSERVER "$EPOHOSTS"
 }
 
 set_kerberos(){
