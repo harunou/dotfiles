@@ -26,15 +26,20 @@ set_vpn(){
 }
 
 set_kerberos(){
-  kerberos_config_location=/tmp/epo-krb5.conf
+  # KRB5_CONFIG=/tmp/epo-krb5.conf
+  # export KRB5_CONFIG
   echo -ne "\nSetting up kerberos ticket...\n"
-  echo "$EPOKRB5_CONFIG" > $kerberos_config_location
-  echo "$PASSWORD" | env KRB5_CONFIG=$kerberos_config_location kinit $EPOUSER
+  # echo "$EPOKRB5_CONFIG" > $KRB5_CONFIG
+  echo "$PASSWORD" | kinit $EPOUSER
 }
 
 set_proxy() {
   echo -ne "\nSetting up proxy...\n"
   curl --silent https://registry.npmjs.org/ --proxy $EPOPROXY --proxy-user "$EPOUSER:$PASSWORD"
+}
+
+remote_desktop() {
+  xfreerdp /bpp:32 /gfx +aero +fonts  /u:$EPOUSER /v:$EPOWORKSTATION /size:100%w /cert:ignore /floatbar:sticky:off,show:always
 }
 
 if [ $# -gt 0 ]; then
@@ -58,9 +63,13 @@ case "$command" in
     set_proxy
     ;;
 
+  desktop)
+    remote_desktop
+    ;;
+
   status)
     echo -ne 'Cheking vpn...\n'
-    ping -c 1 my.internal.epo.org
+    ping -c 1 $EPOPING
     echo -ne '\nChecking kerberos...\n'
     klist
     echo -ne '\nChecking proxy...\n'
