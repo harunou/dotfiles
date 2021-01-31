@@ -32,6 +32,10 @@ case "$command" in
     xscreensaver-command -restart >/dev/null 2>&1
     echo "ScreenSaver mode set to $mode"
     ;;
+  logout)
+    session=`loginctl session-status | head -n 1 | awk '{print $1}'`
+    loginctl terminate-session $session
+    ;;
 
   aur-remove)
     if [ "$#" -eq 0 ]; then
