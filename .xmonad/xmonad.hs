@@ -1,18 +1,27 @@
-import System.Exit
+-- vim:set et sw=2:
+
 import XMonad
 import XMonad.Config.Desktop
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageHelpers
-import XMonad.Layout.BinarySpacePartition (emptyBSP)
-import XMonad.Layout.NoBorders (noBorders)
-import XMonad.Layout.ResizableTile (ResizableTall(..))
-import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
+import XMonad.Hooks.EwmhDesktops hiding (fullscreenEventHook)
+import XMonad.Hooks.ManageDocks
+import XMonad.Layout
+import XMonad.Layout.Fullscreen
+import XMonad.Layout.NoBorders
 
-main = xmonad $ desktopConfig
+myLayout = desktopLayoutModifiers $ tallLayout ||| wideLayout ||| fullLayout
+  where
+    basicLayout = smartBorders $ fullscreenFocus $ Tall 1 (3/100) (1/2)
+    tallLayout  = avoidStruts $ basicLayout
+    wideLayout  = avoidStruts $ Mirror $ basicLayout
+    fullLayout  = avoidStruts $ noBorders Full
+
+main = xmonad $ ewmh $ desktopConfig
   { terminal = "urxvt"
   , modMask = modm
   , focusFollowsMouse = False
-  , layoutHook = desktopLayoutModifiers $ defaultTall ||| noBorders (Full) ||| Mirror (defaultTall)
+  , normalBorderColor = "#37474f"
+  , focusedBorderColor = "#4caf50"
+  , layoutHook = myLayout
   }
-    where modm = mod4Mask,
-          defaultTall = Tall 1 3/100 1/2
+    where 
+      modm = mod4Mask
