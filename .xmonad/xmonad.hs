@@ -15,13 +15,16 @@ myLayout = desktopLayoutModifiers $ tallLayout ||| wideLayout ||| fullLayout
     wideLayout  = avoidStruts $ Mirror $ basicLayout
     fullLayout  = avoidStruts $ noBorders Full
 
-main = xmonad $ ewmh $ desktopConfig
-  { terminal = "urxvt"
-  , modMask = modm
-  , focusFollowsMouse = False
-  , normalBorderColor = "#37474f"
-  , focusedBorderColor = "#4caf50"
-  , layoutHook = myLayout
-  }
-    where 
-      modm = mod4Mask
+main = do 
+  spawn "xmobar"
+
+  xmonad $ ewmh $ desktopConfig
+    { terminal = "urxvt"
+    , modMask = modm
+    , focusFollowsMouse = False
+    , normalBorderColor = "#37474f"
+    , focusedBorderColor = "#06989A"
+    , layoutHook = myLayout
+    }
+      where 
+        modm = mod4Mask
