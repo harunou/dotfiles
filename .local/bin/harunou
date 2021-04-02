@@ -32,9 +32,23 @@ case "$command" in
     xscreensaver-command -restart >/dev/null 2>&1
     echo "ScreenSaver mode set to $mode"
     ;;
+
+  touchpad)
+    touchpad_id=$(xinput | grep -ioE "touchpad.*id=[0-9]+" | sed -E "s/.*id=([0-9]+)/\1/")
+    if xinput list-props "$touchpad_id" | grep -iE "device enabled.*:.*1" >/dev/null
+    then
+      xinput disable "$touchpad_id"
+    else
+      xinput enable "$touchpad_id"
+    fi
+    ;;
+
   logout)
-    session=`loginctl session-status | head -n 1 | awk '{print $1}'`
-    loginctl terminate-session $session
+    loginctl terminate-session sefl
+    ;;
+
+  lock)
+    dm-tool switch-to-greeter
     ;;
 
   aur-remove)
