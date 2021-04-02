@@ -9,8 +9,6 @@ xrdb -merge "$HOME/.Xresources"
 xset r rate 500 30
 xset +fp $HOME/.local/share/fonts/terminus-x11
 xset fp rehash
-xset s off
-xset -dpms
 
 setxkbmap \
   -layout us,ru \
