@@ -49,11 +49,11 @@ case "$command" in
     ;;
 
   logout)
-    loginctl terminate-session sefl
+    loginctl terminate-session self
     ;;
 
   lock)
-    dm-tool switch-to-greeter
+    sleep 1; xdg-screensaver lock || dm-tool switch-to-greeter || xset dpms force standby
     ;;
 
   aur-remove)
