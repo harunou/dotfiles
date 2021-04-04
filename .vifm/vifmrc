@@ -56,7 +56,7 @@ filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
 filextype *.pdf,*.epub
       \ xdg-open %c
 
-filextype *.mp4
+filextype *.mp4,*.webm
       \ xdg-open %c
 
 " vim:set et sw=2 ft=vim:
