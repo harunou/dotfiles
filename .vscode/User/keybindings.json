@@ -3,31 +3,31 @@
   // Manage windows
   {
     "key": "ctrl+w ctrl+u",
-    "command": "workbench.action.toggleSidebarVisibility",
+    "command": "workbench.action.toggleSidebarVisibility"
   },
   {
     "key": "ctrl+w ctrl+i",
-    "command": "workbench.action.toggleActivityBarVisibility",
+    "command": "workbench.action.toggleActivityBarVisibility"
   },
   {
     "key": "ctrl+w ctrl+e",
-    "command": "workbench.view.explorer",
+    "command": "workbench.view.explorer"
   },
   {
     "key": "ctrl+w ctrl+f",
-    "command": "workbench.view.search",
+    "command": "workbench.view.search"
   },
   {
     "key": "ctrl+w ctrl+v",
-    "command": "workbench.view.scm",
+    "command": "workbench.view.scm"
   },
   {
     "key": "ctrl+w ctrl+d",
-    "command": "workbench.view.debug",
+    "command": "workbench.view.debug"
   },
   {
     "key": "ctrl+w ctrl+x",
-    "command": "workbench.view.extensions",
+    "command": "workbench.view.extensions"
   },
   {
     "key": "ctrl+w ctrl+w",
@@ -41,27 +41,27 @@
   },
   {
     "key": "ctrl+w ctrl+m",
-    "command": "workbench.action.toggleMenuBar",
+    "command": "workbench.action.toggleMenuBar"
   },
   {
     "key": "ctrl+w shift+f",
-    "command": "workbench.action.files.openFolder",
+    "command": "workbench.action.files.openFolder"
   },
   {
     "key": "ctrl+w f",
-    "command": "workbench.action.files.openFile",
+    "command": "workbench.action.files.openFile"
   },
   {
     "key": "ctrl+w =",
-    "command": "workbench.action.evenEditorWidths",
+    "command": "workbench.action.evenEditorWidths"
   },
   {
     "key": "ctrl+w o",
-    "command": "workbench.action.maximizeEditor",
+    "command": "workbench.action.maximizeEditor"
   },
   {
     "key": "ctrl+w k",
-    "command": "workbench.action.keepEditor",
+    "command": "workbench.action.keepEditor"
   },
   {
     "key": "ctrl+w v",
@@ -82,59 +82,59 @@
     "command": "-editor.unfoldAll",
     "when": "editorTextFocus && foldingEnabled"
   },
-{
+  {
     "key": "ctrl+tab",
     "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
-},
-{
+  },
+  {
     "key": "ctrl+tab",
     "command": "-workbench.action.quickOpenNavigateNextInEditorPicker",
     "when": "inEditorsPicker && inQuickOpen"
-},
+  },
   {
     "key": "ctrl+j",
     "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
     "when": "vim.active && vim.mode == 'Normal'"
-},
-{
+  },
+  {
     "key": "ctrl+j",
     "command": "workbench.action.quickOpenNavigateNextInEditorPicker",
     "when": "inEditorsPicker && inQuickOpen"
-},
-{
+  },
+  {
     "key": "ctrl+k",
     "command": "workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
-},
-{
+  },
+  {
     "key": "ctrl+shift+tab",
     "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
-},
-{
+  },
+  {
     "key": "ctrl+k",
     "command": "workbench.action.quickOpenNavigatePreviousInEditorPicker",
     "when": "inEditorsPicker && inQuickOpen"
-},
-{
+  },
+  {
     "key": "ctrl+shift+tab",
     "command": "-workbench.action.quickOpenNavigatePreviousInEditorPicker",
     "when": "inEditorsPicker && inQuickOpen"
-},
+  },
 
   // Open quit open dialog and select item
   {
     "key": "ctrl+w e",
-    "command": "workbench.action.quickOpen",
+    "command": "workbench.action.quickOpen"
   },
   {
     "key": "ctrl+e",
     "command": "workbench.action.focusQuickOpen",
-    "when": "inFilesPicker && inQuickOpen"
+    // "when": "inQuickOpen"
   },
-  {
-    "key": "ctrl+y",
-    "command": "list.select",
-    "when": "inFilesPicker && inQuickOpen"
-  },
+//   {
+//     "key": "ctrl+y",
+//     "command": "list.select",
+//     "when": "inFilesPicker && inQuickOpen"
+//   },
   {
     "command": "workbench.action.closeQuickOpen",
     "key": "ctrl+[",
@@ -294,6 +294,5 @@
   {
     "key": "ctrl+d",
     "command": "-editor.action.addSelectionToNextFindMatch"
-}
-
+},
 ]

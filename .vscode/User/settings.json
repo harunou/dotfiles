@@ -45,8 +45,9 @@
   "update.mode": "none",
   "window.menuBarVisibility": "hidden",
   "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
-"window.restoreWindows": "one",
+  "window.restoreWindows": "one",
   "workbench.colorCustomizations": {
+    "terminal.background": "#0B1C2C",
     "statusBar.background": "#005f5f",
     "statusBar.noFolderBackground": "#005f5f",
     "statusBar.debuggingBackground": "#005f5f"
@@ -68,6 +69,6 @@
   "vim.statusBarColors.replace": "#000000",
   "vim.foldfix": true,
   "editor.codeActionsOnSave": {},
-"diffEditor.renderSideBySide": true,
-"workbench.activityBar.visible": false
+  "diffEditor.renderSideBySide": true,
+  "workbench.activityBar.visible": false
 }
