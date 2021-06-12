@@ -5,19 +5,19 @@ WORKDIR="${0%/*}"
 source $WORKDIR/epo.conf
 
 read_epo_user_password() {
-  echo -ne "password for $EPOUSER: "
+  echo -n "password for $EPOUSER: "
   read -s PASSWORD
 }
 
 read_epo_user_digipass() {
-  echo -ne "digipass for $EPOUSER: "
+  echo -n "digipass for $EPOUSER: "
   read DIGIPASS
 }
 
 set_vpn(){
   sudo harunou openconnect status >/dev/null 2>&1
   is_vpn_up=$?
-  if [[ $is_vpn_up -eq 0 ]]; then 
+  if [ $is_vpn_up -eq 0 ]; then 
     harunou openconnect down
     sleep 1
   fi
@@ -26,12 +26,12 @@ set_vpn(){
 }
 
 set_kerberos(){
-  echo -ne "\nSetting up kerberos ticket...\n"
-  echo "$PASSWORD" | kinit $EPOUSER
+  echo "Setting up kerberos ticket..."
+  echo "$PASSWORD" | kinit $EPOUSER >/dev/null 2>&1
 }
 
 set_proxy() {
-  echo -ne "\nSetting up proxy...\n"
+  echo "Setting up proxy..."
   curl --silent https://registry.npmjs.org/ --proxy $EPOPROXY --proxy-user "$EPOUSER:$PASSWORD"
 }
 
@@ -41,10 +41,10 @@ remote_desktop() {
 
 vpn_status() {
   ping -c 3 -W 1 -q $EPOPING >/dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    echo "UP"
-  else 
+  if [ $? -gt 0 ]; then
     echo "DOWN"
+  else 
+    echo "UP"
   fi
 }
 
@@ -61,11 +61,13 @@ case "$command" in
 
   kerberos)
     read_epo_user_password
+    echo ""
     set_kerberos
     ;;
 
   proxy)
     read_epo_user_password
+    echo ""
     set_proxy
     ;;
 
@@ -74,11 +76,14 @@ case "$command" in
     ;;
 
   status)
-    echo -ne 'Cheking vpn...\n'
-    echo "vpn: $(vpn_status)"
-    echo -ne '\nChecking kerberos...\n'
+    echo "Cheking vpn..."
+    vpn_status
+    echo ""
+    echo "Checking kerberos..."
     klist
-    echo -ne '\nChecking proxy...\n'
+    sleep 0.1
+    echo ""
+    echo "Checking proxy..."
     curl --silent https://registry.npmjs.org/ --proxy $EPOPROXY
     ;;
 
@@ -88,11 +93,16 @@ case "$command" in
 
   '') 
     read_epo_user_password
-    echo -ne '\n'
+    echo ""
     read_epo_user_digipass
     set_vpn
     sleep 2
+    vpn_status
+    echo ""
     set_kerberos
+    klist
+    sleep 0.1
+    echo ""
     set_proxy
     ;;
 
