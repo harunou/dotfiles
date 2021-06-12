@@ -55,6 +55,8 @@ elseif &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
   set t_Co=16
 endif
 
+colorscheme elflord
+
 " Plugin settings
 let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
 let g:surround_{char2nr('-')} = "<% \r %>"
