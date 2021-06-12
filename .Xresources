@@ -126,8 +126,7 @@ XScreenSaver.loadURL: xdg-open '%s'
 XScreenSaver.captureStderr: false
 XScreenSaver.overlayStderr: false
 XScreenSaver.mode: blank
-!153 - surfaces
-!XScreenSaver.selected: 153 
+XScreenSaver.unfade: false
 XScreenSaver.lock: true
 XScreenSaver.lockTimeout: 15
 
