@@ -39,6 +39,7 @@ files="\
   .gnupg/gpg-agent.conf \
   .local/etc/pacman.d/hooks/99-intel-microcode-reload.hook \
   .local/etc/pacman.d/hooks/100-systemd-boot.hook \
+  .xscreensaver \
 "
 
 if [ $# -gt 0 ]; then 

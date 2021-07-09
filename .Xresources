@@ -117,16 +117,4 @@ URxvt.url-launcher: /usr/bin/xdg-open
 Xmessage.defaultButton: okay
 
 !## XSCREENSAVER
-XScreenSaver.dpmsEnabled: true
-XScreenSaver.dpmsQuickOff: true 
-XScreenSaver.splash: false
 XScreenSaver.newLoginCommand: dm-tool switch-to-greeter
-XScreenSaver.ignoreUninstalledPrograms: true
-XScreenSaver.loadURL: xdg-open '%s'
-XScreenSaver.captureStderr: false
-XScreenSaver.overlayStderr: false
-XScreenSaver.mode: blank
-XScreenSaver.unfade: false
-XScreenSaver.lock: true
-XScreenSaver.lockTimeout: 15
-
