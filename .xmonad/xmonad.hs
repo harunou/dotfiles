@@ -7,13 +7,16 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Layout
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
+import XMonad.Layout.ToggleLayouts
+import XMonad.Util.EZConfig
 
-myLayout = tallLayout ||| wideLayout ||| fullLayout
+layouts = toggle $ tallLayout ||| wideLayout ||| fullLayout
   where
     basicLayout = smartBorders $ fullscreenFocus $ Tall 1 (3/100) (1/2)
     tallLayout  = avoidStruts $ basicLayout
     wideLayout  = avoidStruts $ Mirror $ basicLayout
     fullLayout  = avoidStruts $ noBorders Full
+    toggle = toggleLayouts fullLayout
 
 main = do 
   spawn "xmobar"
@@ -24,7 +27,10 @@ main = do
     , focusFollowsMouse = False
     , normalBorderColor = "#37474f"
     , focusedBorderColor = "#06989A"
-    , layoutHook = desktopLayoutModifiers myLayout
-    }
-      where 
-        modm = mod4Mask
+    , layoutHook = desktopLayoutModifiers layouts
+    } 
+    `additionalKeys`
+    [ ((modm              , xK_f), sendMessage (Toggle "Full"))
+    , ((modm .|. shiftMask, xK_f), sendMessage ToggleStruts) 
+    ] 
+    where modm = mod4Mask
