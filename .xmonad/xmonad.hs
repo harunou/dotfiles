@@ -4,6 +4,7 @@ import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops hiding (fullscreenEventHook)
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers 
 import XMonad.Layout
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
@@ -18,6 +19,14 @@ layouts = toggle $ tallLayout ||| wideLayout ||| fullLayout
     fullLayout  = avoidStruts $ noBorders Full
     toggle = toggleLayouts fullLayout
 
+manageHooks :: ManageHook
+manageHooks = composeAll
+     [ isDialog --> doCenterFloat
+     , className =? "Xmessage" --> doCenterFloat
+     , className =? "Pavucontrol" --> doFloat
+     , className =? "Arandr" --> doFloat
+     ] 
+
 main = do 
   spawn "xmobar"
 
@@ -28,6 +37,7 @@ main = do
     , normalBorderColor = "#37474f"
     , focusedBorderColor = "#06989A"
     , layoutHook = desktopLayoutModifiers layouts
+    , manageHook = manageHooks
     } 
     `additionalKeys`
     [ ((modm              , xK_f), sendMessage (Toggle "Full"))
