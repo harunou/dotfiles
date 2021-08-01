@@ -8,7 +8,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%battery% | %cpu% | %memory% | %dynnetwork% | epo-vpn: <fc=#046162>%epo-vpn%</fc> }{ %EHRD% | %kbd% | %date%"
+   , template = " %battery% | %cpu% | %memory% | %dynnetwork% | epo-vpn: <fc=#046162>%epo-vpn%</fc> | %XMonadLog% }{ %EHRD% | %kbd% | %date%"
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -16,7 +16,7 @@ Config {
    , allDesktops =      True    -- show on all desktops
    , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
    , pickBroadest =     False   -- choose widest display (multi-monitor)
-   , persistent =       False    -- enable/disable hiding (True = disabled)
+   , persistent =       False   -- enable/disable hiding (True = disabled)
 
    -- plugins
    --   Numbers can be automatically colored according to their value. xmobar
@@ -40,6 +40,7 @@ Config {
         -- network activity monitor (dynamic interface resolution)
         , Run DynNetwork     [ "--template" , "<dev>: <fc=#046162><tx></fc>kB/s|<fc=#046162><rx></fc>kB/s"] 10
 
+        -- custom vpn status
         , Run Com "harunou" ["epo", "vpn-status"] "epo-vpn" 600 
 
         -- cpu activity monitor
@@ -73,5 +74,9 @@ Config {
         , Run Kbd            [ ("ru"         , "<fc=#046162>RU</fc>")
                              , ("us"         , "<fc=#046162>EN</fc>")
                              ]
+        -- get notifications from xmonad
+        ,  Run XMonadLog
+
         ]
+        
    }
