@@ -43,9 +43,9 @@
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "update.mode": "none",
-  "window.menuBarVisibility": "hidden",
   "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
   "window.restoreWindows": "one",
+  "window.menuBarVisibility": "hidden",
   "workbench.colorCustomizations": {
     "terminal.background": "#0B1C2C",
     "statusBar.background": "#005f5f",
@@ -58,8 +58,7 @@
   "workbench.settings.editor": "json",
   "workbench.settings.useSplitJSON": true,
   "workbench.startupEditor": "none",
-  "workbench.sideBar.location": "right",
-  "zenMode.hideStatusBar": false,
+  "workbench.sideBar.location": "left",
   "vim.statusBarColorControl": true,
   "vim.statusBarColors.normal": "#005f5f",
   "vim.statusBarColors.insert": "#c0392b",
@@ -70,5 +69,6 @@
   "vim.foldfix": true,
   "editor.codeActionsOnSave": {},
   "diffEditor.renderSideBySide": true,
-  "workbench.activityBar.visible": false
+  "workbench.activityBar.visible": false,
+  "cSpell.userWords": ["Claimset"]
 }
