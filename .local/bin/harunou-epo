@@ -54,6 +54,10 @@ if [ $# -gt 0 ]; then
 fi
 
 case "$command" in
+  chrome)
+    exec google-chrome-stable --proxy-auto-detect 
+    ;;
+
   vpn)
     read_epo_user_digipass
     set_vpn
