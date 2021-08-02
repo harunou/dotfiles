@@ -75,7 +75,7 @@ Config {
                              , ("us"         , "<fc=#046162>EN</fc>")
                              ]
         -- get notifications from xmonad
-        ,  Run XMonadLog
+        , Run XMonadLog
 
         ]
         

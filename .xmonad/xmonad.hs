@@ -6,6 +6,7 @@ import XMonad.Hooks.EwmhDesktops hiding (fullscreenEventHook)
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers 
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.UrgencyHook
 import XMonad.Layout
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
@@ -32,7 +33,7 @@ manageHooks = composeAll
 main = do 
   spawn "xmobar $HOME/.xmonad/xmobar.hs"
 
-  xmonad $ fullscreenSupport $ ewmh $ desktopConfig
+  xmonad $ fullscreenSupport $ ewmh $ withUrgencyHook NoUrgencyHook $ desktopConfig
     { terminal = "urxvt"
     , modMask = modm
     , focusFollowsMouse = False
@@ -40,10 +41,12 @@ main = do
     , focusedBorderColor = "#06989A"
     , layoutHook = desktopLayoutModifiers layouts
     , manageHook = manageHooks
-    , logHook = dynamicLogString def >>= xmonadPropLog
+    , logHook = dynamicLogString def {
+            ppUrgent = xmobarColor "red" "" . wrap "!" "!"
+	} >>= xmonadPropLog
     } 
     `additionalKeys`
     [ ((modm              , xK_f), sendMessage (Toggle "Full"))
     , ((modm .|. shiftMask, xK_f), sendMessage ToggleStruts) 
     ] 
-    where modm = mod4Mask
+      where modm = mod4Mask
