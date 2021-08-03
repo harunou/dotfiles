@@ -34,9 +34,9 @@ main = do
   spawn "xmobar $HOME/.xmobar/xmobar.hs"
 
   xmonad 
-    $ fullscreenSupport 
-    $ ewmh 
-    $ withUrgencyHook NoUrgencyHook 
+    . fullscreenSupport 
+    . ewmh 
+    . withUrgencyHook NoUrgencyHook 
     $ desktopConfig
       { terminal = "urxvt"
       , modMask = modm
@@ -46,8 +46,8 @@ main = do
       , layoutHook = desktopLayoutModifiers layouts
       , manageHook = manageHooks
       , logHook = dynamicLogString def {
-              ppUrgent = xmobarColor "red" "" . wrap "!" "!"
-                                       } >>= xmonadPropLog
+          ppUrgent = xmobarColor "red" "" . wrap "!" "!"
+        } >>= xmonadPropLog
       } 
       `additionalKeys`
       [ ((modm              , xK_f), sendMessage (Toggle "Full"))
