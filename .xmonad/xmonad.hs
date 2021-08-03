@@ -33,20 +33,24 @@ manageHooks = composeAll
 main = do 
   spawn "xmobar $HOME/.xmobar/xmobar.hs"
 
-  xmonad $ fullscreenSupport $ ewmh $ withUrgencyHook NoUrgencyHook $ desktopConfig
-    { terminal = "urxvt"
-    , modMask = modm
-    , focusFollowsMouse = False
-    , normalBorderColor = "#37474f"
-    , focusedBorderColor = "#06989A"
-    , layoutHook = desktopLayoutModifiers layouts
-    , manageHook = manageHooks
-    , logHook = dynamicLogString def {
-            ppUrgent = xmobarColor "red" "" . wrap "!" "!"
-	} >>= xmonadPropLog
-    } 
-    `additionalKeys`
-    [ ((modm              , xK_f), sendMessage (Toggle "Full"))
-    , ((modm .|. shiftMask, xK_f), sendMessage ToggleStruts) 
-    ] 
-      where modm = mod4Mask
+  xmonad 
+    $ fullscreenSupport 
+    $ ewmh 
+    $ withUrgencyHook NoUrgencyHook 
+    $ desktopConfig
+      { terminal = "urxvt"
+      , modMask = modm
+      , focusFollowsMouse = False
+      , normalBorderColor = "#37474f"
+      , focusedBorderColor = "#06989A"
+      , layoutHook = desktopLayoutModifiers layouts
+      , manageHook = manageHooks
+      , logHook = dynamicLogString def {
+              ppUrgent = xmobarColor "red" "" . wrap "!" "!"
+                                       } >>= xmonadPropLog
+      } 
+      `additionalKeys`
+      [ ((modm              , xK_f), sendMessage (Toggle "Full"))
+        , ((modm .|. shiftMask, xK_f), sendMessage ToggleStruts) 
+      ] 
+        where modm = mod4Mask
