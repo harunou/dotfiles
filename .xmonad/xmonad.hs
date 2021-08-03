@@ -31,7 +31,7 @@ manageHooks = composeAll
      ] 
 
 main = do 
-  spawn "xmobar $HOME/.xmonad/xmobar.hs"
+  spawn "xmobar $HOME/.xmobar/xmobar.hs"
 
   xmonad $ fullscreenSupport $ ewmh $ withUrgencyHook NoUrgencyHook $ desktopConfig
     { terminal = "urxvt"

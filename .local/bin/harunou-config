@@ -29,7 +29,8 @@ files="\
   .local/share/fonts/terminus-x11.tar.gz \
   .config/fontconfig/conf.d/75-yes-terminus.conf \
   .config/autostart/xbindkeys.desktop \
-  .xmonad/xmonad.hs .xmonad/xmobar.hs \
+  .xmonad/xmonad.hs \
+  .xmobar/xmobar.hs \
   .vscode/User/settings.json .vscode/User/keybindings.json \
   .FBReader/options.xml \
   .vim/vimrc \
