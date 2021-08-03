@@ -11,15 +11,15 @@ import XMonad.Layout
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ToggleLayouts
-import XMonad.Layout.Named
+import XMonad.Layout.Renamed
 import XMonad.Util.EZConfig
 
 layouts = toggle $ tallLayout ||| wideLayout ||| fullLayout
   where
     basicLayout = smartBorders $ fullscreenFocus $ Tall 1 (3/100) (1/2)
-    tallLayout  = named "Tall" $ avoidStruts $ basicLayout
-    wideLayout  = named "Wide" $ avoidStruts $ Mirror basicLayout
-    fullLayout  = named "Full" $ avoidStruts $ noBorders Full
+    tallLayout  = renamed [Replace "Tall"] $ avoidStruts $ basicLayout
+    wideLayout  = renamed [Replace "Wide"] $ avoidStruts $ Mirror basicLayout
+    fullLayout  = renamed [Replace "Full"] $ avoidStruts $ noBorders Full
     toggle = toggleLayouts fullLayout
 
 manageHooks :: ManageHook
@@ -51,6 +51,6 @@ main = do
       } 
       `additionalKeys`
       [ ((modm              , xK_f), sendMessage (Toggle "Full"))
-        , ((modm .|. shiftMask, xK_f), sendMessage ToggleStruts) 
+      , ((modm .|. shiftMask, xK_f), sendMessage ToggleStruts) 
       ] 
         where modm = mod4Mask
