@@ -23,16 +23,6 @@ if [ $# -gt 0 ]; then
 fi
 
 case "$command" in
-  screensaver)
-    mode="random"
-    if [[ "x--$1" == "x--off" ]]; then 
-      mode="off"
-    fi
-    echo "XScreenSaver.mode: $mode" | xrdb -merge -
-    xscreensaver-command -restart >/dev/null 2>&1
-    echo "ScreenSaver mode set to $mode"
-    ;;
-
   touchpad)
     touchpad_id=$(xinput | grep -ioE "touchpad.*id=[0-9]+" | sed -E "s/.*id=([0-9]+)/\1/")
     if xinput list-props "$touchpad_id" | grep -iE "device enabled.*:.*1" >/dev/null; then
@@ -56,20 +46,16 @@ case "$command" in
     sleep 1; xdg-screensaver lock || dm-tool switch-to-greeter || xset dpms force standby
     ;;
 
-  aur-remove)
-    if [ "$#" -eq 0 ]; then
-      printf "Usage: `basename "$0"` aur-remove [package ...]"
-      exit 1
-    fi
-    aur_remove_package "$@"
-    ;; 
-
   hostname)
     name
     ;;
 
   update|up)
     sudo pacman -Syu
+    ;;
+
+  aur)
+    exec "harunou-aur" "$@"
     ;;
 
   setup)

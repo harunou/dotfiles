@@ -1,0 +1,30 @@
+#!/bin/bash
+# vim:set et sw=2:
+
+if [ $# -gt 0 ]; then
+  command="$1"
+  shift
+fi
+
+case "$command" in
+  update|up)
+    aur sync -u
+    ;;
+
+  remove)
+    if [ "$#" -eq 0 ]; then
+      printf "Usage: `basename "$0"` aur-remove [package ...]"
+      exit 1
+    fi
+    aur_remove_package "$@"
+    ;; 
+
+  '') 
+    echo "Usage: `basename "$0"` <command> [options]" 
+    ;;
+
+  *) 
+    echo "`basename "$0"` $command: unknown command." >&2; exit 1 
+    ;;
+esac
+
