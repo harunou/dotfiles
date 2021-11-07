@@ -107,7 +107,7 @@ URxvt.keysym.KP_Multiply: string:*
 URxvt.keysym.KP_Divide: string:/
 
 
-URxvt.perl-ext: default,matcher,keyboard-select
+URxvt.perl-ext-common: default,matcher,keyboard-select
 URxvt.keyboard-select.clipboard: true
 
 URxvt.matcher.button: 1
