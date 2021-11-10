@@ -3,7 +3,7 @@
 
 PATH=$HOME/.local/bin:/usr/local/bin:${PATH}
 NVM_DIR=$HOME/.nvm
-if [ -d "$NVM_DIR" ]; then
+if [[ -d "$NVM_DIR" ]]; then
   default=$(<$NVM_DIR/alias/default)
   if [[ $default =~ "lts" ]]; then
     default=$(<$NVM_DIR/alias/$default)
@@ -15,19 +15,19 @@ fi
 ENV=$HOME/.profile
 export PATH ENV
 
-if [ -z "$PAGER" ] && type less >/dev/null 2>&1; then
+if [[ -z "$PAGER" ]] && type less >/dev/null 2>&1; then
   PAGER=less
   export PAGER
 fi
 LESS="FXRq#10"
 
-if [ -z "$VISUAL" ]; then
+if [[ -z "$VISUAL" ]]; then
   type vim >/dev/null 2>&1 && VISUAL=vim || VISUAL=vi
 fi
 EDITOR=$VISUAL
 export LESS EDITOR VISUAL
 
-if [ -f "$HOME/.local/share/fonts/terminus-console/ter-c20n.psf.gz" ]; then
+if [[ -f "$HOME/.local/share/fonts/terminus-console/ter-c20n.psf.gz" ]]; then
   export FBFONT=$HOME/.local/share/fonts/terminus-console/ter-c16n.psf.gz
 fi
 
@@ -42,10 +42,10 @@ XDG_CACHE_HOME
 
 # To keep compatibility with app that use deprecated mimeapps.list location,
 # e.g. gio
-if [ ! -h $HOME/.local/share/applications/mimeapps.list ]; then
+if [[ ! -h $HOME/.local/share/applications/mimeapps.list ]]; then
   ln -s $HOME/.config/mimeapps.list $HOME/.local/share/applications/mimeapps.list
 fi
 
-if [ ! -f "$HOME/. harunou" ]; then
+if [[ ! -f "$HOME/. harunou" ]]; then
   harunou setup
 fi
