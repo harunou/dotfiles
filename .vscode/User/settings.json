@@ -46,10 +46,10 @@
   "window.restoreWindows": "one",
   "workbench.colorCustomizations": {
     "terminal.background": "#0B1C2C",
-    "statusBar.background": "#005f5f",
-    "statusBar.noFolderBackground": "#005f5f",
-    "statusBar.debuggingBackground": "#005f5f"
-},
+    "statusBar.background": "#007acc",
+    "statusBar.noFolderBackground": "#007acc",
+    "statusBar.debuggingBackground": "#007acc"
+  },
   "workbench.editor.showTabs": false,
   "workbench.editor.limit.value": 4,
   "workbench.editor.limit.enabled": true,
@@ -65,9 +65,10 @@
   "vim.statusBarColors.replace": "#000000",
   "vim.foldfix": true,
   "editor.codeActionsOnSave": {},
-"diffEditor.renderSideBySide": true,
+  "diffEditor.renderSideBySide": true,
   "cSpell.userWords": [],
-"workbench.editor.untitled.hint": "hidden",
-"extensions.autoUpdate": "onlyEnabledExtensions",
-"workbench.activityBar.visible": false
+  "workbench.editor.untitled.hint": "hidden",
+  "extensions.autoUpdate": "onlyEnabledExtensions",
+  "editor.inlineSuggest.enabled": true,
+  "workbench.activityBar.visible": false
 }
