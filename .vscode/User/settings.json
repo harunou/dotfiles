@@ -41,15 +41,14 @@
   "html.format.wrapAttributes": "force-expand-multiline",
   "telemetry.telemetryLevel": "off",
   "update.mode": "none",
-  "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
-  "window.menuBarVisibility": "hidden",
+"window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
   "window.restoreWindows": "one",
   "workbench.colorCustomizations": {
     "terminal.background": "#0B1C2C",
-    "statusBar.background": "#007acc",
-    "statusBar.noFolderBackground": "#007acc",
-    "statusBar.debuggingBackground": "#007acc"
-  },
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f"
+},
   "workbench.editor.showTabs": false,
   "workbench.editor.limit.value": 4,
   "workbench.editor.limit.enabled": true,
@@ -69,6 +68,13 @@
   "cSpell.userWords": [],
   "workbench.editor.untitled.hint": "hidden",
   "extensions.autoUpdate": "onlyEnabledExtensions",
-  "editor.inlineSuggest.enabled": true,
-  "workbench.activityBar.visible": false
+"editor.inlineSuggest.enabled": true,
+"window.menuBarVisibility": "toggle",
+"workbench.activityBar.visible": false,
+"github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": false,
+    "markdown": false
+}
 }
