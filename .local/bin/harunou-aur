@@ -1,6 +1,14 @@
 #!/bin/bash
 # vim:set et sw=2:
 
+aur_remove_package(){
+  repo_path=$(aur repo --list-path) ;
+  if repo_path=$(readlink -e "$repo_path"); then
+    repo-remove "$repo_path" "$@"
+    paccache -c "${repo_path%/*}" -rvk0 "$@"
+  fi
+}
+
 if [ $# -gt 0 ]; then
   command="$1"
   shift

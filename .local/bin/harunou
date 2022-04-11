@@ -1,14 +1,6 @@
 #!/bin/bash
 # vim:set et sw=2:
 
-aur_remove_package(){
-  repo_path=$(aur repo --path-list) ;
-  if repo_path=$(readlink -e "$repo_path"); then
-    repo-remove "$repo_path" "$@"
-    paccache -c "${repo_path%/*}" -rvk0 "$@"
-  fi
-}
-
 name() {
   if [ -r /proc/sys/kernel/hostname ]; then
     cat /proc/sys/kernel/hostname
@@ -48,6 +40,27 @@ case "$command" in
 
   hostname)
     name
+    ;;
+
+  proxy)
+    sudo pkill tinyproxy
+    sudo tinyproxy ~/.config/tinyproxy/tinyproxy.conf
+    ;;
+
+  teams)
+    google-chrome-stable --user-data-dir=/tmp/teams https://www.microsoft.com/en-us/microsoft-teams/ >/dev/null 2>&1 &
+    ;;
+
+  whatsapp)
+    google-chrome-stable --user-data-dir=/tmp/whatsapp https://web.whatsapp.com/ >/dev/null 2>&1 &
+    ;;
+
+  telegram)
+    google-chrome-stable --user-data-dir=/tmp/telegram https://web.telegram.org/ >/dev/null 2>&1 &
+    ;;
+
+  slack)
+    google-chrome-stable --user-data-dir=/tmp/slack https://app.slack.com/ >/dev/null 2>&1 &
     ;;
 
   update|up)
