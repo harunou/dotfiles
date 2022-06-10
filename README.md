@@ -1,3 +1,3 @@
 ```console
-curl -L harunou.in/stall | bash -s -- .harunou
+curl -L www.harunou.in/stall | bash -s -- .harunou
 ```
