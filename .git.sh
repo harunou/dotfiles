@@ -90,26 +90,26 @@ alias gcf='git config --list'
 alias gclean='git clean -id'
 
 alias gcount='git shortlog -sn'
-#https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs=
 alias glog='git log'
+#https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
 #Basic graph log
-alias gloga='git loga'
-#Extend look
-alias glogg='git logg'
-alias glogga='git logga'
+alias gloga='git log --graph --color --decorate --all'
+#Extended look
+alias glogg='git log --color --date-order --graph --oneline --decorate'
+alias glogga='git log --color --date-order --graph --oneline --decorate --all'
 #Quick look 
-alias gloggs='git loggs'
-alias gloggsa='git loggsa'
+alias gloggs='git log --color --date-order --graph --oneline --decorate --simplify-by-decoration'
+alias gloggsa='git log --color --date-order --graph --oneline --decorate --simplify-by-decoration --all'
 #Look with date
-alias glogd='git logd'      
-alias glogda='git logda'
+alias glogd='git log --color --date-order --date=\"format:%d.%m.%y %H:%M\" --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ad%Creset %C(auto)%d%Creset s\"'
+alias glogda='git log --color --date-order --date=\"format:%d.%m.%y %H:%M\" --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ad%Creset C(auto)%h%Creset%C(auto)%d%Creset %s\" --all'
 #Look with relative date
-alias glogdr='git logdr'
-alias glogdra='git logdra'
+alias glogdr='git log --color --date-order --graph --format=\"%C(auto)%h%Creset C(blue bold)%ar%Creset %C(auto)%d%Creset %s\"'
+alias glogdra='git log --color --date-order --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s\" --all'
 #Look with commit owner (author)
-alias gloggo='git loggo'
-alias glogdo='git logdo'
-alias glogdro='git logdro'
+alias gloggo='git log --color --date-order --graph --format=\"%C(auto)%h%Creset C(auto)%an%Creset %C(auto)%d%Creset %s\"'
+alias glogdo='git log --color --date-order --date=\"format:%d.%m.%y %H:%M\" --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ad%Creset C(auto)%an%Creset %C(auto)%d%Creset %s\"'
+alias glogdro='git log --color --date-order --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ar%Creset %C(auto)%an%Creset C(auto)%d%Creset %s\"'
 
 alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
 
