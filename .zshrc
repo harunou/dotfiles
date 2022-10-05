@@ -5,7 +5,6 @@
 . $HOME/.grml.zsh
 . $HOME/.grml.help.zsh
 
-alias lap="list_all_pager"
 alias lsf="ls *(.)"
 alias lsdnew="lsnewdir"
 alias lsdold="lsolddir"
@@ -23,19 +22,5 @@ alias helpgrmlkeybindings="zsh_grml_help_expansion | $PAGER"
 
 hash -d Downloads=$HOME/Downloads
 
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-fi
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null
-
-if [[ -n "$NVM_DIR" ]]; then
-  alias nvmstart="source $NVM_DIR/nvm.sh"
-fi
-
-function list_all_pager() {
-  ls -la $1 | $PAGER
-}
 
 [ ! -f "$HOME/.zshrc.local" ] || . "$HOME/.zshrc.local"

@@ -40,12 +40,6 @@ XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME XDG_CONFIG_HOME XDG_DATA_DIRS XDG_CONFIG_DIRS \
 XDG_CACHE_HOME
 
-# To keep compatibility with app that use deprecated mimeapps.list location,
-# e.g. gio
-if [[ ! -h $HOME/.local/share/applications/mimeapps.list ]]; then
-  ln -s $HOME/.config/mimeapps.list $HOME/.local/share/applications/mimeapps.list
-fi
-
 if [[ ! -f "$HOME/. harunou" ]]; then
   harunou setup
 fi
