@@ -8,11 +8,9 @@
   "editor.detectIndentation": false,
   "editor.dragAndDrop": false,
   "editor.find.seedSearchStringFromSelection": "never",
-  "editor.fontFamily": "'Inconsolata LGC'",
-  "editor.fontSize": 17,
   "editor.formatOnSave": false,
   "editor.hideCursorInOverviewRuler": true,
-  "editor.lineHeight": 22,
+  "editor.lineHeight": 20,
   "editor.lineNumbers": "relative",
   "editor.links": false,
   "editor.minimap.enabled": false,
@@ -20,6 +18,7 @@
   "editor.selectionHighlight": false,
   "editor.overviewRulerBorder": false,
   "editor.parameterHints.enabled": false,
+  "editor.bracketPairColorization.enabled": false,
   "editor.quickSuggestions": {
     "other": false,
     "comments": false,
@@ -35,20 +34,19 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "html.format.endWithNewline": true,
   "html.format.indentHandlebars": true,
   "html.format.indentInnerHtml": true,
   "html.format.wrapAttributes": "force-expand-multiline",
   "telemetry.telemetryLevel": "off",
   "update.mode": "none",
-"window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
+  "window.title": "${dirty}${activeEditorShort}${separator}${rootName}",
   "window.restoreWindows": "one",
   "workbench.colorCustomizations": {
     "terminal.background": "#0B1C2C",
     "statusBar.background": "#005f5f",
     "statusBar.noFolderBackground": "#005f5f",
     "statusBar.debuggingBackground": "#005f5f"
-},
+  },
   "workbench.editor.showTabs": false,
   "workbench.editor.limit.value": 4,
   "workbench.editor.limit.enabled": true,
@@ -68,13 +66,6 @@
   "cSpell.userWords": [],
   "workbench.editor.untitled.hint": "hidden",
   "extensions.autoUpdate": "onlyEnabledExtensions",
-"editor.inlineSuggest.enabled": true,
-"window.menuBarVisibility": "toggle",
-"workbench.activityBar.visible": false,
-"github.copilot.enable": {
-    "*": true,
-    "yaml": true,
-    "plaintext": false,
-    "markdown": false
-}
+  "editor.inlineSuggest.enabled": true,
+  "editor.fontFamily": "Lucida Console"
 }
