@@ -67,5 +67,5 @@
   "workbench.editor.untitled.hint": "hidden",
   "extensions.autoUpdate": "onlyEnabledExtensions",
   "editor.inlineSuggest.enabled": true,
-  "editor.fontFamily": "Lucida Console"
+  "editor.fontFamily": "'Inconsolata LGC', 'Lucida Console'"
 }
