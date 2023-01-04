@@ -84,7 +84,12 @@ case "$command" in
     ;;
 
   nvm)
-    git clone https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
+    nvm_version=$1
+    if [[ -z ${nvm_version-} ]]; then
+      echo 'Version is not specified'
+      exit 1
+    fi
+    curl https://raw.githubusercontent.com/nvm-sh/nvm/v$nvm_version/install.sh | env METHOD=git PROFILE=/dev/null bash -
     ;;
 
   console)
