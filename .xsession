@@ -1,6 +1,8 @@
 #!/bin/bash
 # vim:set et sw=2:
 
+logger "harunou.xsession"
+
 date >&2
 env >&2
 

@@ -1,35 +1,52 @@
 # ~/.profile
-# vim:set et sw=2:
+# vim: ft=sh sw=2
+
+h_have() { 
+  type "$1" > /dev/null 2>&1 ;
+}
+
+h_has_substring() { 
+  test "${1#*$2}" != "$1" >/dev/null 2>&1 ;
+}
+
 
 PATH=$HOME/.local/bin:/usr/local/bin:${PATH}
-NVM_DIR=$HOME/.nvm
-if [[ -d "$NVM_DIR" ]]; then
-  default=$(<$NVM_DIR/alias/default)
-  if [[ $default =~ "lts" ]]; then
-    default=$(<$NVM_DIR/alias/$default)
-  fi
-
-  PATH=$NVM_DIR/versions/node/v${default#v}/bin:${PATH}
-  export NVM_DIR
-fi
 ENV=$HOME/.profile
 export PATH ENV
 
-if [[ -z "$PAGER" ]] && type less >/dev/null 2>&1; then
+# NVM_DIR=$HOME/.nvm
+# if [ -d "$NVM_DIR" ]; then
+#   default=$(<$NVM_DIR/alias/default)
+#   if [[ $default =~ "lts" ]]; then
+#     default=$(<$NVM_DIR/alias/$default)
+#   fi
+
+#   PATH=$NVM_DIR/versions/node/v${default#v}/bin:${PATH}
+#   export NVM_DIR
+# fi
+
+if [ -z "$PAGER" ] && h_have less; then
   PAGER=less
   export PAGER
 fi
 LESS="FXRq#10"
 
-if [[ -z "$VISUAL" ]]; then
-  type vim >/dev/null 2>&1 && VISUAL=vim || VISUAL=vi
+if [ -z "$VISUAL" ]; then
+  h_have vim && VISUAL=vim || VISUAL=vi
 fi
 EDITOR=$VISUAL
 export LESS EDITOR VISUAL
 
-if [[ -f "$HOME/.local/share/fonts/terminus-console/ter-c20n.psf.gz" ]]; then
+if [ -f "$HOME/.local/share/fonts/terminus-console/ter-c20n.psf.gz" ]; then
   export FBFONT=$HOME/.local/share/fonts/terminus-console/ter-c16n.psf.gz
 fi
+
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+GPG_TTY=$(tty)
+export GPG_TTY
 
 XDG_DATA_HOME=$HOME/.local/share
 XDG_CONFIG_HOME=$HOME/.config
@@ -38,8 +55,8 @@ XDG_CONFIG_DIRS=/etc/xdg
 XDG_CACHE_HOME=$HOME/.cache
 
 export XDG_DATA_HOME XDG_CONFIG_HOME XDG_DATA_DIRS XDG_CONFIG_DIRS \
-XDG_CACHE_HOME
+  XDG_CACHE_HOME
 
-if [[ ! -f "$HOME/. harunou" ]]; then
+if [ ! -f "$HOME/. harunou" ]; then
   harunou setup
 fi

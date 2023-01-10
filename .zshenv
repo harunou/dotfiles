@@ -1,17 +1,15 @@
 # ~/.zshenv
-# vim:set et sw=2:
+# vim: ft=sh sw=2
 
-if [ -z "$ENV" -a -n "$PATH" ]; then
+if [[ -z "$ENV" && -n "$PATH" ]]; then
   case $- in
-    *l*) ;;
-    *) . "$HOME/.profile" >/dev/null 
+    *l*) 
+      # NOTE(harunou): for interactive shell do nothing
+      ;;
+    *) 
+      . "$HOME/.profile"
       ;;
   esac
 fi
 
-zshcache=$HOME/.cache/zsh
-[ -d $zshcache ] || mkdir -p $zshcache
-HISTFILE=$zshcache/.zsh_history
-COMPDUMPFILE=$zshcache/.zcompdump
-DIRSTACKFILE=$zshcache/.zdirs
 GRML_DISPLAY_BATTERY=1

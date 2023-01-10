@@ -1,5 +1,5 @@
-# ~/.zshrc.help
-# vim:set et sw=2:
+# ~/.grml.help.zsh
+# vim: ft=sh sw=2
 
 function zsh_grml_help_all(){
   zsh_grml_help_commands
@@ -25,10 +25,8 @@ function zsh_grml_help_commands(){
 
   l, ll	List files without dotfiles (ls -l ...)
   la	List all files (ls -la ...)
-  lap	List all files (ls -la $1 | $PAGER)
   lh	List files with human readable sizes (ls -lAh ...)
 
-  dir   Execute ls -lsAh --group-directories-first
   lsd	List directories
   lad	List dot-directories
   lse	List empty directories
@@ -117,7 +115,7 @@ function zsh_grml_help_expansion(){
   V	|& vim -
   NOTE: |& is a shortcut for 2>&1 |
 
-    '
+  '
   }
 
 function zsh_grml_help_glob(){

@@ -1,5 +1,5 @@
 # ~/.zshrc
-# vim:set et sw=2:
+# vim: ft=sh sw=2
 
 . $HOME/.shrc
 . $HOME/.grml.zsh

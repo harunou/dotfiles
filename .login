@@ -1,8 +1,8 @@
 # ~/.login
-# vim:set et sw=2:
+# vim: ft=sh sw=2
 
 function is_linux_console() {
-  [[ $TERM == "linux" ]]
+  [ $TERM = "linux" ]
 }
 
 if is_linux_console; then 
