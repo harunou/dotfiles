@@ -16,17 +16,11 @@ h_setup_basics() {
 }
 
 h_setup_fonts() {
-  fontsdir="$HOME/.local/share/fonts"
-  fonts="\
-    inconsolata-lgc.tar.gz \
-    roboto-mono.tar.gz \
-    terminus-console.tar.gz \
-    terminus-x11.tar.gz \
-  "
-  cd $fontsdir
-  for font in $fonts; do
-    tar -xzf "$fontsdir/$font"
-  done
+  destinationdir="/tmp/powerline-fonts-$$"
+  powerline_fonts="https://github.com/powerline/fonts.git"
+  git clone $powerline_fonts "$destinationdir"
+  cd "$destinationdir"
+  exec ./install.sh
 }
 
 h_setup_shell() {
@@ -75,6 +69,10 @@ case "$command" in
     h_setup_shell
     ;;
 
+  fonts)
+    h_setup_fonts
+    ;;
+
   grml-zsh)
     h_setup_grml_zsh
     ;;
@@ -93,7 +91,7 @@ case "$command" in
     ;;
 
   console)
-    setfont $HOME/.local/share/fonts/terminus-console/ter-c18n.psf.gz
+    setfont ter-c18n.psf.gz
     h_as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
     ;;
 

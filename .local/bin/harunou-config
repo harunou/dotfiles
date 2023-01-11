@@ -23,18 +23,13 @@ files="\
   .local/bin/harunou-epo \
   .local/bin/harunou-aur \
   .local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
-  .local/share/fonts/inconsolata-lgc.tar.gz \
-  .local/share/fonts/roboto-mono.tar.gz \
-  .local/share/fonts/terminus-console.tar.gz \
-  .local/share/fonts/terminus-x11.tar.gz \
-  .config/fontconfig/conf.d/75-yes-terminus.conf \
   .config/autostart/xbindkeys.desktop \
   .xmonad/xmonad.hs \
   .xmobar/xmobar.hs \
   .vscode/User/settings.json .vscode/User/keybindings.json \
   .FBReader/options.xml \
   .vim/vimrc \
-  .vifm/vifmrc .vifm/colors/default.vifm \
+  .vifm/vifmrc .vifm/colors/harunou.vifm \
   .xbindkeysrc.scm \
   .gnupg/gpg-agent.conf \
   .local/etc/pacman.d/hooks/99-intel-microcode-reload.hook \
