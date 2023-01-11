@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim:set et sw=2:
+# vim: ft=sh sw=2
 
 if [ $# -gt 0 ]; then
   command="$1"
@@ -27,52 +27,52 @@ case "$command" in
         openssl genpkey -algorithm RSA -out "$domain".key
         openssl req -new -key "$domain".key -out "$domain".csr -subj "/CN=$domain/O=$host/emailAddress=$USER@$host"
         openssl x509 -req -in "$domain".csr -days 365 -out "$domain".crt \
-                -CA $cacrt -CAkey $cakey -CAcreateserial \
-                -extfile <(cat <<END
+          -CA $cacrt -CAkey $cakey -CAcreateserial \
+          -extfile <(cat <<END
                 basicConstraints = CA:FALSE
                 subjectKeyIdentifier = hash
                 authorityKeyIdentifier = keyid,issuer
                 subjectAltName = DNS:$domain
 END
-)
+        )
+            ;;
+        esac
+        ;;
+
+      check)
+        operation="$1"
+        shift
+        case "$operation" in 
+          key)
+            openssl rsa -in $1 -check
+            ;;
+
+          csr)
+            openssl req -text -noout -verify -in $1
+            ;;
+
+          cert)
+            openssl x509 -in $1 -text -noout
+            ;;
+        esac
+        ;;
+
+      trust)
+        cert=$1
+        harunou-ssl untrust $cert
+        sudo trust anchor $cert
+        ;;
+
+      untrust)
+        cert=$1
+        sudo trust anchor --remove $cert || true
+        ;;
+
+      '') 
+        echo "Usage: `basename "$0"` <command> [options]" 
+        ;;
+
+      *) 
+        echo "`basename "$0"` $command: unknown command." >&2; exit 1 
         ;;
     esac
-    ;;
-
-  check)
-    operation="$1"
-    shift
-    case "$operation" in 
-      key)
-        openssl rsa -in $1 -check
-        ;;
-
-      csr)
-        openssl req -text -noout -verify -in $1
-        ;;
-
-      cert)
-        openssl x509 -in $1 -text -noout
-        ;;
-    esac
-    ;;
-
-  trust)
-    cert=$1
-    harunou-ssl untrust $cert
-    sudo trust anchor $cert
-    ;;
-
-  untrust)
-    cert=$1
-    sudo trust anchor --remove $cert || true
-    ;;
-
-  '') 
-    echo "Usage: `basename "$0"` <command> [options]" 
-    ;;
-
-  *) 
-    echo "`basename "$0"` $command: unknown command." >&2; exit 1 
-    ;;
-esac

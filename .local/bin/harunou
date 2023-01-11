@@ -1,12 +1,16 @@
 #!/bin/bash
-# vim:set et sw=2:
+# vim: ft=sh sw=2
 
-name() {
+h_name() {
   if [ -r /proc/sys/kernel/hostname ]; then
     cat /proc/sys/kernel/hostname
   else
     hostname | cut -d. -f1
   fi
+}
+
+h_have() { 
+  type "$1" > /dev/null 2>&1 ;
 }
 
 if [ $# -gt 0 ]; then
@@ -39,12 +43,7 @@ case "$command" in
     ;;
 
   hostname)
-    name
-    ;;
-
-  proxy)
-    sudo pkill tinyproxy
-    sudo tinyproxy ~/.config/tinyproxy/tinyproxy.conf
+    h_name
     ;;
 
   teams)
@@ -77,10 +76,6 @@ case "$command" in
 
   config)
     exec "harunou-config" "$@"
-    ;;
-
-  media)
-    exec "harunou-media" "$@"
     ;;
 
   ssl)

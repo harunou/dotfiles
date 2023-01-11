@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim:set et sw=2:
+# vim: ft=sh sw=2
 
 INTERFACE="harunou-oc"
 LOGFILE="/tmp/harunou-oc.log"
@@ -7,7 +7,7 @@ PIDFILE="/run/$INTERFACE.pid"
 
 # NOTE(Harunou): to prevent dns leak usefull domains should be explicitly
 # specified, otherwise add nameserver and searchserver to /etc/resolv.conf
-start_vpn(){
+h_start_vpn(){
   ocuser=$1
   ocpassword=$2
   ocserver=$3
@@ -23,13 +23,13 @@ start_vpn(){
     --script="/bin/vpn-slice $ochosts --no-ns-hosts --verbose" $ocserver >>${LOGFILE} 2>&1
   }
 
-stop_vpn() {
+h_stop_vpn() {
   if [[ -f $PIDFILE ]]; then 
     sudo kill -s SIGINT $(cat ${PIDFILE})
   fi
 }
 
-status_vpn() {
+h_status_vpn() {
   is_connected=$(ip a | grep $INTERFACE)
   if [[ -z $is_connected ]]; then
     echo "$INTERFACE is down"
@@ -45,13 +45,13 @@ fi
 
 case "$command" in
   u|up)
-    start_vpn "$@"
+    h_start_vpn "$@"
     ;;
   d|down)
-    stop_vpn
+    h_stop_vpn
     ;;
   s|status)
-    status_vpn
+    h_status_vpn
     ;;
   l|log)
     if [[ -f $LOGFILE ]]; then 

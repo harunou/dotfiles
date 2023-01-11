@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim:set et sw=2:
+# vim: ft=sh sw=2
 
 WORKDIR="${0%/*}"
 source $WORKDIR/epo.conf
@@ -7,23 +7,23 @@ source $WORKDIR/epo.conf
 BASE_NAME=`basename "$0"`
 AUTH_PROXY_PID="$BASE_NAME-auth-proxy.pid"
 
-read_epo_user_password() {
+h_read_epo_user_password() {
   echo -n "password for $EPOUSER: "
   read -s PASSWORD
 }
 
-read_epo_user_digipass() {
+h_read_epo_user_digipass() {
   echo -n "digipass for $EPOUSER: "
   read DIGIPASS
 }
 
-start_pulse() {
+h_start_pulse() {
   cd /opt/pulsesecure/bin/
   sudo ./startup.sh start
   ./pulseUI
 }
 
-set_vpn(){
+h_set_vpn(){
   sudo harunou openconnect status >/dev/null 2>&1
   is_vpn_up=$?
   if [ $is_vpn_up -eq 0 ]; then 
@@ -34,39 +34,21 @@ set_vpn(){
   harunou openconnect up $EPOUSER $DIGIPASS $EPOSERVER "$EPOHOSTS"
 }
 
-set_kerberos(){
+h_set_kerberos(){
   echo "Setting up kerberos ticket..."
   echo "$PASSWORD" | kinit $EPOUSER >/dev/null 2>&1
 }
 
-set_proxy() {
+h_set_proxy() {
   echo "Setting up proxy..."
   echo `curl --silent https://registry.npmjs.org/ --proxy $EPOPROXY --proxy-user "$EPOUSER:$PASSWORD"`
 }
 
-ping_proxy(){
-  while true; do
-    # set_proxy >/dev/null 2>&1
-    echo "ping"
-    sleep 10
-  done &
-  echo $! >"/tmp/$AUTH_PROXY_PID"
-}
-
-kick_ping_proxy(){
-  PID=`cat /tmp/$AUTH_PROXY_PID`
-  if [[ ${PID:+x} == "x" ]]; then
-    kill -9 $PID
-    echo "" >"/tmp/$AUTH_PROXY_PID"
-    echo "Proxy ping kicked"
-  fi
-}
-
-remote_desktop() {
+h_remote_desktop() {
   xfreerdp /bpp:32 /gfx +aero +fonts  /u:$EPOUSER /v:$EPOWORKSTATION /size:100%w /cert:ignore /floatbar:sticky:off,show:always
 }
 
-vpn_status() {
+h_vpn_status() {
   ping -c 3 -W 1 -q $EPOPING >/dev/null 2>&1
   if [ $? -gt 0 ]; then
     echo "DOWN"
@@ -75,15 +57,15 @@ vpn_status() {
   fi
 }
 
-split_routes() {
+h_split_routes() {
   INTERFACE=tun0
   ROUTES=`ip route | grep $INTERFACE`
   TUN_IP=`ip -4 addr show $INTERFACE | grep -oP "(?<=inet\s)\d+(\.\d+){3}"`
   if [[ ${ROUTES:+x} == "x" && ${TUN_IP:+x} == "x" ]]; then
     echo $ROUTES  | while read route; do
-      sudo ip r delete $route
-    done
-    sudo ip route add 10.0.0.0/8 via $TUN_IP dev $INTERFACE metric 1
+    sudo ip r delete $route
+  done
+  sudo ip route add 10.0.0.0/8 via $TUN_IP dev $INTERFACE metric 1
   fi
   ip route
 }
@@ -95,59 +77,37 @@ fi
 
 case "$command" in
   pulse)
-    start_pulse
+    h_start_pulse
     ;;
 
   routes)
-    split_routes
+    h_split_routes
     ;;
 
   vpn)
-    read_epo_user_digipass
-    set_vpn
+    h_read_epo_user_digipass
+    h_set_vpn
     ;;
 
   kerberos)
-    read_epo_user_password
+    h_read_epo_user_password
     echo ""
-    set_kerberos
+    h_set_kerberos
     ;;
 
   proxy)
-    operation="$1"
-    shift
-    case "$operation" in 
-      ping)
-	# kick_ping_proxy
-	# read_epo_user_password
-	# echo ""
-	# set_proxy
-        # if [ $? > 0 ]; then
-          # exit 1
-        # fi
-	ping_proxy 
-        # >/dev/null &
-	;;
-
-      kick)
-	kick_ping_proxy
-	;;
-
-      '')
-	read_epo_user_password
-	echo ""
-	set_proxy
-	;;
-    esac
+    h_read_epo_user_password
+    echo ""
+    h_set_proxy
     ;;
 
   desktop)
-    remote_desktop
+    h_remote_desktop
     ;;
 
   status)
     echo "Cheking vpn..."
-    vpn_status
+    h_vpn_status
     echo ""
     echo "Checking kerberos..."
     klist
@@ -164,22 +124,22 @@ case "$command" in
     ;;
 
   vpn-status)
-    vpn_status
+    h_vpn_status
     ;;
 
   '') 
-    # read_epo_user_password
+    # h_read_epo_user_password
     # echo ""
-    # read_epo_user_digipass
-    # set_vpn
+    # h_read_epo_user_digipass
+    # h_set_vpn
     # sleep 2
-    # vpn_status
+    # h_vpn_status
     # echo ""
-    # set_kerberos
+    # h_set_kerberos
     # klist
     # sleep 0.1
     # echo ""
-    # set_proxy
+    # h_set_proxy
     ;;
 
   *) 

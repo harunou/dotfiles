@@ -1,12 +1,12 @@
 #!/bin/bash
-# vim:set et sw=2:
+# vim: ft=sh sw=2
 
-as_root() {
+h_as_root() {
   if [ "$1" = exec ]; then ex="exec"; shift; fi
   $ex sudo "$@"
 }
 
-setup_basics() {
+h_setup_basics() {
   if [ ! -f "$HOME/. harunou" -o -r "$HOME/. harunou" ]; then
     [ -f "$HOME/. harunou" ] || basics=1
     touch "$HOME/. harunou"
@@ -15,7 +15,7 @@ setup_basics() {
   [ -z "$basics" ] || echo "Initializing basic configuration."
 }
 
-setup_fonts() {
+h_setup_fonts() {
   fontsdir="$HOME/.local/share/fonts"
   fonts="\
     inconsolata-lgc.tar.gz \
@@ -29,7 +29,7 @@ setup_fonts() {
   done
 }
 
-setup_shell() {
+h_setup_shell() {
   zsh=$(grep 'zsh$' /etc/shells 2>/dev/null|head -1)
   if [ -x "$zsh" ] && grep "^$LOGNAME:" /etc/passwd >/dev/null; then
     if ! grep "^$LOGNAME:.*zsh" /etc/passwd >/dev/null; then
@@ -39,7 +39,7 @@ setup_shell() {
   fi
 }
 
-setup_vim(){
+h_setup_vim(){
   vimdir="$HOME/.vim"
   vimplugins="\
     https://github.com/pangloss/vim-javascript \
@@ -70,9 +70,9 @@ shift
 
 case "$command" in
   default)
-    setup_basics
-    setup_fonts
-    setup_shell
+    h_setup_basics
+    h_setup_fonts
+    h_setup_shell
     ;;
 
   grml-zsh)
@@ -80,7 +80,7 @@ case "$command" in
     ;;
 
   vim)
-    setup_vim
+    h_setup_vim
     ;;
 
   nvm)
@@ -94,14 +94,14 @@ case "$command" in
 
   console)
     setfont $HOME/.local/share/fonts/terminus-console/ter-c18n.psf.gz
-    as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
+    h_as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
     ;;
 
   pacman-hooks)
     if [[ ! -d /etc/pacman.d/hooks ]]; then 
-      as_root mkdir -p /etc/pacman.d/hooks
+      h_as_root mkdir -p /etc/pacman.d/hooks
     fi
-    as_root cp $HOME/.local/etc/pacman.d/hooks/* /etc/pacman.d/hooks/
+    h_as_root cp $HOME/.local/etc/pacman.d/hooks/* /etc/pacman.d/hooks/
     ;;
 
   '') echo "Usage: `basename "$0"` <command> [options]" 

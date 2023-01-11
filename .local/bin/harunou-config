@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim:set et sw=2:
+# vim: ft=sh sw=2:
 
 
 files="\
@@ -18,7 +18,6 @@ files="\
   .local/bin/harunou \
   .local/bin/harunou-config \
   .local/bin/harunou-setup \
-  .local/bin/harunou-media \
   .local/bin/harunou-ssl \
   .local/bin/harunou-openconnect \
   .local/bin/harunou-epo \

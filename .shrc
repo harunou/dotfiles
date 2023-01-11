@@ -8,6 +8,7 @@ alias h="harunou"
 alias logg="journalctl -r -b 0"
 alias loga="journalctl -r"
 alias helpgitpaliases="cat $HOME/.git.sh | $PAGER"
+alias ls="ls --color=auto"
 
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
