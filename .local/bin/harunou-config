@@ -22,7 +22,6 @@ files="\
   .local/bin/harunou-openconnect \
   .local/bin/harunou-epo \
   .local/bin/harunou-aur \
-  .local/bin/ls \
   .local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
   .local/share/fonts/inconsolata-lgc.tar.gz \
   .local/share/fonts/roboto-mono.tar.gz \
