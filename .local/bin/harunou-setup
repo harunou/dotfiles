@@ -65,7 +65,11 @@ shift
 case "$command" in
   default)
     h_setup_basics
+    h_setup_shell
     h_setup_fonts
+    ;;
+
+  shell)
     h_setup_shell
     ;;
 
