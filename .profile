@@ -14,16 +14,16 @@ PATH=$HOME/.local/bin:/usr/local/bin:${PATH}
 ENV=$HOME/.profile
 export PATH ENV
 
-# NVM_DIR=$HOME/.nvm
-# if [ -d "$NVM_DIR" ]; then
-#   default=$(<$NVM_DIR/alias/default)
-#   if [[ $default =~ "lts" ]]; then
-#     default=$(<$NVM_DIR/alias/$default)
-#   fi
+NVM_DIR=$HOME/.config/nvm
+if [ -d "$NVM_DIR" ]; then
+  default=$(<$NVM_DIR/alias/default)
+  if [[ $default =~ "lts" ]]; then
+    default=$(<$NVM_DIR/alias/$default)
+  fi
 
-#   PATH=$NVM_DIR/versions/node/v${default#v}/bin:${PATH}
-#   export NVM_DIR
-# fi
+  PATH=$NVM_DIR/versions/node/v${default#v}/bin:${PATH}
+  export NVM_DIR
+fi
 
 if [ -z "$PAGER" ] && h_have less; then
   PAGER=less
