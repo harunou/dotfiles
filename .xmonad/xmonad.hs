@@ -30,6 +30,7 @@ manageHooks = composeAll
      , className =? "Xmessage" --> doCenterFloat
      , className =? "Pavucontrol" --> doFloat
      , className =? "Arandr" --> doFloat
+     , className =? "Wrapper-2.0" --> doFloat
      ] 
 
 main = do 
@@ -46,7 +47,7 @@ main = do
       , normalBorderColor = "#37474f"
       , focusedBorderColor = "#06989A"
       , layoutHook = desktopLayoutModifiers layouts
-      , manageHook = manageHooks
+      , manageHook = manageDocks <+> manageHooks
       , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
       , logHook = dynamicLogString def {
           ppUrgent = xmobarColor "red" "" . wrap "!" "!"
@@ -56,8 +57,8 @@ main = do
       [ ((modm              , xK_f), sendMessage (Toggle "Full"))
       , ((modm .|. shiftMask, xK_f), sendMessage ToggleStruts) 
       , ((modm,               xK_BackSpace), spawn term)
-      , ((modm,               xK_bracketright), moveTo Next NonEmptyWS)
-      , ((modm,               xK_bracketleft), moveTo Prev NonEmptyWS)
+      , ((modm,               xK_bracketright), moveTo Next (Not emptyWS))
+      , ((modm,               xK_bracketleft), moveTo Prev (Not emptyWS))
       , ((modm,               xK_backslash), toggleWS)
       , ((modm,               xK_y), windows $ W.greedyView "7")
       , ((modm,               xK_u), windows $ W.greedyView "8")
