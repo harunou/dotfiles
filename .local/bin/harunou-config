@@ -32,11 +32,6 @@ files="\
   .vifm/vifmrc .vifm/colors/harunou.vifm \
   .xbindkeysrc.scm \
   .gnupg/gpg-agent.conf \
-  .local/etc/pacman.d/hooks/99-intel-microcode-reload.hook \
-  .local/etc/pacman.d/hooks/100-systemd-boot.hook \
-  .local/etc/pacman.d/hooks/101-xmonad-recompile.hook \
-  .local/etc/pacman.d/hooks/102-xmonad-recompile-deps.hook \
-  .xscreensaver \
 "
 
 if [ $# -gt 0 ]; then 
