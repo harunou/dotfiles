@@ -26,7 +26,7 @@ files="\
   .config/autostart/xbindkeys.desktop \
   .xmonad/xmonad.hs \
   .xmobar/xmobar.hs \
-  .vscode/User/settings.json .vscode/User/keybindings.json \
+  .vscode/harunou.code-profile \
   .FBReader/options.xml \
   .vim/vimrc \
   .vifm/vifmrc .vifm/colors/harunou.vifm \
