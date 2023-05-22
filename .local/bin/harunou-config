@@ -22,6 +22,7 @@ files="\
   .local/bin/harunou-openconnect \
   .local/bin/harunou-epo \
   .local/bin/harunou-aur \
+  .local/bin/harunou-np \
   .local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
   .config/autostart/xbindkeys.desktop \
   .xmonad/xmonad.hs \
