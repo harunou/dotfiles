@@ -90,6 +90,10 @@ case "$command" in
     exec "harunou-epo" "$@"
     ;;
 
+  np)
+    exec "harunou-np" "$@"
+    ;;
+
   '') 
     echo "Usage: `basename "$0"` <command> [options]" 
     ;;

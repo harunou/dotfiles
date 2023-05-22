@@ -1,0 +1,108 @@
+#!/bin/bash
+# vim: ft=sh sw=2:
+
+
+is_npm_command() {
+  local npm_commands="access, add-user, adduser, apihelp, author, bin, bugs, c,
+  cache, completion, config, ddp, dedupe, deprecate, dist-tag,
+  dist-tags, docs, edit, explore, faq, find, find-dupes, get,
+  help, help-search, home, i, info, init, install,
+  install-test, issues, it, la, link, list, ll, ln, login,
+  logout, ls, outdated, owner, pack, ping, prefix, prune,
+  publish, r, rb, rebuild, remove, repo, restart, rm, root,
+  run-script, s, se, search, set, show, shrinkwrap, star,
+  stars, start, stop, t, tag, team, test, tst, un, uninstall,
+  unlink, unpublish, unstar, up, update, upgrade, v, verison,
+  version, view, whoami"
+
+  npm_commands=$(echo "$npm_commands" | tr -d '[:space:]') # remove spaces
+  npm_commands=${npm_commands//,/ } # replace commas with spaces
+
+  if [[ $npm_commands =~ (^|[[:space:]])"$1"($|[[:space:]]) ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+is_installed() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+run_command() {
+  local manager="$1"
+  shift
+  if is_installed "$manager"; then
+    if [[ "$manager" == "npm" && $(is_npm_command "$1") -eq 1 ]]; then
+      command "$manager" run "$@"
+    else
+      command "$manager" "$@"
+    fi
+  else
+    echo "$manager is not installed"
+  fi
+}
+
+get_package_manager_name() {
+  local no_lockfile_msg="no lockfile found. Please make sure to run 'np' in a directory that contains either a yarn.lock, pnpm-lock.yaml, or package-lock.json file."
+  if [[ -f yarn.lock ]]; then
+    echo "yarn"
+  elif [[ -f pnpm-lock.yaml ]]; then
+    echo "pnpm"
+  elif [[ -f package-lock.json ]]; then
+    echo "npm"
+  else
+    echo "`basename "$0"`: $no_lockfile_msg" >&2; exit 1 
+  fi
+}
+
+np() {
+  local no_lockfile_msg="No lockfile found. Please make sure to run 'np' in a directory that contains either a yarn.lock, pnpm-lock.yaml, or package-lock.json file."
+
+  case $1 in
+    "check")
+      if [[ -f yarn.lock ]]; then
+        echo "yarn"
+      elif [[ -f pnpm-lock.yaml ]]; then
+        echo "pnpm"
+      elif [[ -f package-lock.json ]]; then
+        echo "npm"
+      else
+        echo "$no_lockfile_msg"
+      fi
+      ;;
+    *)
+      if [[ -f yarn.lock ]]; then
+        run_command yarn "$@"
+      elif [[ -f pnpm-lock.yaml ]]; then
+        run_command pnpm "$@"
+      elif [[ -f package-lock.json ]]; then
+        run_command npm "$@"
+      else
+        echo "$no_lockfile_msg"
+      fi
+      ;;
+  esac
+}
+
+command="$1"
+shift
+
+case $command in 
+  "check") 
+    get_package_manager_name 
+    ;;
+
+  *)
+    echo "else"
+    ;;
+esac
+# if [[ -f yarn.lock ]]; then
+#   run_command yarn "$@"
+# elif [[ -f pnpm-lock.yaml ]]; then
+#   run_command pnpm "$@"
+# elif [[ -f package-lock.json ]]; then
+#   run_command npm "$@"
+# else
+#   echo "$no_lockfile_msg"
+# fi
