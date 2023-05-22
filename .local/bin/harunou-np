@@ -44,20 +44,32 @@ run_command() {
 }
 
 get_package_manager_name() {
-  local no_lockfile_msg="no lockfile found. Please make sure to run 'np' in a directory that contains either a yarn.lock, pnpm-lock.yaml, or package-lock.json file."
   if [[ -f yarn.lock ]]; then
     echo "yarn"
   elif [[ -f pnpm-lock.yaml ]]; then
     echo "pnpm"
   elif [[ -f package-lock.json ]]; then
     echo "npm"
-  else
-    echo "`basename "$0"`: $no_lockfile_msg" >&2; exit 1 
   fi
+  # else
+  #   echo "`basename "$0"`: $no_lockfile_msg" >&2; exit 1 
+  # fi
 }
 
+notify_package_manager_is_not_detected_and_throw() {
+  local message="no lockfile found. Please make sure to run 'np' in a directory that contains either a yarn.lock, pnpm-lock.yaml, or package-lock.json file."
+  echo "`basename "$0"`: $message" >&2; 
+  exit 1 
+}
+
+notify_package_manager_is_not_installed_and_throw() {
+  local message="Package manager is not installed or not recognized."
+  echo "`basename "$0"` $1: $message" >&2; 
+  exit 1 
+}
+
+
 np() {
-  local no_lockfile_msg="No lockfile found. Please make sure to run 'np' in a directory that contains either a yarn.lock, pnpm-lock.yaml, or package-lock.json file."
 
   case $1 in
     "check")
@@ -89,20 +101,23 @@ command="$1"
 shift
 
 case $command in 
-  "check") 
-    get_package_manager_name 
+  check) 
+    package_manager=`get_package_manager_name`
+    [[ -z $package_manager ]] && notify_package_manager_is_not_detected_and_throw
+    echo $package_manager
     ;;
 
   *)
-    echo "else"
+    package_manager=`get_package_manager_name`
+    [[ -z $package_manager ]] && notify_package_manager_is_not_detected_and_throw
+    [[ ! `is_installed "$package_manager"` ]] && notify_package_manager_is_not_installed_and_throw
+    case $package_manager in 
+      npm)
+        ;;
+      yarn) 
+        ;;
+      pnpm)
+        ;;
+    esac
     ;;
 esac
-# if [[ -f yarn.lock ]]; then
-#   run_command yarn "$@"
-# elif [[ -f pnpm-lock.yaml ]]; then
-#   run_command pnpm "$@"
-# elif [[ -f package-lock.json ]]; then
-#   run_command npm "$@"
-# else
-#   echo "$no_lockfile_msg"
-# fi
