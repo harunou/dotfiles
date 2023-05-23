@@ -1,6 +1,19 @@
 #!/bin/bash
 # vim: ft=sh sw=2:
 
+h_have() {
+  type "$1" &>/dev/null;
+}
+
+h_get_package_manager_name() {
+  if [[ -f yarn.lock ]]; then
+    echo "yarn"
+  elif [[ -f pnpm-lock.yaml ]]; then
+    echo "pnpm"
+  elif [[ -f package-lock.json ]]; then
+    echo "npm"
+  fi
+}
 
 is_npm_command() {
   local npm_commands="access, add-user, adduser, apihelp, author, bin, bugs, c,
@@ -25,36 +38,6 @@ is_npm_command() {
   fi
 }
 
-is_installed() {
-  command -v "$1" >/dev/null 2>&1
-}
-
-run_command() {
-  local manager="$1"
-  shift
-  if is_installed "$manager"; then
-    if [[ "$manager" == "npm" && $(is_npm_command "$1") -eq 1 ]]; then
-      command "$manager" run "$@"
-    else
-      command "$manager" "$@"
-    fi
-  else
-    echo "$manager is not installed"
-  fi
-}
-
-get_package_manager_name() {
-  if [[ -f yarn.lock ]]; then
-    echo "yarn"
-  elif [[ -f pnpm-lock.yaml ]]; then
-    echo "pnpm"
-  elif [[ -f package-lock.json ]]; then
-    echo "npm"
-  fi
-  # else
-  #   echo "`basename "$0"`: $no_lockfile_msg" >&2; exit 1 
-  # fi
-}
 
 notify_package_manager_is_not_detected_and_throw() {
   local message="no lockfile found. Please make sure to run 'np' in a directory that contains either a yarn.lock, pnpm-lock.yaml, or package-lock.json file."
@@ -68,56 +51,55 @@ notify_package_manager_is_not_installed_and_throw() {
   exit 1 
 }
 
-
-np() {
-
-  case $1 in
-    "check")
-      if [[ -f yarn.lock ]]; then
-        echo "yarn"
-      elif [[ -f pnpm-lock.yaml ]]; then
-        echo "pnpm"
-      elif [[ -f package-lock.json ]]; then
-        echo "npm"
-      else
-        echo "$no_lockfile_msg"
-      fi
-      ;;
-    *)
-      if [[ -f yarn.lock ]]; then
-        run_command yarn "$@"
-      elif [[ -f pnpm-lock.yaml ]]; then
-        run_command pnpm "$@"
-      elif [[ -f package-lock.json ]]; then
-        run_command npm "$@"
-      else
-        echo "$no_lockfile_msg"
-      fi
-      ;;
-  esac
+run_npm_command() {
+  if [[ `is_npm_command "$1"` -eq 1 ]]; then
+    command npm run "$@"
+  else
+    command npm "$@"
+  fi
 }
+
+run_yarn_command() {
+  command yarn "$@"
+}
+
+run_pnpm_command() {
+  command pnpm "$@"
+}
+
 
 command="$1"
 shift
 
 case $command in 
-  check) 
-    package_manager=`get_package_manager_name`
+  status) 
+    package_manager=`h_get_package_manager_name`
     [[ -z $package_manager ]] && notify_package_manager_is_not_detected_and_throw
-    echo $package_manager
+    echo "Package manager: $package_manager"
+    if h_have $package_manager; then 
+      echo "Package manager: is installed"
+    else
+      echo "Package manager: is not installed"
+    fi
     ;;
 
   *)
-    package_manager=`get_package_manager_name`
+    package_manager=`h_get_package_manager_name`
     [[ -z $package_manager ]] && notify_package_manager_is_not_detected_and_throw
-    [[ ! `is_installed "$package_manager"` ]] && notify_package_manager_is_not_installed_and_throw
+    h_have $package_manager || notify_package_manager_is_not_installed_and_throw
     case $package_manager in 
       npm)
-        ;;
+	echo npm
+	# run_npm_command "$@"
+	;;
       yarn) 
-        ;;
+	echo yarn
+	# run_command yarn "$@"
+	;;
       pnpm)
-        ;;
+	echo pnpm
+	# run_command pnpm "$@"
+	;;
     esac
     ;;
 esac
