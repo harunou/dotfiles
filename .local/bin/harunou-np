@@ -15,47 +15,43 @@ h_get_package_manager_name() {
   fi
 }
 
-is_npm_command() {
-  local npm_commands="access, add-user, adduser, apihelp, author, bin, bugs, c,
-  cache, completion, config, ddp, dedupe, deprecate, dist-tag,
-  dist-tags, docs, edit, explore, faq, find, find-dupes, get,
-  help, help-search, home, i, info, init, install,
-  install-test, issues, it, la, link, list, ll, ln, login,
-  logout, ls, outdated, owner, pack, ping, prefix, prune,
-  publish, r, rb, rebuild, remove, repo, restart, rm, root,
-  run-script, s, se, search, set, show, shrinkwrap, star,
-  stars, start, stop, t, tag, team, test, tst, un, uninstall,
-  unlink, unpublish, unstar, up, update, upgrade, v, verison,
-  version, view, whoami"
-
-  npm_commands=$(echo "$npm_commands" | tr -d '[:space:]') # remove spaces
-  npm_commands=${npm_commands//,/ } # replace commas with spaces
-
-  if [[ $npm_commands =~ (^|[[:space:]])"$1"($|[[:space:]]) ]]; then
-    return 0
-  else
-    return 1
-  fi
-}
-
-
-notify_package_manager_is_not_detected_and_throw() {
+h_notify_package_manager_is_not_detected_and_throw() {
   local message="no lockfile found. Please make sure to run 'np' in a directory that contains either a yarn.lock, pnpm-lock.yaml, or package-lock.json file."
   echo "`basename "$0"`: $message" >&2; 
   exit 1 
 }
 
-notify_package_manager_is_not_installed_and_throw() {
+h_notify_package_manager_is_not_installed_and_throw() {
   local message="Package manager is not installed or not recognized."
   echo "`basename "$0"` $1: $message" >&2; 
   exit 1 
 }
 
-run_npm_command() {
-  if [[ `is_npm_command "$1"` -eq 1 ]]; then
-    command npm run "$@"
+h_is_npm_command() {
+  local npm_commands="access, adduser, audit, bin, bugs, cache, ci, completion,
+  config, dedupe, deprecate, diff, dist-tag, docs, doctor,
+  edit, exec, explain, explore, find-dupes, fund, get, help,
+  hook, init, install, install-ci-test, install-test, link,
+  ll, login, logout, ls, org, outdated, owner, pack, ping,
+  pkg, prefix, profile, prune, publish, query, rebuild, repo,
+  restart, root, run-script, search, set, set-script,
+  shrinkwrap, star, stars, start, stop, team, test, token,
+  uninstall, unpublish, unstar, update, version, view, whoami"
+
+  npm_commands=`echo "$npm_commands" | sed 's/ //g; s/,/ /g'`
+
+  if [[ $npm_commands =~ (^|[[:space:]])"$1"($|[[:space:]]) ]]; then
+    echo "0"
   else
+    echo "1"
+  fi
+}
+
+h_run_npm_command() {
+  if [[ `h_is_npm_command "$1"` == "0" ]]; then
     command npm "$@"
+  else
+    command npm run "$@"
   fi
 }
 
@@ -69,12 +65,11 @@ run_pnpm_command() {
 
 
 command="$1"
-shift
 
 case $command in 
   status) 
     package_manager=`h_get_package_manager_name`
-    [[ -z $package_manager ]] && notify_package_manager_is_not_detected_and_throw
+    [[ -z $package_manager ]] && h_notify_package_manager_is_not_detected_and_throw
     echo "Package manager: $package_manager"
     if h_have $package_manager; then 
       echo "Package manager: is installed"
@@ -85,12 +80,11 @@ case $command in
 
   *)
     package_manager=`h_get_package_manager_name`
-    [[ -z $package_manager ]] && notify_package_manager_is_not_detected_and_throw
-    h_have $package_manager || notify_package_manager_is_not_installed_and_throw
+    [[ -z $package_manager ]] && h_notify_package_manager_is_not_detected_and_throw
+    h_have $package_manager || h_notify_package_manager_is_not_installed_and_throw
     case $package_manager in 
       npm)
-	echo npm
-	# run_npm_command "$@"
+	h_run_npm_command "$@"
 	;;
       yarn) 
 	echo yarn
