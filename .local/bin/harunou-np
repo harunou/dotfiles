@@ -55,18 +55,31 @@ h_run_npm_command() {
   fi
 }
 
-run_yarn_command() {
+h_run_yarn_command() {
   command yarn "$@"
 }
 
-run_pnpm_command() {
-  command pnpm "$@"
+h_run_pnpm_command() {
+  local h_command=$1
+  case $h_command in 
+    ci)
+      echo "np: deleting ./node_modules"
+      rm -rf ./node_modules
+      echo "np: installing packages"
+      command pnpm install
+      ;;
+    *)
+      command pnpm "$@"
+      ;;
+  esac
+
 }
 
 
-command="$1"
 
-case $command in 
+h_command="$1"
+
+case $h_command in 
   status) 
     package_manager=`h_get_package_manager_name`
     [[ -z $package_manager ]] && h_notify_package_manager_is_not_detected_and_throw
@@ -87,12 +100,10 @@ case $command in
 	h_run_npm_command "$@"
 	;;
       yarn) 
-	echo yarn
-	# run_command yarn "$@"
+	h_run_yarn_command "$@"
 	;;
       pnpm)
-	echo pnpm
-	# run_command pnpm "$@"
+	h_run_pnpm_command "$@"
 	;;
     esac
     ;;
