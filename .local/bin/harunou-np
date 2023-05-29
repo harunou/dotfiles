@@ -75,7 +75,20 @@ h_run_pnpm_command() {
 
 }
 
+print_package_scripts() {
+  package_file="package.json"
 
+  if [ ! -f "$package_file" ]; then
+    echo "Package manager: package.json file not found."
+    exit 1
+  fi
+
+  scripts=$(awk -F'"' '/"scripts"/{flag=1;next} /}/{flag=0} flag' "$package_file")
+
+  echo ""
+  echo "$scripts"
+  echo ""
+}
 
 h_command="$1"
 
@@ -90,7 +103,9 @@ case $h_command in
       echo "Package manager: is not installed"
     fi
     ;;
-
+  scripts)
+    print_package_scripts
+    ;;
   *)
     package_manager=`h_get_package_manager_name`
     [[ -z $package_manager ]] && h_notify_package_manager_is_not_detected_and_throw
