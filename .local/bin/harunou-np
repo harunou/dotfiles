@@ -93,7 +93,7 @@ print_package_scripts() {
 h_command="$1"
 
 case $h_command in 
-  status) 
+  status|st) 
     package_manager=`h_get_package_manager_name`
     [[ -z $package_manager ]] && h_notify_package_manager_is_not_detected_and_throw
     echo "Package manager: $package_manager"
@@ -103,7 +103,7 @@ case $h_command in
       echo "Package manager: is not installed"
     fi
     ;;
-  scripts)
+  scripts|sc)
     print_package_scripts
     ;;
   *)
