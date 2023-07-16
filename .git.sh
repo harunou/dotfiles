@@ -90,6 +90,7 @@ alias gcf='git config --list'
 alias gclean='git clean -id'
 
 alias gcount='git shortlog -sn'
+alias glo='git show -s'
 alias glog='git log'
 #https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
 #Basic graph log
