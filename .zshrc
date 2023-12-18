@@ -51,6 +51,7 @@ alias helpgrmlcommands="zsh_grml_help_commands | $PAGER"
 alias helpgrmlhashes="zsh_grml_help_hashes | $PAGER"
 alias helpgrmlkeybindings="zsh_grml_help_keybindings | $PAGER"
 alias helpgrmlkeybindings="zsh_grml_help_expansion | $PAGER"
+alias np="h np"
 
 hash -d Downloads=$HOME/Downloads
 
