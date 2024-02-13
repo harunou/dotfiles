@@ -21,7 +21,12 @@ if [ -d "$NVM_DIR" ]; then
     default=$(<$NVM_DIR/alias/$default)
   fi
 
-  PATH=$NVM_DIR/versions/node/v${default#v}/bin:${PATH}
+  if [[ $default =~ ^[0-9]+$ ]]; then
+    latest_version=$(find "$NVM_DIR/versions/node" -maxdepth 1 -type d -name "v${default}.*" | sort -V | tail -n 1)
+    default=$(basename "$latest_version")
+  fi
+
+  PATH="$NVM_DIR/versions/node/$default/bin:${PATH}"
   export NVM_DIR
 fi
 
