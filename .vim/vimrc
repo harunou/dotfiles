@@ -24,6 +24,8 @@ set infercase
 set showmatch
 set virtualedit=block
 set shiftround
+filetype on
+syntax on
 
 autocmd FileType json set sw=2 et
 autocmd FileType haskell set sw=2 et
