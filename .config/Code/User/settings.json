@@ -1,0 +1,10 @@
+{
+  "telemetry.telemetryLevel": "off",
+  "window.menuBarVisibility": "hidden",
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["leader", "leader", "f"],
+      "commands": ["editor.action.formatDocument"]
+    }
+  ]
+}

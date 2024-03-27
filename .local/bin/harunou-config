@@ -28,6 +28,7 @@ files="\
   .xmonad/xmonad.hs \
   .xmobar/xmobar.hs \
   .vscode/harunou.code-profile \
+  .config/Code/User/settings.json \
   .FBReader/options.xml \
   .vim/vimrc \
   .vifm/vifmrc .vifm/colors/harunou.vifm \
