@@ -1,9 +1,10 @@
 # ~/.zshrc
-# vim: ft=sh sw=2
+# vim: ft=zsh sw=2
 
 . $HOME/.shrc
 . $HOME/.grml.zsh
 . $HOME/.grml.help.zsh
+. $HOME/.local/bin/harunou-completion.zsh
 
 # listing stuff
 #a2# Execute \kbd{ls -lSrah}
@@ -55,5 +56,5 @@ alias np="h np"
 
 hash -d Downloads=$HOME/Downloads
 
-
 [ ! -f "$HOME/.zshrc.local" ] || . "$HOME/.zshrc.local"
+

@@ -23,6 +23,7 @@ files="\
   .local/bin/harunou-epo \
   .local/bin/harunou-aur \
   .local/bin/harunou-np \
+  .local/bin/harunou-completion.zsh \
   .local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map \
   .config/autostart/xbindkeys.desktop \
   .xmonad/xmonad.hs \

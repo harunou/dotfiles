@@ -5,6 +5,10 @@ h_have() {
   type "$1" &>/dev/null;
 }
 
+h_get_package_json_file() {
+  echo './package.json'
+}
+
 h_get_package_manager_name() {
   if [[ -f yarn.lock ]]; then
     echo "yarn"
@@ -75,19 +79,32 @@ h_run_pnpm_command() {
 
 }
 
-print_package_scripts() {
-  package_file="package.json"
+h_get_package_json_property_object() {
+  local package_json="$1"
+  local property="$2"
+  cat "$package_json" |
+    sed -nE "/^  \"$property\": \{$/,/^  \},?$/p" | # Grab scripts object
+    sed '1d;$d' |                                   # Remove first/last lines
+    sed -E 's/    "([^"]+)": "(.+)",?/\1=>\2/'      # Parse into key=>value
+}
 
-  if [ ! -f "$package_file" ]; then
-    echo "Package manager: package.json file not found."
-    exit 1
-  fi
-
-  scripts=$(awk -F'"' '/"scripts"/{flag=1;next} /}/{flag=0} flag' "$package_file")
+h_get_package_json_scripts() {
+  local package_json=$1
+  local max_line_length=$(tput cols)
 
   echo ""
-  echo "$scripts"
+  h_get_package_json_property_object "$package_json" scripts |
+    sed -E 's/(.+)=>(.+)/    \1 => \2/' | 
+    cut -c 1-"$max_line_length"  
   echo ""
+}
+
+h_get_package_json_scripts_suggestion() {
+  local package_json=$1
+  h_get_package_json_property_object "$package_json" scripts |
+    sed -E 's/(.+)=>(.+)/\1:$ \2/' |  # Parse commands into suggestions
+    sed 's/\(:\)[^$]/\\&/g' |         # Escape ":" in commands
+    sed 's/\(:\)$[^ ]/\\&/g'          # Escape ":$" without a space in commands
 }
 
 h_command="$1"
@@ -104,7 +121,10 @@ case $h_command in
     fi
     ;;
   scripts|sc)
-    print_package_scripts
+    h_get_package_json_scripts `h_get_package_json_file`
+    ;;
+  rawscripts)
+    h_get_package_json_property_object `h_get_package_json_file` scripts
     ;;
   *)
     package_manager=`h_get_package_manager_name`
