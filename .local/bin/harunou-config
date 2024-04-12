@@ -35,6 +35,8 @@ files="\
   .vifm/vifmrc .vifm/colors/harunou.vifm \
   .xbindkeysrc.scm \
   .gnupg/gpg-agent.conf \
+  .powershell/Microsoft.PowerShell_profile.ps1 \
+  .powershell/functions.ps1
 "
 
 if [ $# -gt 0 ]; then 
