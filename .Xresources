@@ -63,6 +63,7 @@ URxvt.underlineColor: #777777
 URxvt.boldFont:
 URxvt.italicFont:
 URxvt.boldItalicFont:
+URxvt.geometry: 400x400
 
 #if WIDTH > 1800
 URxvt.font: -xos4-terminus-medium-r-normal-*-22-*-*-*-c-*
