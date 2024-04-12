@@ -1,5 +1,5 @@
 # ~/.profile
-# vim: ft=sh sw=2
+# vim: set ft=sh:
 
 h_have() { 
   type "$1" > /dev/null 2>&1 ;
@@ -42,9 +42,9 @@ fi
 EDITOR=$VISUAL
 export LESS EDITOR VISUAL
 
-if [ -f "$HOME/.local/share/fonts/terminus-console/ter-c20n.psf.gz" ]; then
-  export FBFONT=$HOME/.local/share/fonts/terminus-console/ter-c16n.psf.gz
-fi
+# if [ -f "$HOME/.local/share/fonts/terminus-console/ter-c20n.psf.gz" ]; then
+#  export FBFONT=$HOME/.local/share/fonts/terminus-console/ter-c16n.psf.gz
+# fi
 
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
@@ -52,15 +52,6 @@ if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
 fi
 GPG_TTY=$(tty)
 export GPG_TTY
-
-XDG_DATA_HOME=$HOME/.local/share
-XDG_CONFIG_HOME=$HOME/.config
-XDG_DATA_DIRS=/usr/local/share/:/usr/share/
-XDG_CONFIG_DIRS=/etc/xdg
-XDG_CACHE_HOME=$HOME/.cache
-
-export XDG_DATA_HOME XDG_CONFIG_HOME XDG_DATA_DIRS XDG_CONFIG_DIRS \
-  XDG_CACHE_HOME
 
 if [ ! -f "$HOME/. harunou" ]; then
   harunou setup
