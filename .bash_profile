@@ -1,4 +1,5 @@
 # ~/.bash_profile
-# vim:set et sw=2:
+# vim: set ft=sh:
 
+echo "~/.bash_profile"
 . $HOME/.profile
