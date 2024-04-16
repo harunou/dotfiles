@@ -9,7 +9,7 @@ if ! command -v git >/dev/null 2>&1; then
 fi
 
 repo_dir="${1:-.harunou}"
-dot_dir="${2:-~}"
+dots_dir="${2:-~}"
 
 git clone https://github.com/harunou/harunou.git "$repo_dir" || {
   echo "Error: Failed to clone the repository."
@@ -21,13 +21,14 @@ cd "$repo_dir" || {
   exit 1
 }
 
-echo "Setting up repo with dots files\n"
+echo "Setting up repo with dots files"
 
-.local/bin/harunou-config setup-repo "$(repo_dir)" "$(dots_dir)" || {
+.local/bin/harunou-config setup-repo "$repo_dir" "$dots_dir" || {
   echo "Error: Repository setup failed."
   exit 1
 }
 
-echo "Installing dots files\n"
+echo "Installing dots files"
 
-git export
+./.local/bin/harunou-config tar "$repo_dir" -cf - | ./.local/bin/harunou-config tar "$dots_dir" -xf -
+
