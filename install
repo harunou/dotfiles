@@ -30,5 +30,4 @@ echo "Setting up repo with dots files"
 
 echo "Installing dots files"
 
-./.local/bin/harunou-config tar "$repo_dir" -cf - | ./.local/bin/harunou-config tar "$dots_dir" -xf -
-
+git export 
