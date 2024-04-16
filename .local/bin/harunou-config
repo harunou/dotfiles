@@ -1,7 +1,6 @@
 #!/bin/bash
 # vim: ft=sh sw=2:
 
-
 files="\
   .login .profile \
   .shrc .git.sh \
@@ -37,50 +36,51 @@ files="\
   .gnupg/gpg-agent.conf \
   .powershell/Microsoft.PowerShell_profile.ps1 \
   .powershell/functions.ps1
-"
+  "
 
-if [ $# -gt 0 ]; then 
-  command="$1"
-  shift
-fi
-
-case "$command" in
-  tar) # flags
-    cd
-    exec tar "$@" $files
-    ;;
-
-  find) # starting_point, find params
-    starting_point="$1"
+  if [ $# -gt 0 ]; then 
+    command="$1"
     shift
-    exec find "$starting_point" \
-      -name .git -prune -a \
-      ! -name .git -o \
-      -type f -a \
-      ! -name install -a \
-      ! -name README.md \
-      "$@"
-    ;;
+  fi
 
-  setup-repo) # repo directory
-    cd "$@"
-    git config --replace-all remote.origin.url git@github.com:harunou/harunou.git
-    git config alias.import '!harunou config find . -exec rm {} \; && harunou config tar -cf - | tar -xf -'
-    git config alias.export '!.local/bin/harunou-config find . -print0 | \
-      sed -e "s/\x0\.\//\x0/g;s/^\.\///" | xargs -0 tar -cf - | .local/bin/harunou-config tar -xf -'
-    ;;
+  case "$command" in
+    tar) # working_directory, tar_params
+      working_dir="$1"
+      shift
+      cd "$working_dir"
+      exec tar "$@" $files
+      ;;
 
-  clone) # destination directory
-    set -e
-    git clone https://github.com/harunou/harunou.git "$@"
-    harunou config setup-repo "${1-harunou}"
-    ;;
+    setup-repo) # repo_directory, dots_directory
+      repo_dir="$1"
+      dots_dir="$2"
+      cd "$repo_dir"
+      git config --replace-all remote.origin.url git@github.com:harunou/harunou.git
+      git config config.exportDirectory "$dots_dir"
+      git config alias.import '!harunou config prune . && harunou config tar "$(git config config.exportDirectory)" -cf - | harunou config tar . -xf -'
+      git config alias.export '!harunou config tar . -cf - | harunou config tar "$(git config config.exportDirectory)" -xf -'
+      ;;
 
-  '')
-    echo "Usage: `basename "$0"` <command> [options]" 
-    ;;
+    clone) # destination directory
+      set -e
+      git clone https://github.com/harunou/harunou.git "$@"
+      harunou config setup-repo "${1-harunou}"
+      ;;
 
-  *)
-    echo "`basename "$0"` $command: unknown command." >&2; exit 1 
-    ;;
-esac
+    prune) # working_directory
+      working_dir="$1"
+      cd $working_dir
+
+      for file in $files; do
+        [ -e "$file" ] && rm -r $file
+      done
+      ;;
+
+    '')
+      echo "Usage: `basename "$0"` <command> [options]" 
+      ;;
+
+    *)
+      echo "`basename "$0"` $command: unknown command." >&2; exit 1 
+      ;;
+  esac
