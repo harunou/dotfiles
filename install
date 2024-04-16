@@ -1,18 +1,33 @@
 #!/bin/bash
-# vim:set et sw=2:
+# vim: set ft=sh:
 
 set -e
 
-if ! type git >/dev/null 2>&1; then
- echo "Git is not installed." 
- exit 1
+if ! command -v git >/dev/null 2>&1; then
+  echo "Error: Git is not installed."
+  exit 1
 fi
 
-destination="${1-.harunou}"
+repo_dir="${1:-.harunou}"
+dot_dir="${2:-~}"
 
-git clone https://github.com/harunou/harunou.git "$destination"
+git clone https://github.com/harunou/harunou.git "$repo_dir" || {
+  echo "Error: Failed to clone the repository."
+  exit 1
+}
 
-cd "$destination"
+cd "$repo_dir" || {
+  echo "Error: Failed to change directory to \"$repo_dir\"."
+  exit 1
+}
 
-.local/bin/harunou-config setup-repo "$(pwd)"
-.local/bin/harunou-config find . -print0 | sed "s/\x0\.\//\x0/g;s/^\.\///" | xargs -0 tar -cf - | .local/bin/harunou-config tar -xf -
+echo "Setting up repo with dots files\n"
+
+.local/bin/harunou-config setup-repo "$(repo_dir)" "$(dots_dir)" || {
+  echo "Error: Repository setup failed."
+  exit 1
+}
+
+echo "Installing dots files\n"
+
+git export
