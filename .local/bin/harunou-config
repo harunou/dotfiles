@@ -8,7 +8,7 @@ files="\
   .zshrc \
   .grml.zsh .grml.help.zsh \
   .bashrc .bash_profile \
-  .xsession .Xresources .xsessionrc \
+  .xsession .Xresources .xsessionrc .xinitrc \
   .curlrc .toprc \
   .gitconfig \
   .tmux.conf \
@@ -68,10 +68,12 @@ files="\
       ;;
 
     prune) # working_directory
-      set -e
       working_dir="$1"
       cd $working_dir
-      rm -rf $files
+
+      for file in $files; do
+        [ -e "$file" ] && rm -r $file
+      done
       ;;
 
     '')
