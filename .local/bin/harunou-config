@@ -61,19 +61,17 @@ files="\
       git config alias.export '!harunou config tar . -cf - | harunou config tar "$(git config config.exportDirectory)" -xf -'
       ;;
 
-    clone) # destination directory
+    clone) # repo_directory, dot_directory
       set -e
-      git clone https://github.com/harunou/harunou.git "$@"
-      harunou config setup-repo "${1-harunou}"
+      git clone https://github.com/harunou/harunou.git ${1:-.harunou} 
+      harunou config setup-repo "${1:-.harunou}" "${2:-$HOME}"
       ;;
 
     prune) # working_directory
+      set -e
       working_dir="$1"
       cd $working_dir
-
-      for file in $files; do
-        [ -e "$file" ] && rm -r $file
-      done
+      rm -rf $files
       ;;
 
     '')
