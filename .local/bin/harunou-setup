@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim: ft=sh sw=2
+# vim: set ft=sh sw=2
 
 h_as_root() {
   if [ "$1" = exec ]; then ex="exec"; shift; fi
@@ -97,13 +97,6 @@ case "$command" in
   console)
     setfont ter-c18n.psf.gz
     h_as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
-    ;;
-
-  pacman-hooks)
-    if [[ ! -d /etc/pacman.d/hooks ]]; then 
-      h_as_root mkdir -p /etc/pacman.d/hooks
-    fi
-    h_as_root cp $HOME/.local/etc/pacman.d/hooks/* /etc/pacman.d/hooks/
     ;;
 
   '') echo "Usage: `basename "$0"` <command> [options]" 

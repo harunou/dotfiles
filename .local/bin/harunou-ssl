@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim: ft=sh sw=2
+# vim: set ft=sh sw=2:
 
 if [ $# -gt 0 ]; then
   command="$1"
