@@ -57,8 +57,8 @@ files="\
       cd "$repo_dir"
       git config --replace-all remote.origin.url git@github.com:harunou/harunou.git
       git config config.exportDirectory "$dots_dir"
-      git config alias.import '!./.local/bin/harunou-config prune . && ./.local/bin/harunou-config tar "$(git config config.exportDirectory)" -cf - | ./.local/bin/harunou-config tar . -xf -'
-      git config alias.export '!./.local/bin/harunou-config tar . -cf - | ./.local/bin/harunou-config tar "$(git config config.exportDirectory)" -xf -'
+      git config alias.import '!harunou config prune . && harunou config tar "$(git config config.exportDirectory)" -cf - | harunou config tar . -xf -'
+      git config alias.export '!harunou config tar . -cf - | harunou config tar "$(git config config.exportDirectory)" -xf -'
       ;;
 
     clone) # repo_directory, dot_directory
@@ -74,6 +74,7 @@ files="\
       for file in $files; do
         [ -e "$file" ] && rm -r $file
       done
+      rm -f '. harunou'
       ;;
 
     '')
