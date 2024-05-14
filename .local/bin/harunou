@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim: ft=sh sw=2
+# vim: set ft=sh sw=2:
 
 h_name() {
   if [ -r /proc/sys/kernel/hostname ]; then
@@ -80,14 +80,6 @@ case "$command" in
 
   ssl)
     exec "harunou-ssl" "$@"
-    ;;
-
-  openconnect|oc)
-    exec "harunou-openconnect" "$@"
-    ;;
-
-  epo)
-    exec "harunou-epo" "$@"
     ;;
 
   np)
