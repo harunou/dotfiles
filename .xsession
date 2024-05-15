@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim: ft=sh sw=2
+# vim: set ft=sh:
 
 h_have() { 
   type "$1" > /dev/null 2>&1;
@@ -18,35 +18,35 @@ setxkbmap \
 
 [ ! -f "$HOME/.xsession.local" ] || . "$HOME/.xsession.local"
 
-case "$@" in
-  *xmonad-session*)
-    ;;
-  *gnome-session*|*xfce*)
-    exec "$@"
-    ;;
-esac
+# case "$@" in
+#   *xmonad-session*)
+#     ;;
+#   *gnome-session*|*xfce*)
+#     exec "$@"
+#     ;;
+# esac
 
-for wm in $wm xmonad; do
-  if type $wm >/dev/null 2>&1; then
-    set -- $wm
-    break
-  fi
-done
+# for wm in $wm xmonad; do
+#   if type $wm >/dev/null 2>&1; then
+#     set -- $wm
+#     break
+#   fi
+# done
 
-xsetroot -solid '#008080'
+# xsetroot -solid '#008080'
 
-"$@" &
-wmpid=$!
+# "$@" &
+# wmpid=$!
 
-: ${XDG_CURRENT_DESKTOP:=${XDG_SESSION_DESKTOP:-${GDMSESSION:-Old}}}
+# : ${XDG_CURRENT_DESKTOP:=${XDG_SESSION_DESKTOP:-${GDMSESSION:-Old}}}
 
-sleep 0.5
+# sleep 0.5
 
-# Note(harunou): autostart
-if h_have dex; then
-  dex -a -e "$XDG_CURRENT_DESKTOP"
-elif h_have xbindkeys; then
-  xbindkeys -n &
-fi
+# # Note(harunou): autostart
+# if h_have dex; then
+#   dex -a -e "$XDG_CURRENT_DESKTOP"
+# elif h_have xbindkeys; then
+#   xbindkeys -n &
+# fi
 
-wait $wmpid
+# wait $wmpid
