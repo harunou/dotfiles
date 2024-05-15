@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim: set ft=sh sw=2:
+# vim: set ft=sh:
 
 h_name() {
   if [ -r /proc/sys/kernel/hostname ]; then
@@ -72,10 +72,6 @@ case "$command" in
 
   setup)
     exec "harunou-setup" "$@"
-    ;;
-
-  config)
-    exec "harunou-config" "$@"
     ;;
 
   ssl)

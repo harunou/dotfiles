@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim: set ft=sh sw=2:
+# vim: set ft=sh:
 
 h_aur_remove_package(){
   repo_path=$(aur repo --list-path) ;

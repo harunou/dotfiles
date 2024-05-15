@@ -1,5 +1,5 @@
 #!/bin/zsh
-# vim: set ft=zsh sw=2:
+# vim: set ft=sh:
 
 # Inspired by https://github.com/lukechilds/zsh-better-npm-completion
 h_get_package_json_property_object() {
