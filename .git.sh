@@ -1,5 +1,5 @@
 # ~/.git.sh
-# vim:set et sw=2:
+# vim: set ft=sh:
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet
 
 alias g='git'

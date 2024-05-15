@@ -1,7 +1,9 @@
 # ~/.shrc
-# vim: ft=sh sw=2
+# vim: set ft=sh:
 #
 # NOTE(harunou): any shell specific config
+
+. $HOME/.git.sh
 
 alias h="harunou"
 
@@ -15,7 +17,4 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 if [[ -n "$NVM_DIR" ]]; then
   alias nvmstart="source $NVM_DIR/nvm.sh"
 fi
-
-. $HOME/.git.sh
-
 

@@ -1,4 +1,4 @@
 # ~/.zlogin
-# vim: ft=sh sw=2
+# vim: set ft=sh:
 
 . "$HOME/.login"

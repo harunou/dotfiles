@@ -1,6 +1,5 @@
 # ~/.login
-# vim: ft=sh sw=2
-
+# vim: set ft=sh:
 
 function is_linux_console() {
   [ $TERM = "linux" ]

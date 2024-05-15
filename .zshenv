@@ -1,5 +1,5 @@
 # ~/.zshenv
-# vim: ft=sh sw=2
+# vim: set ft=sh:
 
 if [[ -z "$ENV" && -n "$PATH" ]]; then
   case $- in
@@ -8,8 +8,8 @@ if [[ -z "$ENV" && -n "$PATH" ]]; then
       ;;
     *) 
       . "$HOME/.profile"
+      GRML_DISPLAY_BATTERY=1
       ;;
   esac
 fi
 
-GRML_DISPLAY_BATTERY=1

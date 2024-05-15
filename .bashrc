@@ -4,6 +4,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# load shared config
+. $HOME/.shrc
+
 # navigate directories without cd
 shopt -s autocd
 

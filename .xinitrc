@@ -3,6 +3,7 @@
 # ~/.xinitrc
 #
 # Executed by startx (run your window manager from here)
+# vim: set ft=sh:
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
