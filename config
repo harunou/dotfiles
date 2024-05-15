@@ -8,14 +8,13 @@ files="\
   .zshrc \
   .grml.zsh .grml.help.zsh \
   .bashrc .bash_profile \
-  .xsession .Xresources .xsessionrc .xinitrc \
+  .xsession .Xresources .xinitrc \
   .curlrc .toprc \
   .gitconfig \
   .tmux.conf \
   .ssh/authorized_keys \
   .ssh/config \
   .local/bin/harunou \
-  .local/bin/harunou-config \
   .local/bin/harunou-setup \
   .local/bin/harunou-ssl \
   .local/bin/harunou-aur \
@@ -55,11 +54,8 @@ files="\
       cd "$repo_dir"
       git config --replace-all remote.origin.url git@github.com:harunou/harunou.git
       git config config.exportDirectory "$dots_dir"
-      git config config.importDirectory "$repo_dir"
-      # NOTE(harunou): use direct path to a binary as this only can be run
-      # inside the repo directory
-      git config alias.import '!hu="./.local/bin/harunou"; $hu config tar "$(git config config.exportDirectory)" -cf - | $hu config tar . -xf -'
-      git config alias.export '!hu="./.local/bin/harunou"; $hu config tar . -cf - | $hu config tar "$(git config config.exportDirectory)" -xf -'
+      git config alias.import '!./config tar "$(git config config.exportDirectory)" -cf - | ./config tar ./ -xf -'
+      git config alias.export '!./config tar ./ -cf - | ./config tar "$(git config config.exportDirectory)" -xf -'
       ;;
 
     clone) # repo_directory, dot_directory
