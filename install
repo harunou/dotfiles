@@ -23,7 +23,7 @@ cd "$repo_dir" || {
 
 echo "Setting up repo with dots files"
 
-.local/bin/harunou-config setup-repo "$repo_dir" "$dots_dir" || {
+./config setup-repo "$repo_dir" "$dots_dir" || {
   echo "Error: Repository setup failed."
   exit 1
 }
