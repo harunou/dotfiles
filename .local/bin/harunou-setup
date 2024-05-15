@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim: set ft=sh:
+# vim: set ft=sh sw=2
 
 h_as_root() {
   if [ "$1" = exec ]; then ex="exec"; shift; fi
