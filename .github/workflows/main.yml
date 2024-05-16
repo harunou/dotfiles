@@ -26,4 +26,4 @@ jobs:
       - name: Upload file to GCS
         run: |
           cp ./install ./stall
-          gsutil cp ./stall gs://your-gcs-bucket/path/in/bucket/
+          gsutil cp ./stall gs://www.harunou.in/
