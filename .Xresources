@@ -66,9 +66,9 @@ URxvt.boldItalicFont:
 URxvt.geometry: 400x400
 
 #if WIDTH > 1800
-URxvt.font: -xos4-terminus-medium-r-normal-*-22-*-*-*-c-*
+URxvt.font: xft:Terminus:pixelsize=25:Regular
 #else
-URxvt.font: -xos4-terminus-medium-r-normal-*-16-*-*-*-c-*
+URxvt.font: xft:Terminus:pixelsize=22:Regular
 #endif
 
 URxvt.keysym.M-C-1:     command:\033]710;-misc-fixed-medium-r-normal--8-*-*-*-c-*-iso10646-1\007
