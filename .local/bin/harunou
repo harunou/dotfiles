@@ -66,6 +66,10 @@ case "$command" in
     sudo pacman -Syu
     ;;
 
+  mate-use-xmonad)
+    gsettings set org.mate.session.required-components windowmanager xmonad
+    ;;
+
   aur)
     exec "harunou-aur" "$@"
     ;;
