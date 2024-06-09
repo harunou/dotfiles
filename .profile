@@ -34,7 +34,7 @@ if [ -z "$PAGER" ] && h_have less; then
   PAGER=less
   export PAGER
 fi
-LESS="FXRq#10"
+LESS="FXRq#10i"
 
 if [ -z "$VISUAL" ]; then
   h_have vim && VISUAL=vim || VISUAL=vi
