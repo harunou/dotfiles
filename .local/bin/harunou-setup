@@ -15,14 +15,6 @@ h_setup_basics() {
   [ -z "$basics" ] || echo "Initializing basic configuration."
 }
 
-h_setup_fonts() {
-  destinationdir="/tmp/powerline-fonts-$$"
-  powerline_fonts="https://github.com/powerline/fonts.git"
-  git clone $powerline_fonts "$destinationdir"
-  cd "$destinationdir"
-  exec ./install.sh
-}
-
 h_setup_shell() {
   zsh=$(grep 'zsh$' /etc/shells 2>/dev/null|head -1)
   if [ -x "$zsh" ] && grep "^$LOGNAME:" /etc/passwd >/dev/null; then
@@ -66,7 +58,6 @@ case "$command" in
   default)
     h_setup_basics
     h_setup_shell
-    h_setup_fonts
     ;;
 
   shell)

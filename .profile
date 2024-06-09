@@ -53,6 +53,3 @@ fi
 GPG_TTY=$(tty)
 export GPG_TTY
 
-if [ ! -f "$HOME/. harunou" ]; then
-  harunou setup
-fi
