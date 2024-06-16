@@ -64,10 +64,6 @@ case "$command" in
     h_setup_shell
     ;;
 
-  fonts)
-    h_setup_fonts
-    ;;
-
   grml-zsh)
     h_setup_grml_zsh
     ;;
