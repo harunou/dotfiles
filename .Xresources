@@ -34,7 +34,11 @@
 
 
 !##XFT
+#if WIDTH > 2500
+Xft.dpi: 123
+#else
 Xft.dpi: 96
+#endif
 Xft.autohint: false
 Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintslight
@@ -66,23 +70,21 @@ URxvt.boldItalicFont:
 URxvt.geometry: 400x400
 
 #if WIDTH > 1800
-URxvt.font: xft:Terminus:pixelsize=25:Regular
+URxvt.font: xft:Terminus:pixelsize=26:Regular
 #else
 URxvt.font: xft:Terminus:pixelsize=22:Regular
 #endif
 
-URxvt.keysym.M-C-1:     command:\033]710;-misc-fixed-medium-r-normal--8-*-*-*-c-*-iso10646-1\007
-URxvt.keysym.M-C-2:     command:\033]710;-xos4-terminus-medium-r-normal-*-12-*-*-*-c-*-iso10646-1\007
-URxvt.keysym.M-C-3:     command:\033]710;-xos4-terminus-medium-r-normal-*-16-*-*-*-c-*-iso10646-1\007
-URxvt.keysym.M-C-4:     command:\033]710;-xos4-terminus-medium-r-normal-*-18-*-*-*-c-*-iso10646-1\007
-URxvt.keysym.M-C-5:     command:\033]710;-xos4-terminus-medium-r-normal-*-22-*-*-*-c-*-iso10646-1\007
-URxvt.keysym.M-C-6:     command:\033]710;xft:Roboto Mono-9:Regular\007
-URxvt.keysym.M-C-7:     command:\033]710;xft:Roboto Mono-11:Regular\007
-URxvt.keysym.M-C-8:     command:\033]710;xft:Roboto Mono-13:Regular\007
-URxvt.keysym.M-C-9:     command:\033]710;xft:Roboto Mono-15:Regular\007
-URxvt.keysym.M-C-0:     command:\033]710;xft:Roboto Mono-17:Regular\007
-!URxvt.keysym.M-C-minus: command:\033]710;xft:Roboto Mono-13:Regular\007
-!URxvt.keysym.M-C-equal: command:\033]710;xft:Roboto Mono-13:Regular\007
+URxvt.keysym.M-C-1:     command:\033]710;xft:Terminus:pixelsize=10:Regular\007
+URxvt.keysym.M-C-2:     command:\033]710;xft:Terminus:pixelsize=12:Regular\007
+URxvt.keysym.M-C-3:     command:\033]710;xft:Terminus:pixelsize=16:Regular\007
+URxvt.keysym.M-C-4:     command:\033]710;xft:Terminus:pixelsize=18:Regular\007
+URxvt.keysym.M-C-5:     command:\033]710;xft:Terminus:pixelsize=22:Regular\007
+URxvt.keysym.M-C-6:     command:\033]710;xft:Terminus:pixelsize=26:Regular\007
+URxvt.keysym.M-C-7:     command:\033]710;xft:Monospace:pixelsize=26:Regular\007
+URxvt.keysym.M-C-8:     command:\033]710;xft:Monospace:pixelsize=30:Regular\007
+URxvt.keysym.M-C-9:     command:\033]710;xft:Monospace:pixelsize=34:Regular\007
+URxvt.keysym.M-C-equal: command:\033]710;xft:Terminus:pixelsize=26:Regular\007
 
 URxvt.keysym.C-grave:  perl:matcher:list
 URxvt.keysym.C-Escape: perl:keyboard-select:activate
@@ -107,6 +109,7 @@ URxvt.keysym.KP_Subtract: string:-
 URxvt.keysym.KP_Multiply: string:*
 URxvt.keysym.KP_Divide: string:/
 
+URxvt.keysym.Meta-Control-l: command:\033c
 
 URxvt.perl-ext-common: default,matcher,keyboard-select
 URxvt.keyboard-select.clipboard: true
