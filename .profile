@@ -42,10 +42,6 @@ fi
 EDITOR=$VISUAL
 export LESS EDITOR VISUAL
 
-# if [ -f "$HOME/.local/share/fonts/terminus-console/ter-c20n.psf.gz" ]; then
-#  export FBFONT=$HOME/.local/share/fonts/terminus-console/ter-c16n.psf.gz
-# fi
-
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
