@@ -1,4 +1,4 @@
-# vim: set et sw=2:
+#vim: set et sw=2:
 
 [user]
   name = harunou
@@ -49,7 +49,8 @@
   conflictStyle = diff3
   ff = false
 
+[init]
+  defaultBranch = master
+
 [include]
   path = ./.gitconfig.local
-[init]
-	defaultBranch = master
