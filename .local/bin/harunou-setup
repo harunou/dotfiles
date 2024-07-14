@@ -82,7 +82,7 @@ case "$command" in
     ;;
 
   console)
-    setfont ter-c18n.psf.gz
+    setfont ter-v18n.psf.gz
     h_as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
     ;;
 

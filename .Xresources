@@ -69,7 +69,7 @@ URxvt.italicFont:
 URxvt.boldItalicFont:
 URxvt.geometry: 400x400
 
-#if WIDTH > 1800
+#if WIDTH > 1920
 URxvt.font: xft:Terminus:pixelsize=26:Regular
 #else
 URxvt.font: xft:Terminus:pixelsize=22:Regular
