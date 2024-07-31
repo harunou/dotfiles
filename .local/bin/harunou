@@ -47,7 +47,7 @@ case "$command" in
     ;;
 
   teams)
-    google-chrome-stable --user-data-dir=/tmp/teams https://www.microsoft.com/nl-nl/microsoft-teams/log-in>/dev/null 2>&1 &
+    google-chrome-stable --user-data-dir=/tmp/teams https://teams.microsoft.com/v2/ >/dev/null 2>&1 & 
     ;;
 
   whatsapp)
