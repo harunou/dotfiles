@@ -73,12 +73,8 @@ case "$command" in
     ;;
 
   nvm)
-    nvm_version=$1
-    if [[ -z ${nvm_version-} ]]; then
-      echo 'Version is not specified'
-      exit 1
-    fi
-    curl https://raw.githubusercontent.com/nvm-sh/nvm/v$nvm_version/install.sh | env METHOD=git PROFILE=/dev/null bash -
+    nvm_version=$(git ls-remote --tags https://github.com/nvm-sh/nvm.git | sort -t '/' -k 3 -V | tail -n 1 | awk -F'[/^]' '{print $3}')
+    curl https://raw.githubusercontent.com/nvm-sh/nvm/$nvm_version/install.sh | env METHOD=git PROFILE=/dev/null bash -
     ;;
 
   console)
