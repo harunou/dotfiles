@@ -9,6 +9,20 @@ h_aur_remove_package(){
   fi
 }
 
+h_aur_rebuild_package(){
+  pkg="$1";
+
+  pkg_dir=`find $HOME/.cache/aurutils/sync/ -maxdepth 1 -name "$pkg"`;
+
+  if [ -d "$pkg_dir" ]; then
+    cd "$pkg_dir";
+    aur build -fR -d "custom";
+    sudo pacman -S "$pkg";
+  else
+    echo "Error: no already built package found!";
+  fi
+}
+
 if [ $# -gt 0 ]; then
   command="$1"
   shift
@@ -22,6 +36,10 @@ case "$command" in
   update|up)
     aur sync -u
     ;;
+  
+  list|ls)
+    pacman -Sl custom;
+    ;;
 
   remove)
     if [ "$#" -eq 0 ]; then
@@ -30,6 +48,10 @@ case "$command" in
     fi
     h_aur_remove_package "$@"
     ;; 
+ 
+  rebuild)
+    h_aur_rebuild_package "$@"
+    ;;
 
   '') 
     echo "Usage: `basename "$0"` <command> [options]" 
