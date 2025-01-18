@@ -3,6 +3,11 @@
 
 set -e
 
+if ! [[ -t 0 && -t 1 ]]; then
+  echo "Error: This script must be run in an interactive shell."
+  exit 1
+fi
+
 if ! command -v git >/dev/null 2>&1; then
   echo "Error: Git is not installed."
   exit 1
