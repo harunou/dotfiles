@@ -33,11 +33,51 @@ if ! ./config setup-repo "$repo_dir" "$dots_dir"; then
   exit 1
 fi
 
-# Final instructions for the user
-echo "\n============================================================"
-echo "Dot files have been successfully installed in \"$dots_dir\"."
-echo "To complete the setup, follow these steps:"
-echo "1. To export the dot files, run: \`git export\` in the repository directory: \"$repo_dir\"."
-echo "2. Logout and login back to apply the changes."
-echo "3. Finally, run: \`harunou install default\` to finish the installation."
-echo "============================================================"
+read -p "Install suggested packages with pacman [Y/n]? " install_packages_choice
+install_packages_choice=${install_packages_choice:-Y}
+
+if [[ "$install_packages_choice" =~ ^[Yy]$ ]]; then
+  package_list_file="$repo_dir/package-list"
+  if [[ -f "$package_list_file" ]]; then
+    echo "Installing packages from \"$package_list_file\"..."
+    sudo pacman -S --needed - < "$package_list_file" || {
+      echo "Error: Failed to install some packages."
+      exit 1
+    }
+    echo "Packages installed successfully."
+  else
+    echo "Warning: Package list file \"$package_list_file\" not found. Skipping package installation."
+  fi
+else
+  echo "Skipping package installation."
+fi
+
+read -p "Install the dot files into \"$dots_dir\" [Y/n]? " install_choice
+install_choice=${install_choice:-Y}
+
+if [[ "$install_choice" =~ ^[Yy]$ ]]; then
+  echo "Running \`git export\` in the dot file directory..."
+  if ! git export; then
+    echo "Error: Failed to export the dot files."
+    exit 1
+  fi
+  echo "Dot files exported successfully."
+else
+  echo "Skipping dot file installation."
+fi
+
+read -p "Setup the dot files default [Y/n]? " setup_default_choice
+setup_default_choice=${setup_default_choice:-Y}
+
+if [[ "$setup_default_choice" =~ ^[Yy]$ ]]; then
+  echo "Running \".local/bin/harunou-setup default\" from the \"$dots_dir\" directory..."
+  if ! "$dots_dir/.local/bin/harunou-setup" default; then
+    echo "Error: Failed to set up the default configuration."
+    exit 1
+  fi
+  echo "Default configuration set up successfully."
+else
+  echo "Skipping default configuration setup."
+fi
+
+echo "Installation completed"
