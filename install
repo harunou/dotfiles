@@ -8,8 +8,13 @@ if ! command -v git >/dev/null 2>&1; then
   exit 1
 fi
 
-repo_dir="${1:-$HOME/.harunou}"
-dots_dir="${2:-$HOME}"
+repo_dir=$(realpath "${1:-$HOME/.harunou}")
+dots_dir=$(realpath "${2:-$HOME}")
+
+if [ -d "$repo_dir" ]; then
+  echo "Error: Directory \"$repo_dir\" already exists. Remove it or specify a different path."
+  exit 1
+fi
 
 git clone https://github.com/harunou/harunou.git "$repo_dir" || {
   echo "Error: Failed to clone the repository."
@@ -21,13 +26,18 @@ cd "$repo_dir" || {
   exit 1
 }
 
-echo "Setting up repo with dots files"
+echo "Setting up the repository with dot files..."
 
-./config setup-repo "$repo_dir" "$dots_dir" || {
+if ! ./config setup-repo "$repo_dir" "$dots_dir"; then
   echo "Error: Repository setup failed."
   exit 1
-}
+fi
 
-echo "Installing dots files"
-
-# git export 
+# Final instructions for the user
+echo "\n============================================================"
+echo "Dot files have been successfully installed in \"$dots_dir\"."
+echo "To complete the setup, follow these steps:"
+echo "1. To export the dot files, run: \`git export\` in the repository directory: \"$repo_dir\"."
+echo "2. Logout and login back to apply the changes."
+echo "3. Finally, run: \`harunou install default\` to finish the installation."
+echo "============================================================"
