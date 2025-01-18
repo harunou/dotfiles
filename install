@@ -11,7 +11,7 @@ fi
 full_setup=false
 while [[ "$1" =~ ^- ]]; do
   case "$1" in
-    --full_setup)
+    --full-setup)
       full_setup=true
       shift
       ;;
