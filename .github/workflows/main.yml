@@ -23,7 +23,7 @@ jobs:
         with:
           version: 'latest'
 
-      - name: Upload file to GCS
+      - name: Upload file to GCS with Cache-Control
         run: |
           cp ./install ./stall
-          gsutil cp ./stall gs://www.harunou.in/
+          gsutil -h "Cache-Control:no-cache, max-age=0" cp ./stall gs://www.harunou.in/
