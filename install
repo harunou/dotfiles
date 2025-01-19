@@ -1,22 +1,20 @@
 #!/bin/bash
-# vim: set ft=sh:
 
 set -e
+set -o pipefail
 
-is_interactive=true
-if ! [[ -t 0 && -t 1 ]]; then
-  is_interactive=false
-fi
+package_list_file="./package-list"
 
-full_setup=false
+skip_config=false
 while [[ "$1" =~ ^- ]]; do
   case "$1" in
-    --full-setup)
-      full_setup=true
+    --skip-config)
+      skip_config=true
       shift
       ;;
     *)
       echo "Unknown option: $1"
+      echo "Usage: $0 [--skip-config] [repo_dir] [dots_dir]"
       exit 1
       ;;
   esac
@@ -24,6 +22,11 @@ done
 
 if ! command -v git >/dev/null 2>&1; then
   echo "Error: Git is not installed."
+  exit 1
+fi
+
+if ! command -v sudo >/dev/null 2>&1; then
+  echo "Error: 'sudo' is not installed. Please install it before running this script."
   exit 1
 fi
 
@@ -35,10 +38,16 @@ if [ -d "$repo_dir" ]; then
   exit 1
 fi
 
-git clone https://github.com/harunou/harunou.git "$repo_dir" || {
+echo "Cloning repository to \"$repo_dir\"..."
+if ! git clone https://github.com/harunou/harunou.git "$repo_dir"; then
   echo "Error: Failed to clone the repository."
   exit 1
-}
+fi
+
+if [ ! -f "$repo_dir/config" ]; then
+  echo "Error: 'config' script not found in the repository."
+  exit 1
+fi
 
 cd "$repo_dir" || { 
   echo "Error: Failed to change directory to \"$repo_dir\"."
@@ -52,68 +61,41 @@ if ! ./config setup-repo "$repo_dir" "$dots_dir"; then
   exit 1
 fi
 
-prompt() {
-  local question="$1"
-  local default="$2"
-  local response
-
-  if $full_setup; then
-    echo "$question [$default]: $default (auto)"
-    response=$default
-  elif $is_interactive; then
-    read -p "$question [$default]: " response
-    response=${response:-$default}
-  else
-    echo "$question [$default]: $default (default)"
-    response=$default
-  fi
-
-  echo "$response"
-}
-
-install_packages_choice=$(prompt "Install suggested packages with pacman" "Y")
-if [[ "$install_packages_choice" =~ ^[Yy]$ ]]; then
-  package_list_file="$repo_dir/package-list"
-  if [[ -f "$package_list_file" ]]; then
-    echo "Installing packages from \"$package_list_file\"..."
-    sudo pacman -S --needed - < "$package_list_file" || {
-      echo "Error: Failed to install some packages."
-      exit 1
-    }
-    echo "Packages installed successfully."
-  else
-    echo "Warning: Package list file \"$package_list_file\" not found. Skipping package installation."
-  fi
-else
-  echo "Skipping package installation."
+if $skip_config; then
+  echo "--skip-config flag detected. Skipping package installation, dot file export, and configuration."
+  exit 0
 fi
 
-install_choice=$(prompt "Install the dot files into \"$dots_dir\"" "Y")
-if [[ "$install_choice" =~ ^[Yy]$ ]]; then
-  echo "Running \`git export\` in the dot file directory..."
-  if ! (cd "$repo_dir" && git export); then
-    echo "Error: Failed to export the dot files."
+package_list_file="$repo_dir/package-list"
+if [[ -f "$package_list_file" ]]; then
+  echo "Installing packages from \"$package_list_file\"..."
+  if ! sudo pacman -S --needed - < "$package_list_file"; then
+    echo "Error: Failed to install some packages."
     exit 1
   fi
-  echo "Dot files exported successfully."
+  echo "Packages installed successfully."
 else
-  echo "Skipping dot file installation."
+  echo "Warning: Package list file \"$package_list_file\" not found. Skipping package installation."
 fi
 
-setup_default_choice=$(prompt "Setup the dot files default" "Y")
-if [[ "$setup_default_choice" =~ ^[Yy]$ ]]; then
-  echo "Running \".local/bin/harunou-setup default\" from the \"$dots_dir\" directory..."
-  if [ ! -x "$dots_dir/.local/bin/harunou-setup" ]; then
-    echo "Error: '$dots_dir/.local/bin/harunou-setup' does not exist or is not executable."
-    exit 1
-  fi
-  if ! "$dots_dir/.local/bin/harunou-setup" default; then
-    echo "Error: Failed to set up the default configuration."
-    exit 1
-  fi
-  echo "Default configuration set up successfully."
-else
-  echo "Skipping default configuration setup."
+echo "Copying the dot file to the \"$dots_dir\""
+if ! (cd "$repo_dir" && git export); then
+  echo "Error: Failed to export the dot files."
+  exit 1
 fi
+
+echo "Dot files exported successfully."
+
+echo "Configuring home directory..."
+if [ ! -x "$dots_dir/.local/bin/harunou-setup" ]; then
+  echo "Error: '$dots_dir/.local/bin/harunou-setup' does not exist or is not executable."
+  exit 1
+fi
+if ! "$dots_dir/.local/bin/harunou-setup" default; then
+  echo "Error: Failed to set up the default configuration."
+  exit 1
+fi
+
+echo "Default configuration set up successfully."
 
 echo "Installation completed"
