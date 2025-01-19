@@ -46,7 +46,7 @@ h_setup_vim(){
 }
 
 h_setup_grml_zsh(){
-  curl https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc --output "$HOME/.grml.zsh" 
+  curl https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc --output "$HOME/.grml.zsh"
 }
 
 [ $# -gt 0 ] || set -- default
@@ -57,7 +57,6 @@ shift
 case "$command" in
   default)
     h_setup_basics
-    h_setup_shell
     ;;
 
   shell)
@@ -82,10 +81,10 @@ case "$command" in
     h_as_root loadkeys $HOME/.local/share/kbd/keymaps/ruwin_sh_sh_UTF-8.map
     ;;
 
-  '') echo "Usage: `basename "$0"` <command> [options]" 
+  '') echo "Usage: `basename "$0"` <command> [options]"
     ;;
 
-  *) 
-    echo "`basename "$0"` $command: unknown command." >&2; exit 1 
+  *)
+    echo "`basename "$0"` $command: unknown command." >&2; exit 1
     ;;
 esac

@@ -16,7 +16,7 @@ while [[ "$1" =~ ^- ]]; do
       echo "Unknown option: $1"
       echo "Usage: ./install_dotfiles.sh [--skip-config] [repo_dir] [dots_dir]"
       echo "\nOptions:"
-      echo "  --skip-config   Skip copying dot files to the target directory, and configuring the user home directory."
+      echo "  --skip-config   Skip copying dot files and configuring the user home directory."
       echo "  repo_dir        Directory to clone the repository (default: \$HOME/.harunou)."
       echo "  dots_dir        Target directory for dot files (default: \$HOME)."
       exit 1
@@ -53,7 +53,7 @@ if [ ! -f "$repo_dir/config" ]; then
   exit 1
 fi
 
-cd "$repo_dir" || { 
+cd "$repo_dir" || {
   echo "Error: Failed to change directory to \"$repo_dir\"."
   exit 1
 }
@@ -66,7 +66,7 @@ if ! ./config setup-repo "$repo_dir" "$dots_dir"; then
 fi
 
 if $skip_config; then
-  echo "--skip-config flag detected. Skipping package installation, dot file export, and configuration."
+  echo "--skip-config flag detected. Skipping packages installation, dot file copying, and configuration."
   exit 0
 fi
 
@@ -88,9 +88,7 @@ if ! (cd "$repo_dir" && git export); then
   exit 1
 fi
 
-echo "Dot files copied successfully to \"$dots_dir\"."
-
-echo "Configuring the user home directory using \"$dots_dir/.local/bin/harunou-setup\"..."
+echo "Configuring the user home directory..."
 if [ ! -x "$dots_dir/.local/bin/harunou-setup" ]; then
   echo "Error: '$dots_dir/.local/bin/harunou-setup' does not exist or is not executable."
   exit 1
@@ -99,7 +97,5 @@ if ! "$dots_dir/.local/bin/harunou-setup" default; then
   echo "Error: Failed to set up the default configuration."
   exit 1
 fi
-
-echo "User home directory configured successfully."
 
 echo "Installation completed"
