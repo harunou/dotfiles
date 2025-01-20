@@ -29,6 +29,7 @@ files="\
   .config/Code/User/settings.json \
   .FBReader/options.xml \
   .vim/vimrc \
+  .exrc \
   .vifm/vifmrc .vifm/colors/harunou.vifm \
   .xbindkeysrc.scm \
   .gnupg/gpg-agent.conf \
