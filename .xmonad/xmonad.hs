@@ -54,7 +54,7 @@ main = do
                                        } >>= xmonadPropLog
       } 
       `additionalKeys`
-      [ ((modm              , xK_f), sendMessage (Toggle "Full"))
+      [ ((modm,               xK_f), sendMessage (Toggle "Full"))
       , ((modm,               xK_BackSpace), spawn term)
       , ((modm,               xK_bracketright), moveTo Next (Not emptyWS))
       , ((modm,               xK_bracketleft), moveTo Prev (Not emptyWS))
