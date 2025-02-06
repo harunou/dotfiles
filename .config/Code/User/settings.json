@@ -1,10 +1,19 @@
 {
   "telemetry.telemetryLevel": "off",
-  "window.menuBarVisibility": "hidden",
+  "window.menuBarVisibility": "classic",
   "vim.normalModeKeyBindings": [
     {
-      "before": ["leader", "leader", "f"],
+      "before": ["leader", "f"],
       "commands": ["editor.action.formatDocument"]
+    },
+    {
+      "before": ["leader", "s"],
+      "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["leader", "q"],
+      "commands": ["workbench.action.quit"]
     }
-  ]
+  ],
+  "window.newWindowProfile": "harunou"
 }
