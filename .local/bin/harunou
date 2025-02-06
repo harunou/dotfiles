@@ -38,6 +38,10 @@ case "$command" in
     loginctl terminate-session self
     ;;
 
+  suspend)
+    systemctl suspend
+    ;;
+
   lock)
     sleep 1; xdg-screensaver lock || dm-tool switch-to-greeter || xset dpms force standby
     ;;
@@ -47,19 +51,19 @@ case "$command" in
     ;;
 
   teams)
-    google-chrome-stable --user-data-dir=/tmp/teams https://teams.microsoft.com/v2/ >/dev/null 2>&1 & 
+    google-chrome-stable --user-data-dir=/tmp/teams --app=https://teams.microsoft.com/v2/ >/dev/null 2>&1 & 
     ;;
 
   whatsapp)
-    google-chrome-stable --user-data-dir=/tmp/whatsapp https://web.whatsapp.com/ >/dev/null 2>&1 &
+    google-chrome-stable --user-data-dir=/tmp/whatsapp --app=https://web.whatsapp.com/ >/dev/null 2>&1 &
     ;;
 
   telegram)
-    google-chrome-stable --user-data-dir=/tmp/telegram https://web.telegram.org/ >/dev/null 2>&1 &
+    google-chrome-stable --user-data-dir=/tmp/telegram --app=https://web.telegram.org/ >/dev/null 2>&1 &
     ;;
 
   slack)
-    google-chrome-stable --user-data-dir=/tmp/slack https://app.slack.com/ >/dev/null 2>&1 &
+    google-chrome-stable --user-data-dir=/tmp/slack --app=https://app.slack.com/ >/dev/null 2>&1 &
     ;;
 
   update|up)
