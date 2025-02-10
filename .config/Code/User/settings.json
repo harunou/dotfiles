@@ -1,18 +1,34 @@
 {
   "telemetry.telemetryLevel": "off",
-  "window.menuBarVisibility": "classic",
+  "window.menuBarVisibility": "toggle",
   "vim.normalModeKeyBindings": [
     {
       "before": ["leader", "f"],
       "commands": ["editor.action.formatDocument"]
     },
     {
-      "before": ["leader", "s"],
+      "before": ["leader", "w"],
       "commands": ["workbench.action.files.save"]
     },
     {
+      "before": ["leader", "leader", "w"],
+      "commands": ["workbench.action.files.saveAll"]
+    },
+    {
       "before": ["leader", "q"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    },
+    {
+      "before": ["leader", "leader", "q"],
+      "commands": ["workbench.action.closeAllEditors"]
+    },
+    {
+      "before": ["leader", "z"],
       "commands": ["workbench.action.quit"]
+    },
+    {
+      "before": ["leader", "k"],
+      "commands": ["workbench.action.keepEditor"]
     }
   ],
   "window.newWindowProfile": "harunou"
