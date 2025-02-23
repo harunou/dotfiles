@@ -12,9 +12,10 @@ xrdb -merge "$HOME/.Xresources"
 
 xset r rate 500 30
 
+# localectl list-x11-keymap-options
 setxkbmap \
   -layout us,ru \
-  -option ctrl:nocaps,ctrl:swap_lwin_lctl,ctrl:swap_rwin_rctl,grp:shifts_toggle,terminate:ctrl_alt_bksp
+  -option ctrl:nocaps,ctrl:swap_rwin_rctl,grp:shifts_toggle,terminate:ctrl_alt_bksp
 
 if h_have xbindkeys; then
   xbindkeys -n &
