@@ -23,7 +23,7 @@
       "commands": ["workbench.action.closeAllEditors"]
     },
     {
-      "before": ["leader", "z"],
+      "before": ["leader", "z", "z"],
       "commands": ["workbench.action.quit"]
     },
     {
