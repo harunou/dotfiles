@@ -29,6 +29,18 @@
     {
       "before": ["leader", "k"],
       "commands": ["workbench.action.keepEditor"]
+    },
+    {
+      "before": ["leader", "r"],
+      "commands": ["editor.action.rename"]
+    },
+    {
+      "before": ["leader", "v"],
+      "commands": ["editor.action.marker.next"]
+    },
+    {
+      "before": ["leader", "c"],
+      "commands": ["editor.action.marker.prev"]
     }
   ],
   "window.newWindowProfile": "harunou"
