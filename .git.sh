@@ -90,27 +90,38 @@ alias gcf='git config --list'
 alias gclean='git clean -id'
 
 alias gcount='git shortlog -sn'
-alias glo='git --no-pager show -s'
+
+# https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
+
+# Show latest commit
+alias glo='git --no-pager show --stat'
+
+# Git log standard
 alias glog='git log'
-#https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
-#Basic graph log
+
+# Basic graph log
 alias gloga='git log --graph --color --decorate --all'
-#Extended look
+
+# Extended look
 alias glogg='git log --color --date-order --graph --oneline --decorate'
 alias glogga='git log --color --date-order --graph --oneline --decorate --all'
-#Quick look 
+
+# Quick look
 alias gloggs='git log --color --date-order --graph --oneline --decorate --simplify-by-decoration'
 alias gloggsa='git log --color --date-order --graph --oneline --decorate --simplify-by-decoration --all'
-#Look with date
+
+# Look with date
 alias glogd='git log --color --date-order --date="format:%d.%m.%y %H:%M" --graph --format="%C(auto)%h%Creset %C(blue bold)%ad%Creset %C(auto)%d%Creset %s"'
-alias glogda='git log --color --date-order --date="format:%d.%m.%y %H:%M" --graph --format="%C(auto)%h%Creset %C(blue bold)%ad%Creset %C(auto)%h%Creset%C(auto)%d%Creset %s" --all'
-#Look with relative date
+alias glogda='git log --color --date-order --date="format:%d.%m.%y %H:%M" --graph --format="%C(auto)%h%Creset %C(blue bold)%ad%Creset %C(auto)%d%Creset %s" --all'
+
+# Look with relative date
 alias glogdr='git log --color --date-order --graph --format="%C(auto)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s"'
 alias glogdra='git log --color --date-order --graph --format="%C(auto)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s" --all'
-#Look with commit owner (author)
+
+# Look with commit owner (author)
 alias gloggo='git log --color --date-order --graph --format="%C(auto)%h%Creset %C(auto)%an%Creset %C(auto)%d%Creset %s"'
-alias glogdo='git log --color --date-order --date="format:%d.%m.%y %H:%M" --graph --format=\"%C(auto)%h%Creset %C(blue bold)%ad%Creset %C(auto)%an%Creset %C(auto)%d%Creset %s"'
-alias glogdro='git log --color --date-order --graph --format="%C(auto)%h%Creset %C(blue bold)%ar%Creset %C(auto)%an%Creset %C(auto)%d%Creset %s"'
+alias glogdo='git log --color --date-order --date="format:%d.%m.%y %H:%M" --graph --format="%C(auto)%h%Creset %C(blue bold)%ad%Creset %C(auto)%an%Creset %C(auto)%d%Creset %s"'
+
 
 alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
 
@@ -148,17 +159,31 @@ function grename() {
   fi
 }
 
-function confirm_and_delete_gone_branch() {
+confirm_and_delete_gone_branch() {
   gone_branches=$(git branch -vv | awk '/: gone]/{print $1}')
-  while read -u 3 -r branch; do
-    echo -ne "Delete gone branch '$branch' [Y/n]? "
-    read choice
-    case "$choice" in 
-      y|Y ) git branch -D $branch
-	;;
-      * ) echo "Skipping '$branch'" 
-	;;
+  
+  if [[ -z "$gone_branches" ]]; then
+    echo "No gone branches found."
+    return 0
+  fi
+
+  echo "The following local branches have been deleted remotely:"
+  echo "$gone_branches"
+  echo
+
+  while read -r branch; do
+    read -p "Delete gone branch '$branch'? [Y/n] " choice
+    choice=${choice:-Y}  # Default to Yes if ENTER is pressed
+    
+    case "$choice" in
+      [yY] ) 
+        git branch -D "$branch"
+        echo "Deleted '$branch'."
+        ;;
+      * ) 
+        echo "Skipping '$branch'."
+        ;;
     esac
-  done 3<<< "$gone_branches"
+  done <<< "$gone_branches"
 }
 
