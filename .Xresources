@@ -33,7 +33,7 @@
 *color15:      #eeeeec
 
 
-!##XFT
+! XFT
 #if WIDTH > 2500
 Xft.dpi: 123
 #else
@@ -47,27 +47,27 @@ Xft.antialias: true
 Xft.rgba: rgb
 
 
-!## RXVT
-Rxvt*visualBell: true
+! RXVT
 URxvt.urgentOnBell: true
 URxvt.visualBell: true
 
-URxvt.termName: rxvt-unicode
+URxvt.geometry: 400x400
+
+URxvt.termName: rxvt-unicode-256color
 
 URxvt.saveLines: 8192
 
-Rxvt*scrollBar: false
-URxvt.thickness: 4
-URxvt.scrollBar_floating: true
-URxvt.scrollstyle: plain
+URxvt.scrollBar: false
+
 URxvt.iso14755_52: false
 URxvt.iso14755: false
 
 URxvt.underlineColor: #777777
+
+! Do not use bold italic and bold italic fonts
 URxvt.boldFont:
 URxvt.italicFont:
 URxvt.boldItalicFont:
-URxvt.geometry: 400x400
 
 #if WIDTH > 1920
 URxvt.font: xft:Terminus:pixelsize=26:Regular
