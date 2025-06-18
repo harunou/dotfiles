@@ -51,11 +51,7 @@ set fileformats=unix,dos,mac
 set backupskip+=/private/tmp/*
 
 " Color schemes and palettes
-if $TERM =~# '^rxvt' 
-  set t_Co=16
-elseif &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
-  set t_Co=16
-endif
+set t_Co=16
 
 colorscheme industry
 
