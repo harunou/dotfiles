@@ -160,21 +160,22 @@ function grename() {
 }
 
 confirm_and_delete_gone_branch() {
-  gone_branches=$(git branch -vv | awk '/: gone]/{print $1}')
+  gone_branches=$(git branch -vv | awk '/: gone]/{print $1}' | sed 's/^\*//')
   
   if [[ -z "$gone_branches" ]]; then
     echo "No gone branches found."
     return 0
   fi
-
+  
   echo "The following local branches have been deleted remotely:"
   echo "$gone_branches"
   echo
-
-  while read -r branch; do
-    read -p "Delete gone branch '$branch'? [Y/n] " choice
-    choice=${choice:-Y}  # Default to Yes if ENTER is pressed
-    
+  
+  while IFS= read -r branch; do
+    [[ -z "$branch" ]] && continue
+    echo -n "Delete gone branch '$branch'? [Y/n] "
+    read choice < /dev/tty
+    choice=${choice:-Y}
     case "$choice" in
       [yY] ) 
         git branch -D "$branch"
@@ -186,4 +187,3 @@ confirm_and_delete_gone_branch() {
     esac
   done <<< "$gone_branches"
 }
-
