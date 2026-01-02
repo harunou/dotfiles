@@ -15,56 +15,28 @@ import XMonad.Layout.Renamed
 import XMonad.Util.EZConfig
 import XMonad.Actions.CycleWS
 import qualified XMonad.StackSet as W
+import XMonad.Layout.IndependentScreens
 
-layouts = toggle $ tallLayout ||| wideLayout ||| fullLayout
-  where
-    basicLayout = smartBorders $ fullscreenFocus $ Tall 1 (3/100) (1/2)
-    tallLayout  = renamed [Replace "Tall"] $ avoidStruts $ basicLayout
-    wideLayout  = renamed [Replace "Wide"] $ avoidStruts $ Mirror basicLayout
-    fullLayout  = renamed [Replace "Full"] $ avoidStruts $ noBorders Full
-    toggle = toggleLayouts fullLayout
-
-manageHooks :: ManageHook
-manageHooks = composeAll
-     [ isDialog --> doCenterFloat
-     , className =? "Xmessage" --> doCenterFloat
-     , className =? "Pavucontrol" --> doFloat
-     , className =? "Arandr" --> doFloat
-     , className =? "Wrapper-2.0" --> doFloat
-     ] 
-
-main = do 
-  spawn "xmobar $HOME/.xmobar/xmobar.hs"
-
+main =
   xmonad 
     . fullscreenSupport 
     . ewmh 
-    . withUrgencyHook NoUrgencyHook 
     $ desktopConfig
       { terminal = term
       , modMask = modm
       , focusFollowsMouse = False
       , normalBorderColor = "#37474f"
       , focusedBorderColor = "#06989A"
-      , layoutHook = desktopLayoutModifiers layouts
-      , manageHook = manageDocks <+> manageHooks
-      , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-      , logHook = dynamicLogString def {
-          ppUrgent = xmobarColor "red" "" . wrap "!" "!"
-                                       } >>= xmonadPropLog
+      , manageHook = manageDocks
+      , workspaces = withScreens 2 ["1", "2", "3"]
       } 
       `additionalKeys`
-      [ ((modm,               xK_f), sendMessage (Toggle "Full"))
-      , ((modm,               xK_BackSpace), spawn term)
-      , ((modm,               xK_bracketright), moveTo Next (Not emptyWS))
-      , ((modm,               xK_bracketleft), moveTo Prev (Not emptyWS))
-      , ((modm,               xK_backslash), toggleWS)
-      , ((modm,               xK_y), windows $ W.greedyView "7")
-      , ((modm,               xK_u), windows $ W.greedyView "8")
-      , ((modm,               xK_i), windows $ W.greedyView "9")
-      , ((modm,               xK_o), windows $ W.greedyView "0")
-      , ((modm,               xK_0), windows $ W.greedyView "0")
-      , ((modm .|. shiftMask, xK_0), windows $ W.shift "0")
+      [ ((modm,               xK_1), windows $ onCurrentScreen W.greedyView "1")
+      , ((modm,               xK_2), windows $ onCurrentScreen W.greedyView "2")
+      , ((modm,               xK_3), windows $ onCurrentScreen W.greedyView "3")
+      ]
+      ++
+      [ ((modm,               xK_BackSpace), spawn term)
       ] 
         where modm = mod4Mask
               term = "urxvt"
