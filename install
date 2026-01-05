@@ -1,9 +1,8 @@
 #!/bin/bash
 
-set -e
-set -o pipefail
+set -eo pipefail
 
-package_list_file="./package-list"
+REPO_URL="https://github.com/harunou/dotfiles.git"
 
 skip_config=false
 while [[ "$1" =~ ^- ]]; do
@@ -15,7 +14,8 @@ while [[ "$1" =~ ^- ]]; do
     *)
       echo "Unknown option: $1"
       echo "Usage: ./install [--skip-config] [repo_dir] [dots_dir]"
-      echo "\nOptions:"
+      echo ""
+      echo "Options:"
       echo "  --skip-config   Skip copying dot files and configuring the user home directory."
       echo "  repo_dir        Directory to clone the repository (default: \$HOME/.harunou)."
       echo "  dots_dir        Target directory for dot files (default: \$HOME)."
@@ -34,8 +34,15 @@ if ! command -v sudo >/dev/null 2>&1; then
   exit 1
 fi
 
-repo_dir=$(realpath "${1:-$HOME/.harunou}")
-dots_dir=$(realpath "${2:-$HOME}")
+if ! repo_dir=$(realpath "${1:-$HOME/.harunou}" 2>/dev/null); then
+  echo "Error: Invalid repository directory path: ${1:-$HOME/.harunou}"
+  exit 1
+fi
+
+if ! dots_dir=$(realpath "${2:-$HOME}" 2>/dev/null); then
+  echo "Error: Invalid dot files directory path: ${2:-$HOME}"
+  exit 1
+fi
 
 if [ -d "$repo_dir" ]; then
   echo "Error: Directory \"$repo_dir\" already exists. Remove it or specify a different path."
@@ -43,8 +50,8 @@ if [ -d "$repo_dir" ]; then
 fi
 
 echo "Cloning repository to \"$repo_dir\"..."
-if ! git clone https://github.com/harunou/dotfiles.git "$repo_dir"; then
-  echo "Error: Failed to clone the repository."
+if ! git clone "$REPO_URL" "$repo_dir"; then
+  echo "Error: Failed to clone the repository from $REPO_URL."
   exit 1
 fi
 
@@ -72,17 +79,26 @@ fi
 
 package_list_file="$repo_dir/package-list"
 if [[ -f "$package_list_file" ]]; then
-  echo "Installing packages from \"$package_list_file\"..."
-  if ! sudo pacman -S --needed - < "$package_list_file"; then
-    echo "Error: Failed to install some packages."
-    exit 1
+  if ! command -v pacman >/dev/null 2>&1; then
+    echo "Warning: 'pacman' is not installed. This script is designed for Arch Linux."
+    echo "Skipping package installation. Please install packages manually from: $package_list_file"
+  else
+    echo "Installing packages from \"$package_list_file\"..."
+    if ! sudo pacman -S --needed - < "$package_list_file"; then
+      echo "Error: Failed to install some packages."
+      exit 1
+    fi
+    echo "Packages installed successfully."
   fi
-  echo "Packages installed successfully."
 else
   echo "Warning: Package list file \"$package_list_file\" not found. Skipping package installation."
 fi
 
 echo "Copying dot files to the target directory: \"$dots_dir\""
+if ! (cd "$repo_dir" && git config --get alias.export >/dev/null 2>&1); then
+  echo "Error: 'git export' alias not configured. Repository setup may have failed."
+  exit 1
+fi
 if ! (cd "$repo_dir" && git export); then
   echo "Error: Failed to export the dot files."
   exit 1
